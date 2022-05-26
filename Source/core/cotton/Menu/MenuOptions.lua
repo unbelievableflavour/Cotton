@@ -17,7 +17,8 @@ function MenuOptions:init(positionX, positionY, dialogWidth, dialogHeight)
     self.dialogWidth = dialogWidth
     self.dialogHeight = dialogHeight
 
-    self:moveTo(positionX + (self.dialogWidth / 2), positionY + (self.dialogHeight / 2))
+    local topLeftCorner = getTopLeftCorner()
+    self:moveTo(topLeftCorner.x + positionX + (self.dialogWidth / 2),topLeftCorner.y + positionY + (self.dialogHeight / 2))
 
     self.optionsImage = gfx.image.new(self.dialogWidth, self.dialogHeight)
 

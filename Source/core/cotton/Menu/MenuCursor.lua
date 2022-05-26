@@ -3,11 +3,12 @@ local gfx <const> = playdate.graphics
 class("MenuCursor", {positionX = 0, positionY = 0, selected = 1}).extends(gfx.sprite)
 
 function MenuCursor:init(positionX, positionY)
-    self.positionX = positionX
-    self.positionY = positionY
+    local topLeftCorner = getTopLeftCorner()
+    self.positionX = topLeftCorner.x + positionX
+    self.positionY = topLeftCorner.y + positionY
     self.tileSize = 16
 
-    self:moveTo(positionX + (self.tileSize / 2), positionY + (self.tileSize / 2))
+    self:moveTo(self.positionX + (self.tileSize / 2), self.positionY + (self.tileSize / 2))
 
     self.promptImage = gfx.image.new("images/interface/cursor-active-16-16.png", self.tileSize, self.tileSize)
     self:setZIndex(32767)

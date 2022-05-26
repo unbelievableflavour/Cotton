@@ -47,6 +47,12 @@ function MessageHandler:new(message, x, y, width, height)
     self.isFullyRendered = false
 
     self.isActive = true
+
+    local topLeftCorner = getTopLeftCorner()
+    self.textPosition = {
+        x = topLeftCorner.x + self.positionX + self.margin,
+        y = topLeftCorner.y + self.positionY + self.margin
+    }
 end
 
 function MessageHandler:Update()
@@ -66,9 +72,6 @@ end
 function MessageHandler:drawMessage()
     local lineLoopIndex = 0
 
-    local textPositionX = self.positionX + self.margin
-    local textPositionY = self.positionY + self.margin
-
     while (lineLoopIndex < self.numberOfLines) do
         local chunk = self.chunkList[self.chunkOffset + lineLoopIndex]
         if chunk == nil then
@@ -76,7 +79,7 @@ function MessageHandler:drawMessage()
         end
 
         local truncatedMessage = string.sub(chunk, 0, self.currentChunkLength[self.chunkOffset + lineLoopIndex] or 0)
-        self.textFont:drawText(truncatedMessage, textPositionX, textPositionY + (self.textFontHeight * lineLoopIndex))
+        self.textFont:drawText(truncatedMessage, self.textPosition.x, self.textPosition.y + (self.textFontHeight * lineLoopIndex))
         lineLoopIndex = lineLoopIndex + 1
     end
 
