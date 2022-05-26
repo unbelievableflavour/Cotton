@@ -56,7 +56,7 @@ These are the built-in events:
 * `confirmReleased`: called on the Player when the A button is released
 * `cancelPressed`: called on the Player when the B button is pressed
 * `cancelReleased`: called on the Player when the B button is released
-* `crank`: NOT-YET-SUPPORTED called on the Player when the crank is turned
+* `crank`: called on the Player when the crank is turned
 * `dock`: called on the Player when the crank is docked
 * `undock`: called on the Player when the crank is undocked
 * `draw`: called on the Player 30 frames per second, before drawing
