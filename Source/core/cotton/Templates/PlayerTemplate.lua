@@ -40,10 +40,10 @@ function PlayerTemplate:cancelReleased()
     -- log("player: cancel released")
 end
 
-function PlayerTemplate:hide()
-    game.player.sprite:remove()
+function PlayerTemplate:dock()
+    -- log("player: dock")
 end
 
-function PlayerTemplate:show()
-    game.player.sprite:add()
+function PlayerTemplate:undock()
+    -- log("player: undock")
 end

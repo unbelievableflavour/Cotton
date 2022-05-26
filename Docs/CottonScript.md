@@ -57,8 +57,8 @@ These are the built-in events:
 * `cancelPressed`: called on the Player when the B button is pressed
 * `cancelReleased`: called on the Player when the B button is released
 * `crank`: NOT-YET-SUPPORTED called on the Player when the crank is turned
-* `dock`: NOT-YET-SUPPORTED called on the Player when the crank is docked
-* `undock`: NOT-YET-SUPPORTED called on the Player when the crank is undocked
+* `dock`: called on the Player when the crank is docked
+* `undock`: called on the Player when the crank is undocked
 * `draw`: called on the Player 30 frames per second, before drawing
 * `interact`: called on an entity when the Player bumps into or acts upon it
 * `collect`: called on an entity when the Player steps onto or acts upon it
@@ -362,7 +362,7 @@ otherTile:eventName()
 ### hide
 
 ```lua
-self:hide()
+hidePlayer()
 ```
 
 Prevents the Player from being drawn. Can only be called from the `Player` entity.
@@ -370,7 +370,7 @@ Prevents the Player from being drawn. Can only be called from the `Player` entit
 ### show
 
 ```lua
-self:show()
+showPlayer()
 ```
 
 Makes sure the Player is being drawn. Can only be called from the `Player` entity.

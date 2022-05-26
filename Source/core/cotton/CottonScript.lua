@@ -189,3 +189,12 @@ end
 function timestamp()
     return playdate.getSecondsSinceEpoch()
 end
+
+function hidePlayer()
+    game.player.sprite:remove()
+end
+
+function showPlayer()
+    game.player.sprite:add()
+end
+
