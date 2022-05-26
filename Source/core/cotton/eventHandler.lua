@@ -1,4 +1,7 @@
-class("EventHandler", {events = {}, isRunningEvent = false}).extends()
+class("EventHandler", {
+    events = {},
+    isRunningEvent = false
+}).extends()
 
 function EventHandler:Update()
     if not self.isRunningEvent then

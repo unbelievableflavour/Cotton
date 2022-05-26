@@ -1,18 +1,15 @@
-local gfx <const> = playdate.graphics
+local gfx<const> = playdate.graphics
 
 import "./PromptIcon"
 
-class(
-    "MessageHandler",
-    {
-        isActive = false,
-        wordList = {},
-        chunkList = {},
-        currentLength = 0,
-        chunkOffset = 0,
-        currentChunk = 0
-    }
-).extends()
+class("MessageHandler", {
+    isActive = false,
+    wordList = {},
+    chunkList = {},
+    currentLength = 0,
+    chunkOffset = 0,
+    currentChunk = 0
+}).extends()
 
 function MessageHandler:new(message, x, y, width, height)
     game.freeze()
@@ -28,11 +25,8 @@ function MessageHandler:new(message, x, y, width, height)
     self.dialog = Dialog(self.positionX, self.positionY, self.dialogWidth, self.dialogHeight)
     self.dialog:add()
 
-    self.arrowDown =
-        PromptIcon(
-        self.positionX + self.dialogWidth - self.margin * 2,
-        self.positionY + self.dialogHeight - self.margin
-    )
+    self.arrowDown = PromptIcon(self.positionX + self.dialogWidth - self.margin * 2,
+        self.positionY + self.dialogHeight - self.margin)
 
     self.textFont = gfx.font.new("fonts/" .. config.font)
     self.textFontHeight = self.textFont:getHeight()
@@ -79,7 +73,8 @@ function MessageHandler:drawMessage()
         end
 
         local truncatedMessage = string.sub(chunk, 0, self.currentChunkLength[self.chunkOffset + lineLoopIndex] or 0)
-        self.textFont:drawText(truncatedMessage, self.textPosition.x, self.textPosition.y + (self.textFontHeight * lineLoopIndex))
+        self.textFont:drawText(truncatedMessage, self.textPosition.x,
+            self.textPosition.y + (self.textFontHeight * lineLoopIndex))
         lineLoopIndex = lineLoopIndex + 1
     end
 
@@ -109,13 +104,9 @@ function MessageHandler:drawMessage()
 end
 
 function MessageHandler:detectInput()
-    if
-        playdate.buttonJustPressed(playdate.kButtonA) or playdate.buttonJustPressed(playdate.kButtonB) or
-            playdate.buttonJustPressed(playdate.kButtonUp) or
-            playdate.buttonJustPressed(playdate.kButtonDown) or
-            playdate.buttonJustPressed(playdate.kButtonLeft) or
-            playdate.buttonJustPressed(playdate.kButtonRight)
-     then
+    if playdate.buttonJustPressed(playdate.kButtonA) or playdate.buttonJustPressed(playdate.kButtonB) or
+        playdate.buttonJustPressed(playdate.kButtonUp) or playdate.buttonJustPressed(playdate.kButtonDown) or
+        playdate.buttonJustPressed(playdate.kButtonLeft) or playdate.buttonJustPressed(playdate.kButtonRight) then
         if #self.chunkList == self.currentChunk then
             -- End of all chunks!
             self:disableDialog()

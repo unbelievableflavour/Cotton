@@ -21,18 +21,18 @@ asset.loadImageFolder("images/")
 LDtk.load("levels/world.ldtk", config.useFastLoader)
 
 if playdate.isSimulator then
-	LDtk.export_to_lua()
+    LDtk.export_to_lua()
 end
 
 scene.set(game, "Level_0")
 
 function playdate.update()
-	hot_import_update()
+    hot_import_update()
 
-	input.update()
+    input.update()
 
-	scene.update()
-	if config.showFPS then
-		playdate.drawFPS()
-	end
+    scene.update()
+    if config.showFPS then
+        playdate.drawFPS()
+    end
 end

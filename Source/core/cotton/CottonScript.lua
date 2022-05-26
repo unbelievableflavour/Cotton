@@ -14,7 +14,10 @@ function say(message, x, y, width, height, callback)
         cotton.messageHandler:new(message, x, y, width, height)
     end
 
-    cotton.eventHandler:registerCallback({event = event, callback = callback or nil})
+    cotton.eventHandler:registerCallback({
+        event = event,
+        callback = callback or nil
+    })
 end
 
 function fin(message)
@@ -26,7 +29,10 @@ function fin(message)
         cotton.game:finish()
     end
 
-    cotton.eventHandler:registerCallback({event = event, callback = callback or nil})
+    cotton.eventHandler:registerCallback({
+        event = event,
+        callback = callback or nil
+    })
 end
 
 function menu(x, y, width, height, options)
@@ -46,7 +52,9 @@ function menu(x, y, width, height, options)
         cotton.menuHandler:new(x, y, width, height, options)
     end
 
-    cotton.eventHandler:registerCallback({event = event})
+    cotton.eventHandler:registerCallback({
+        event = event
+    })
 end
 
 function sound(fileName, volume)
@@ -60,7 +68,10 @@ function tell(tileId)
 end
 
 function dump()
-    log({config = config, save = save})
+    log({
+        config = config,
+        save = save
+    })
 end
 
 function store()
@@ -76,10 +87,8 @@ function toss()
 end
 
 function log(node)
-    if
-        type(node) == "string" or type(node) == "nil" or type(node) == "number" or type(node) == "userdata" or
-            type(node) == "boolean"
-     then
+    if type(node) == "string" or type(node) == "nil" or type(node) == "number" or type(node) == "userdata" or type(node) ==
+        "boolean" then
         print(node)
         return
     end

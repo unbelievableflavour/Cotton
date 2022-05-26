@@ -1,21 +1,18 @@
-local gfx <const> = playdate.graphics
+local gfx<const> = playdate.graphics
 
 import "CoreLibs/animation"
 
-class(
-    "PromptIcon",
-    {
-        positionX = 0,
-        positionY = 0
-    }
-).extends(gfx.sprite)
+class("PromptIcon", {
+    positionX = 0,
+    positionY = 0
+}).extends(gfx.sprite)
 
 function PromptIcon:init(positionX, positionY)
     local imagetable = gfx.imagetable.new("images/interface/prompt-table-16-16.png")
     self.animation = gfx.animation.loop.new(200, imagetable)
 
     local topLeftCorner = getTopLeftCorner()
-    self:moveTo(topLeftCorner.x + positionX + (16 / 2),topLeftCorner.y + positionY + (16 / 2))
+    self:moveTo(topLeftCorner.x + positionX + (16 / 2), topLeftCorner.y + positionY + (16 / 2))
     self:setZIndex(32767)
 
     self.promptImage = gfx.image.new(16, 16)

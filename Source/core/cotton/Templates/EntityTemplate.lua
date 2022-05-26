@@ -1,12 +1,9 @@
-local gfx <const> = playdate.graphics
+local gfx<const> = playdate.graphics
 
-class(
-    "EntityTemplate",
-    {
-        onTile = false,
-        collisionType = "solid"
-    }
-).extends(gfx.sprite)
+class("EntityTemplate", {
+    onTile = false,
+    collisionType = "solid"
+}).extends(gfx.sprite)
 
 function EntityTemplate:init(ldtk_entity)
     self.id = ldtk_entity.id
