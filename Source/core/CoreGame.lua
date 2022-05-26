@@ -102,12 +102,14 @@ function goto_level(level_name, direction)
     opposites["East"] = "West"
 
     for index, entity in ipairs(LDtk.get_entities(level_name)) do
+        -- if player came from other room
         if entity.name == "Exit" then
             if entity.fields.EntranceDirection == opposites[direction] then
                 game.player:Init(entity)
             end
         end
 
+        -- if player just started the game
         if entity.name == "Player" then
             if direction == nil then
                 game.player:Init(entity)
