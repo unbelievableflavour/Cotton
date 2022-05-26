@@ -173,7 +173,7 @@ function PlayerGrid:detectInput()
 
     self:doBasicInputChecks()
 
-    if input.is(buttonLeft) then
+    if input.onRepeat(buttonLeft) then
         cotton.player:update()
 
         self.destinationCursor.x = self.destinationCursor.x - 1
@@ -185,7 +185,7 @@ function PlayerGrid:detectInput()
         end
     end
 
-    if input.is(buttonRight) then
+    if input.onRepeat(buttonRight) then
         cotton.player:update()
 
         self.destinationCursor.x = self.destinationCursor.x + 1
@@ -197,7 +197,7 @@ function PlayerGrid:detectInput()
         end
     end
 
-    if input.is(buttonUp) then
+    if input.onRepeat(buttonUp) then
         cotton.player:update()
 
         self.destinationCursor.x = self.destinationCursor.x
@@ -209,7 +209,7 @@ function PlayerGrid:detectInput()
         end
     end
 
-    if input.is(buttonDown) then
+    if input.onRepeat(buttonDown) then
         cotton.player:update()
 
         self.destinationCursor.x = self.destinationCursor.x

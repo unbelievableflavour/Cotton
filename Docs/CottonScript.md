@@ -197,7 +197,7 @@ NOT-YET-SUPPORTED Controls the time from the initial press to the first repeat.
 ```lua
 config.inputRepeatBetween = 0.2
 ```
-NOT-YET-SUPPORTED Controls the time between all subsequent repeats.
+Controls the time between all subsequent repeats.
 
 ```lua
 config.cameraFollow = false

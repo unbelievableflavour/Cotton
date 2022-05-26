@@ -6,5 +6,6 @@ config = {
     cameraFollow = false,
     cameraFollowOverflowImage = nil,
     cameraFollowOverflowColor = "white",
-    allowDismissRootMenu = false
+    allowDismissRootMenu = false,
+    inputRepeatBetween = 0.2
 }

@@ -3,15 +3,14 @@ import "CoreLibs/object"
 import "CoreLibs/sprites"
 import "CoreLibs/nineslice"
 
-import "core/definitions"
+import "config"
 
+import "core/definitions"
 import "core/cotton/all"
 
-import "config"
 import "scripts/index"
 
 import "core/lieb/all"
-
 import "core/CoreGame"
 
 playdate.display.setRefreshRate(30)

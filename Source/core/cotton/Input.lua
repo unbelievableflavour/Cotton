@@ -11,7 +11,7 @@ buttonA = playdate.kButtonA
 buttonB = playdate.kButtonB
 
 input = {
-    repeatDuration = 0.12,
+    repeatDuration = config.inputRepeatBetween,
     repeats = {
         [buttonLeft] = {
             state = false,
