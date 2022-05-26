@@ -6,7 +6,7 @@ class("PlayerGrid", {
     transitionSpeed = 2,
     allowDiagonalMovement = false,
     currentCollisions = {}
-}).extends()
+}).extends(PlayerBase)
 
 function PlayerGrid:Init(ldtk_entity)
     self.previousTile = playdate.geometry.point.new(ldtk_entity.position.x / self.tileSize,
@@ -169,22 +169,21 @@ function PlayerGrid:getEntityOnPosition()
 end
 
 function PlayerGrid:detectInput()
-    -- move left/right/up/down
     self:resetPreviousTileToPlayer()
 
-    if playdate.buttonJustPressed(playdate.kButtonA) then
+    if input.justPressed(buttonA) then
         cotton.player:confirmPressed()
     end
 
-    if playdate.buttonJustReleased(playdate.kButtonA) then
+    if input.justPressed(buttonA) then
         cotton.player:confirmReleased()
     end
 
-    if playdate.buttonJustPressed(playdate.kButtonB) then
+    if input.justPressed(buttonB) then
         cotton.player:cancelPressed()
     end
 
-    if playdate.buttonJustReleased(playdate.kButtonB) then
+    if input.justPressed(buttonB) then
         cotton.player:cancelReleased()
     end
 
@@ -199,6 +198,7 @@ function PlayerGrid:detectInput()
             return
         end
     end
+
     if input.is(buttonRight) then
         cotton.player:update()
 
@@ -222,6 +222,7 @@ function PlayerGrid:detectInput()
             return
         end
     end
+
     if input.is(buttonDown) then
         cotton.player:update()
 
@@ -241,8 +242,6 @@ function PlayerGrid:resetPreviousTileToPlayer()
 end
 
 function PlayerGrid:update()
-    local dt = 1 / playdate.display.getRefreshRate()
-
     if self.isFrozen then
         return
     end
@@ -268,28 +267,4 @@ function PlayerGrid:update()
     if config.cameraFollow then
         self:fixCamera()
     end
-end
-
-function PlayerGrid:isAtNorthScreenEdge()
-    return self.sprite.y < 0
-end
-
-function PlayerGrid:isAtEastScreenEdge()
-    return self.sprite.x + self.sprite.width > screenWidth
-end
-
-function PlayerGrid:isAtSouthScreenEdge()
-    return self.sprite.y + self.sprite.height > screenHeight
-end
-
-function PlayerGrid:isAtWestScreenEdge()
-    return self.sprite.x < 0
-end
-
-function PlayerGrid:freeze()
-    self.isFrozen = true
-end
-
-function PlayerGrid:unfreeze()
-    self.isFrozen = false
 end

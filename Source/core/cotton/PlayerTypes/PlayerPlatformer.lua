@@ -12,7 +12,7 @@ class("PlayerPlatformer", {
     gravity_up = 80,
     gravity_down = 130,
     player_max_gravity = 40
-}).extends()
+}).extends(PlayerBase)
 
 function PlayerPlatformer:Init(ldtk_entity)
     self.sprite = gfx.sprite.new(asset("player"))
@@ -35,6 +35,10 @@ function PlayerPlatformer:Init(ldtk_entity)
 end
 
 function PlayerPlatformer:update()
+    if self.isFrozen then
+        return
+    end
+
     local dt = 1 / playdate.display.getRefreshRate()
 
     -- Friction
@@ -51,6 +55,22 @@ function PlayerPlatformer:update()
         if self.bangCeiling then
             self.velocity.y = 0
         end
+    end
+
+    if input.justPressed(buttonA) then
+        cotton.player:confirmPressed()
+    end
+
+    if input.justPressed(buttonA) then
+        cotton.player:confirmReleased()
+    end
+
+    if input.justPressed(buttonB) then
+        cotton.player:cancelPressed()
+    end
+
+    if input.justPressed(buttonB) then
+        cotton.player:cancelReleased()
     end
 
     -- move left/right
@@ -126,20 +146,4 @@ function PlayerPlatformer:update()
         goto_level(LDtk.get_neighbours(game.level_name, "south")[1], "South")
         return
     end
-end
-
-function PlayerPlatformer:isAtNorthScreenEdge()
-    return self.sprite.y < 0
-end
-
-function PlayerPlatformer:isAtEastScreenEdge()
-    return self.sprite.x + self.sprite.width > screenWidth
-end
-
-function PlayerPlatformer:isAtSouthScreenEdge()
-    return self.sprite.y + self.sprite.height > screenHeight
-end
-
-function PlayerPlatformer:isAtWestScreenEdge()
-    return self.sprite.x < 0
 end
