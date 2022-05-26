@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"files.exclude": {
+			"*.pdx": true,
+			"Source/core": true,
+			".vscode": true,
+			".gitignore": true
+		}
+	}
+}
