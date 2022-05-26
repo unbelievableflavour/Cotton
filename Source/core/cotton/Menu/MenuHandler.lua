@@ -60,35 +60,35 @@ function MenuHandler:refreshMenu()
 end
 
 function MenuHandler:detectInput()
-    if playdate.buttonJustPressed(playdate.kButtonLeft) then
+    if input.justPressed(buttonLeft) then
         self:previousChunkPage()
         self.cursor:setNumberOfLines(#self.chunks[self.currentChunk])
         return
     end
 
-    if playdate.buttonJustPressed(playdate.kButtonRight) then
+    if input.justPressed(buttonRight) then
         self:nextChunkPage()
         self.cursor:setNumberOfLines(#self.chunks[self.currentChunk])
         return
     end
 
-    if playdate.buttonJustPressed(playdate.kButtonUp) then
+    if input.justPressed(buttonUp) then
         self.cursor:moveUp()
         return
     end
 
-    if playdate.buttonJustPressed(playdate.kButtonDown) then
+    if input.justPressed(buttonDown) then
         self.cursor:moveDown()
         return
     end
 
-    if playdate.buttonJustPressed(playdate.kButtonA) then
+    if input.justPressed(buttonA) then
         self.chunks[self.currentChunk][self.cursor.selected].callback()
         self:disableDialog()
         return
     end
 
-    if playdate.buttonJustPressed(playdate.kButtonB) then
+    if input.justPressed(buttonB) then
         if not config.allowDismissRootMenu then
             return
         end

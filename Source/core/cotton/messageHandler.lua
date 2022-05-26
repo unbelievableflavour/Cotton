@@ -104,9 +104,8 @@ function MessageHandler:drawMessage()
 end
 
 function MessageHandler:detectInput()
-    if playdate.buttonJustPressed(playdate.kButtonA) or playdate.buttonJustPressed(playdate.kButtonB) or
-        playdate.buttonJustPressed(playdate.kButtonUp) or playdate.buttonJustPressed(playdate.kButtonDown) or
-        playdate.buttonJustPressed(playdate.kButtonLeft) or playdate.buttonJustPressed(playdate.kButtonRight) then
+    if input.justPressed(buttonA) or input.justPressed(buttonB) or input.justPressed(buttonUp) or
+        input.justPressed(buttonDown) or input.justPressed(buttonLeft) or input.justPressed(buttonRight) then
         if #self.chunkList == self.currentChunk then
             -- End of all chunks!
             self:disableDialog()
