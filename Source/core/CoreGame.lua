@@ -141,12 +141,12 @@ end
 function game.update()
     cotton.player:draw()
     cotton.game:loop()
-    game.player:Update()
+    game.player:update()
 
     gfx.sprite.update()
-    cotton.menuHandler:Update()
-    cotton.messageHandler:Update()
-    cotton.eventHandler:Update()
+    cotton.menuHandler:update()
+    cotton.messageHandler:update()
+    cotton.eventHandler:update()
 end
 
 function game.drawBackground(x, y, w, h)

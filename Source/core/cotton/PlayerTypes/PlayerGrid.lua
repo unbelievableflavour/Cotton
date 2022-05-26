@@ -240,7 +240,7 @@ function PlayerGrid:resetPreviousTileToPlayer()
     self.previousTile.y = self.destinationCursor.y
 end
 
-function PlayerGrid:Update()
+function PlayerGrid:update()
     local dt = 1 / playdate.display.getRefreshRate()
 
     if self.isFrozen then

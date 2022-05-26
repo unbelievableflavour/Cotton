@@ -1,16 +1,13 @@
-local gfx <const> = playdate.graphics
+local gfx<const> = playdate.graphics
 
 import "./PagesIcon"
 import "./MenuCursor"
 import "./MenuOptions"
 
-class(
-    "MenuHandler",
-    {
-        options = {},
-        currentChunk = 1
-    }
-).extends()
+class("MenuHandler", {
+    options = {},
+    currentChunk = 1
+}).extends()
 
 function MenuHandler:new(x, y, width, height, options)
     game.freeze()
@@ -24,8 +21,8 @@ function MenuHandler:new(x, y, width, height, options)
     self.dialog = Dialog(self.positionX, self.positionY, self.dialogWidth, self.dialogHeight)
     self.dialog:add()
 
-    self.menuOptions =
-        MenuOptions(self.positionX + self.margin, self.positionY, self.dialogWidth - self.margin, self.dialogHeight)
+    self.menuOptions = MenuOptions(self.positionX + self.margin, self.positionY, self.dialogWidth - self.margin,
+        self.dialogHeight)
     self.menuOptions:add()
 
     self.textFont = gfx.font.new("fonts/" .. config.font)
@@ -39,8 +36,8 @@ function MenuHandler:new(x, y, width, height, options)
     self.cursor:setNumberOfLines(#self.chunks[self.currentChunk])
     self.cursor:add()
 
-    self.pagesIcon =
-        PagesIcon(self.positionX + self.dialogWidth - self.margin * 2, self.positionY + self.dialogHeight - self.margin)
+    self.pagesIcon = PagesIcon(self.positionX + self.dialogWidth - self.margin * 2,
+        self.positionY + self.dialogHeight - self.margin)
 
     if #self.chunks > 1 then
         self.pagesIcon:add()
@@ -50,7 +47,7 @@ function MenuHandler:new(x, y, width, height, options)
     self:refreshMenu()
 end
 
-function MenuHandler:Update()
+function MenuHandler:update()
     if not self.isActive then
         return
     end

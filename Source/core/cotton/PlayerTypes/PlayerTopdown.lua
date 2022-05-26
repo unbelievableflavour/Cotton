@@ -22,7 +22,7 @@ function PlayerTopdown:Init(ldtk_entity)
     self.velocity = playdate.geometry.vector2D.new(0, 0)
 end
 
-function PlayerTopdown:Update()
+function PlayerTopdown:update()
     local dt = 1 / playdate.display.getRefreshRate()
 
     if input.x() == 0 then

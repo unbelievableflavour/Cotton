@@ -3,7 +3,7 @@ class("EventHandler", {
     isRunningEvent = false
 }).extends()
 
-function EventHandler:Update()
+function EventHandler:update()
     if not self.isRunningEvent then
         self:listenForNewEvents()
         return

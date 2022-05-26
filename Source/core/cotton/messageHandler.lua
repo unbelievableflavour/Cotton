@@ -49,7 +49,7 @@ function MessageHandler:new(message, x, y, width, height)
     }
 end
 
-function MessageHandler:Update()
+function MessageHandler:update()
     if not self.isActive then
         return
     end
