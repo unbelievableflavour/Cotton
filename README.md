@@ -1,6 +1,9 @@
-## Cotton
+# Cotton
 
 Cotton is a project example of how a Pulp-like experiences could work in a Lua project. This will allow you to use all the features Pulp has to offer + not be limited by it.
+
+## Important
+Hi! This project is not yet finished,it's still missing some key features from Pulp, BUT it's pretty stable and useable.
 
 ## Requirments
 Make sure you have the following applications installed.
