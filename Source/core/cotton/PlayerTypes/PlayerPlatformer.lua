@@ -1,3 +1,5 @@
+local gfx <const> = playdate.graphics
+
 class(
 	"PlayerPlatformer",
 	{
@@ -16,7 +18,7 @@ class(
 ).extends()
 
 function PlayerPlatformer:Init(ldtk_entity)
-	self.sprite = playdate.graphics.sprite.new(asset("player"))
+	self.sprite = gfx.sprite.new(asset("player"))
 	local sprite = self.sprite
 
 	sprite:setZIndex(ldtk_entity.zIndex)
@@ -57,11 +59,11 @@ function PlayerPlatformer:Update()
 	-- move left/right
 	if input.is(buttonLeft) then
 		self.velocity.x = math.approach(self.velocity.x, -self.player_speed, self.player_acc)
-	-- self.sprite:setImageFlip(playdate.graphics.kImageFlippedX)
+	-- self.sprite:setImageFlip(gfx.kImageFlippedX)
 	end
 	if input.is(buttonRight) then
 		self.velocity.x = math.approach(self.velocity.x, self.player_speed, self.player_acc)
-	-- self.sprite:setImageFlip(playdate.graphics.kImageUnflipped)
+	-- self.sprite:setImageFlip(gfx.kImageUnflipped)
 	end
 
 	-- Jump

@@ -8,7 +8,7 @@
 -- To get collision information, in LDtk create an enum for tiles (Wall, Water, Ladder etc.)
 -- Use the enum in the tileset and tag tiles with the desired property
 -- In your code:
--- 	playdate.graphics.sprite.addWallSprites( game.tilemap, LDtk.get_empty_tileIDs( "Level_0", "Solid") )
+-- 	gfx.sprite.addWallSprites( game.tilemap, LDtk.get_empty_tileIDs( "Level_0", "Solid") )
 
 -- Tilsets
 -- It is recommended to save the tileset image in the same folder (or in a sub folder) as the ldtk file
@@ -35,7 +35,9 @@
 -- in the simulator call LDtk.export_to_lua() after a LDtl file is loaded to save the exported lua files in the save folder
 -- copy the LDtk_lua_levels/ next to your .ldtk file in your project directory
 
-import 'core/lieb/writeLua'
+local gfx <const> = playdate.graphics
+
+import "core/lieb/writeLua"
 
 LDtk = {}
 
@@ -59,23 +61,23 @@ local _ = {} -- for private functions
 --	true: will load lua precomputed levels
 --	false: will load .ldtk files (slower)
 --	nil: will load lua files if they exist
-function LDtk.load( ldtk_file, use_lua_levels )
+function LDtk.load(ldtk_file, use_lua_levels)
 	_ldtk_filepath = ldtk_file
-	_ldtk_folder = _.get_folder( ldtk_file )
-	_ldtk_lua_folder = _ldtk_folder.."LDtk_lua_levels/"
+	_ldtk_folder = _.get_folder(ldtk_file)
+	_ldtk_lua_folder = _ldtk_folder .. "LDtk_lua_levels/"
 
-	local lua_filename = _ldtk_lua_folder.._.get_filename( ldtk_file )..".pdz"
+	local lua_filename = _ldtk_lua_folder .. _.get_filename(ldtk_file) .. ".pdz"
 
 	-- check if we should load the lua files instead of the json files
 	_use_lua_levels = use_lua_levels
-	if _use_lua_levels==nil then
-		_use_lua_levels = playdate.file.exists( lua_filename )
+	if _use_lua_levels == nil then
+		_use_lua_levels = playdate.file.exists(lua_filename)
 	end
 
 	-- simply load the level from the precomputed lua file
 	if _use_lua_levels then
 		print("LDtk loader will use lua precomputed levels.")
-		local data = playdate.file.run( lua_filename )
+		local data = playdate.file.run(lua_filename)
 
 		_tilesets = data.tilesets
 		_level_files = data.level_files
@@ -86,8 +88,8 @@ function LDtk.load( ldtk_file, use_lua_levels )
 
 		if not _use_external_files then
 			for level_name in pairs(_levels) do
-				_.load_tileset( level_name )
-			end	
+				_.load_tileset(level_name)
+			end
 		end
 		return
 	end
@@ -99,14 +101,14 @@ function LDtk.load( ldtk_file, use_lua_levels )
 	-- handle the tilesets
 	for tileset_index, tileset_data in ipairs(data.defs.tilesets) do
 		-- check if the image table is in the folder of the ldtk file
-		if string.byte(".", 1)==string.byte(tileset_data.relPath, 1) then
-			error( "Cannot load tileset used by LDtk levels. imageTable tilesets must be in the same folder as ldtk file.", 2)
+		if string.byte(".", 1) == string.byte(tileset_data.relPath, 1) then
+			error("Cannot load tileset used by LDtk levels. imageTable tilesets must be in the same folder as ldtk file.", 2)
 			return
 		end
 
 		local tileset = {}
 
-		_tilesets[ tileset_data.uid ] = tileset
+		_tilesets[tileset_data.uid] = tileset
 
 		tileset.imageTable_filename = tileset_data.relPath
 		tileset.imageWidth = tileset_data.pxWid
@@ -115,7 +117,7 @@ function LDtk.load( ldtk_file, use_lua_levels )
 		-- Tile IDs list
 		local gsize = tileset_data.tileGridSize
 		local cw, ch = tileset_data.__cWid, tileset_data.__cHei
-		local cw2, ch2 = cw*2, ch*2
+		local cw2, ch2 = cw * 2, ch * 2
 
 		tileset.tileIDs = {}
 		tileset.tileIDs_empty = {}
@@ -128,69 +130,73 @@ function LDtk.load( ldtk_file, use_lua_levels )
 			local registered_tileIDs = {}
 			local registered_tileIDs_flipped = {}
 
-			for i, tileID in ipairs( enum_def.tileIds ) do
+			for i, tileID in ipairs(enum_def.tileIds) do
 				-- normal tileset
-				table.insert( tileIDs, 1+tileID)
-				registered_tileIDs[ 1+tileID ] = true
+				table.insert(tileIDs, 1 + tileID)
+				registered_tileIDs[1 + tileID] = true
 
 				-- flipped tileset
-				local cy = tileID//cw
-				local cx = tileID - cy*cw
-				local tileID_flip_no = 1 + cy*cw2 + cx
-				local tileID_flip_x = 1 + cy*cw2 + (cw2-cx-1)
-				local tileID_flip_y = 1 + (ch2-cy-1)*cw2 + cx
-				local tileID_flip_xy = 1 + (ch2-cy-1)*cw2 + (cw2-cx-1)
+				local cy = tileID // cw
+				local cx = tileID - cy * cw
+				local tileID_flip_no = 1 + cy * cw2 + cx
+				local tileID_flip_x = 1 + cy * cw2 + (cw2 - cx - 1)
+				local tileID_flip_y = 1 + (ch2 - cy - 1) * cw2 + cx
+				local tileID_flip_xy = 1 + (ch2 - cy - 1) * cw2 + (cw2 - cx - 1)
 
-				table.insert( tileIDs_flipped, tileID_flip_no)
-				table.insert( tileIDs_flipped, tileID_flip_x)
-				table.insert( tileIDs_flipped, tileID_flip_y)
-				table.insert( tileIDs_flipped, tileID_flip_xy)
+				table.insert(tileIDs_flipped, tileID_flip_no)
+				table.insert(tileIDs_flipped, tileID_flip_x)
+				table.insert(tileIDs_flipped, tileID_flip_y)
+				table.insert(tileIDs_flipped, tileID_flip_xy)
 
-				registered_tileIDs_flipped[ tileID_flip_no ] = true
-				registered_tileIDs_flipped[ tileID_flip_x ] = true
-				registered_tileIDs_flipped[ tileID_flip_y ] = true
-				registered_tileIDs_flipped[ tileID_flip_xy ] = true
+				registered_tileIDs_flipped[tileID_flip_no] = true
+				registered_tileIDs_flipped[tileID_flip_x] = true
+				registered_tileIDs_flipped[tileID_flip_y] = true
+				registered_tileIDs_flipped[tileID_flip_xy] = true
 			end
-			
+
 			-- empty versions
 			local tileIDs_empty = {}
-			for tileID = 1, cw*ch do
+			for tileID = 1, cw * ch do
 				if not registered_tileIDs[tileID] then
-					table.insert( tileIDs_empty, tileID )
+					table.insert(tileIDs_empty, tileID)
 				end
 			end
 
 			-- flipped empty version
 			local tileIDs_flipped_empty = {}
-			for tileID = 1, cw2*ch2 do
+			for tileID = 1, cw2 * ch2 do
 				if not registered_tileIDs_flipped[tileID] then
-					table.insert( tileIDs_flipped_empty, tileID )
+					table.insert(tileIDs_flipped_empty, tileID)
 				end
 			end
 
-			tileset.tileIDs[ enum_def.enumValueId ] = tileIDs
-			tileset.tileIDs_empty[ enum_def.enumValueId ] = tileIDs_empty
-			tileset.tileIDs_flipped[ enum_def.enumValueId ] = tileIDs_flipped
-			tileset.tileIDs_flipped_empty[ enum_def.enumValueId ] = tileIDs_flipped_empty
+			tileset.tileIDs[enum_def.enumValueId] = tileIDs
+			tileset.tileIDs_empty[enum_def.enumValueId] = tileIDs_empty
+			tileset.tileIDs_flipped[enum_def.enumValueId] = tileIDs_flipped
+			tileset.tileIDs_flipped_empty[enum_def.enumValueId] = tileIDs_flipped_empty
 		end
-
 	end
 
 	-- we list the level names (the complete list needs to be ready before calling LDtk.load_level())
 	for level_index, level_data in ipairs(data.levels) do
-		_level_names[ level_data.uid ] = level_data.identifier
-		_level_rects[ level_data.identifier ] = { x=level_data.worldX, y=level_data.worldY, width=level_data.pxWid, height=level_data.pxHei }
+		_level_names[level_data.uid] = level_data.identifier
+		_level_rects[level_data.identifier] = {
+			x = level_data.worldX,
+			y = level_data.worldY,
+			width = level_data.pxWid,
+			height = level_data.pxHei
+		}
 	end
 
 	-- we load the levels
 	for level_index, level_data in ipairs(data.levels) do
 		if level_data.externalRelPath then
-			_level_files[ level_data.identifier ] = level_data.externalRelPath
+			_level_files[level_data.identifier] = level_data.externalRelPath
 		else
-			LDtk.load_level( level_data )
-			_.load_tileset( level_data.identifier )
+			LDtk.load_level(level_data)
+			_.load_tileset(level_data.identifier)
 		end
-	end	
+	end
 end
 
 -- Call this function to save the LDtk level in lua files to improve loading performance
@@ -207,66 +213,68 @@ function LDtk.export_to_lua()
 	local lua_level_files = {}
 	for level_name, level_file in pairs(_level_files) do
 		local filename = _.get_filename(level_file)
-		lua_level_files[ level_name ] = _ldtk_lua_folder..filename..".pdz"
+		lua_level_files[level_name] = _ldtk_lua_folder .. filename .. ".pdz"
 	end
 
 	print("Export LDtk world")
-	writeLua( folder.._.get_filename(_ldtk_filepath)..".lua", {
-		tilesets = _tilesets,
-		level_files = lua_level_files,
-		level_names = _level_names,
-		level_rects = _level_rects,
-		levels = _levels,
-		use_external_files = _use_external_files
-	})
+	writeLua(
+		folder .. _.get_filename(_ldtk_filepath) .. ".lua",
+		{
+			tilesets = _tilesets,
+			level_files = lua_level_files,
+			level_names = _level_names,
+			level_rects = _level_rects,
+			levels = _levels,
+			use_external_files = _use_external_files
+		}
+	)
 
 	for level_name, level_file in pairs(_level_files) do
 		print("Export LDtk level", level_name)
 
-		LDtk.load_level( level_name )
-		writeLua( folder.._.get_filename(level_file)..".lua", _levels[ level_name ])
-		LDtk.release_level( level_name )
+		LDtk.load_level(level_name)
+		writeLua(folder .. _.get_filename(level_file) .. ".lua", _levels[level_name])
+		LDtk.release_level(level_name)
 	end
 end
 
 -- load the level in memory
 -- only necessary to call if the ldtk file is saved in multiple files
-function LDtk.load_level( level_name )
-	if _levels[ level_name ] then
+function LDtk.load_level(level_name)
+	if _levels[level_name] then
 		return
 	end
 
 	if _use_lua_levels then
-		_levels[ level_name ] = playdate.file.run( _level_files[ level_name ] )
-		_.load_tileset( level_name )
+		_levels[level_name] = playdate.file.run(_level_files[level_name])
+		_.load_tileset(level_name)
 		return
 	end
 
 	local level_data
-	if type(level_name)=="string" then
-		level_data = json.decodeFile( _ldtk_folder.._level_files[ level_name ] )
+	if type(level_name) == "string" then
+		level_data = json.decodeFile(_ldtk_folder .. _level_files[level_name])
 	else
 		level_data = level_name
 	end
 
 	local level = {}
-	_levels[ level_data.identifier ] = level
+	_levels[level_data.identifier] = level
 
-	level.neighbours = { east = {}, west = {}, north = {}, south = {}}
-	local direction_table = { e = "east", w = "west", n = "north", s = "south" }
+	level.neighbours = {east = {}, west = {}, north = {}, south = {}}
+	local direction_table = {e = "east", w = "west", n = "north", s = "south"}
 	for index, neighbour_data in ipairs(level_data.__neighbours) do
-		local direction = direction_table[ neighbour_data.dir ]
+		local direction = direction_table[neighbour_data.dir]
 		if direction then
-			table.insert( level.neighbours[ direction ], _level_names[ neighbour_data.levelUid ])
+			table.insert(level.neighbours[direction], _level_names[neighbour_data.levelUid])
 		end
 	end
 
 	-- handle layers
 	level.layers = {}
 	for layer_index, layer_data in ipairs(level_data.layerInstances) do
-
 		local layer = {}
-		level.layers[ layer_data.__identifier ] = layer
+		level.layers[layer_data.__identifier] = layer
 
 		local layer_type = layer_data.__type
 
@@ -277,7 +285,7 @@ function LDtk.load_level( level_name )
 			y = level_data.worldY + layer_data.__pxTotalOffsetY,
 			width = layer_data.__cWid * layer_data.__gridSize,
 			height = layer_data.__cHei * layer_data.__gridSize
-			}
+		}
 
 		-- load tileset
 		if layer_data.__tilesetRelPath then
@@ -287,22 +295,22 @@ function LDtk.load_level( level_name )
 
 		-- handle tiles
 		local tiles_data = layer_data.gridTiles
-		if #layer_data.autoLayerTiles>0 then
+		if #layer_data.autoLayerTiles > 0 then
 			tiles_data = layer_data.autoLayerTiles
 		end
-		if #tiles_data>0 then
+		if #tiles_data > 0 then
 			layer.tilemap_width = layer_data.__cWid
 			layer.tileset_uid = layer_data.__tilesetDefUid
 
 			layer.tiles = {}
 
 			local gsize = layer.grid_size
-			local tileset_data = _tilesets[ layer.tileset_uid ]
-			local cw, ch = tileset_data.imageWidth/gsize, tileset_data.imageHeight/gsize
-			
+			local tileset_data = _tilesets[layer.tileset_uid]
+			local cw, ch = tileset_data.imageWidth / gsize, tileset_data.imageHeight / gsize
+
 			-- check we we have any flipped tiles
 			for tile_index, tile_data in ipairs(tiles_data) do
-				if tile_data.f~=0 then
+				if tile_data.f ~= 0 then
 					layer.has_flipped_tiles = true
 					cw = cw * 2
 					ch = ch * 2
@@ -313,73 +321,78 @@ function LDtk.load_level( level_name )
 
 			local tiles_list = {}
 			for tile_index, tile_data in ipairs(tiles_data) do
-				local id = (tile_data.px[2]/gsize)*layer_data.__cWid + tile_data.px[1]/gsize
+				local id = (tile_data.px[2] / gsize) * layer_data.__cWid + tile_data.px[1] / gsize
 
 				if layer.has_flipped_tiles then
-					local cx, cy = tile_data.src[1]/gsize, tile_data.src[2]/gsize
+					local cx, cy = tile_data.src[1] / gsize, tile_data.src[2] / gsize
 
-					if tile_data.f==0 then
-						tiles_list[id] = 1 + cy*cw + cx
-					elseif tile_data.f==1 then
-						tiles_list[id] = 1 + cy*cw + (cw-cx-1)
-					elseif tile_data.f==2 then
-						tiles_list[id] = 1 + (ch-cy-1)*cw + cx
+					if tile_data.f == 0 then
+						tiles_list[id] = 1 + cy * cw + cx
+					elseif tile_data.f == 1 then
+						tiles_list[id] = 1 + cy * cw + (cw - cx - 1)
+					elseif tile_data.f == 2 then
+						tiles_list[id] = 1 + (ch - cy - 1) * cw + cx
 					else
-						tiles_list[id] = 1 + (ch-cy-1)*cw + (cw-cx-1)
+						tiles_list[id] = 1 + (ch - cy - 1) * cw + (cw - cx - 1)
 					end
 				else
 					tiles_list[id] = 1 + tile_data.t
 				end
 			end
 
-			for y = 0, layer_data.__cHei-1 do
-				for x = 0, layer_data.__cWid-1 do
-					local id = y*layer_data.__cWid + x
-					table.insert( layer.tiles, math.floor(tiles_list[id]) or 1)
+			for y = 0, layer_data.__cHei - 1 do
+				for x = 0, layer_data.__cWid - 1 do
+					local id = y * layer_data.__cWid + x
+					table.insert(layer.tiles, math.floor(tiles_list[id]) or 1)
 				end
 			end
 		end
 
 		local entities_data = layer_data.entityInstances
-		if #entities_data>0 then
+		if #entities_data > 0 then
 			layer.entities = {}
 
 			for entity_index, entity_data in ipairs(entities_data) do
 				local properties = {}
 				for field_index, field_data in ipairs(entity_data.fieldInstances) do
-					properties[ field_data.__identifier ] = field_data.__value
+					properties[field_data.__identifier] = field_data.__value
 				end
 
-				table.insert( layer.entities, {
-					id = entity_data.iid,
-					name = entity_data.__identifier,
-					position = { x=entity_data.px[1], y=entity_data.px[2] },
-					center = { x=entity_data.__pivot[1], y=entity_data.__pivot[2] },
-					size = { width=entity_data.width, height=entity_data.height },
-					zIndex = layer_index,
-					fields = properties,
-				})
+				table.insert(
+					layer.entities,
+					{
+						id = entity_data.iid,
+						name = entity_data.__identifier,
+						position = {x = entity_data.px[1], y = entity_data.px[2]},
+						center = {x = entity_data.__pivot[1], y = entity_data.__pivot[2]},
+						size = {width = entity_data.width, height = entity_data.height},
+						zIndex = layer_index,
+						fields = properties
+					}
+				)
 			end
 		end
 	end
 
-	_.load_tileset( level_name )
+	_.load_tileset(level_name)
 end
 
 -- free the level from the memory
 -- the tileset is also freed if no other level is using it
-function LDtk.release_level( level_name )
+function LDtk.release_level(level_name)
 	if not _use_external_files then
 		print("LDtk file doesn't use external files. No need to load/release individual levels.")
 		return
 	end
 
 	local level = _levels[level_name]
-	if not level then return end
+	if not level then
+		return
+	end
 
 	-- release image table tilesets
 	for layer_name, layer in pairs(level.layers) do
-		_.release_tileset_imagetable( layer.tileset_file, layer.has_flipped_tiles)
+		_.release_tileset_imagetable(layer.tileset_file, layer.has_flipped_tiles)
 	end
 
 	_levels[level_name] = nil
@@ -394,109 +407,125 @@ end
 --	.size :  width and height of the entity
 --	.zIndex : layer index
 -- 	.fields : all the custom fields data entered in the LDtk editor
-function LDtk.get_entities( level_name, layer_name )
+function LDtk.get_entities(level_name, layer_name)
 	local level = _levels[level_name]
-	if not level then return end
+	if not level then
+		return
+	end
 
 	if not layer_name then
 		local all_entities = {}
 		for layer_name, layer in pairs(level.layers) do
 			for entity_index, entity in pairs(layer.entities or {}) do
-				table.insert( all_entities, entity)
+				table.insert(all_entities, entity)
 			end
 		end
 
 		return all_entities
 	end
 
-	local layer = level.layers[ layer_name ]
-	if not layer then return end
+	local layer = level.layers[layer_name]
+	if not layer then
+		return
+	end
 
 	return layer.entities
 end
 
 -- return a tilemap for the level
 -- @layer_name is optional, if nil than will return the first layer with tiles
-function LDtk.create_tilemap( level_name, layer_name )
-	local layer = _.get_tile_layer( level_name, layer_name )
-	if not layer then return end
+function LDtk.create_tilemap(level_name, layer_name)
+	local layer = _.get_tile_layer(level_name, layer_name)
+	if not layer then
+		return
+	end
 
-	local tilemap = playdate.graphics.tilemap.new()
-	tilemap:setImageTable( layer.tileset_image )
-	tilemap:setTiles( layer.tiles, layer.tilemap_width)
+	local tilemap = gfx.tilemap.new()
+	tilemap:setImageTable(layer.tileset_image)
+	tilemap:setTiles(layer.tiles, layer.tilemap_width)
 
 	return tilemap
 end
 
 -- return a table with all the adjacent levels
 -- @direction is optional: values can be "east", "west", "north", "south"
-function LDtk.get_neighbours( level_name, direction )
+function LDtk.get_neighbours(level_name, direction)
 	local level = _levels[level_name]
-	if not level then return end
+	if not level then
+		return
+	end
 
 	if not direction then
 		return level.neighbours
 	end
 
-	return level.neighbours[ direction ]
+	return level.neighbours[direction]
 end
 
 -- return the position and site of the level in the world
 -- always available, the level doesn't need to be loaded
-function LDtk.get_rect( level_name )
+function LDtk.get_rect(level_name)
 	return _level_rects[level_name]
 end
 
 -- return all the tileIDs tagged in LDtk with tileset_enum_value
 -- LDtk.get_tileIDs( "Level_0", "Solid" )
-function LDtk.get_tileIDs( level_name, tileset_enum_value, layer_name )
-	local layer = _.get_tile_layer( level_name, layer_name )
-	if not layer then return end
-
-	local tileset = _tilesets[ layer.tileset_uid ]
-	if not tileset then return end
-
-	if layer.has_flipped_tiles then
-		return tileset.tileIDs_flipped[ tileset_enum_value ]
+function LDtk.get_tileIDs(level_name, tileset_enum_value, layer_name)
+	local layer = _.get_tile_layer(level_name, layer_name)
+	if not layer then
+		return
 	end
 
-	return tileset.tileIDs[ tileset_enum_value ]
-end
+	local tileset = _tilesets[layer.tileset_uid]
+	if not tileset then
+		return
+	end
 
+	if layer.has_flipped_tiles then
+		return tileset.tileIDs_flipped[tileset_enum_value]
+	end
+
+	return tileset.tileIDs[tileset_enum_value]
+end
 
 -- return all the tileIDs NOT tagged in LDtk with tileset_enum_value
 -- playdate functions usually require this function (getCollisionRects(emptyIDs), addWallSprites() )
-function LDtk.get_empty_tileIDs( level_name, tileset_enum_value, layer_name )
-	local layer = _.get_tile_layer( level_name, layer_name )
-	if not layer then return end
-
-	local tileset = _tilesets[ layer.tileset_uid ]
-	if not tileset then return end
-
-	if layer.has_flipped_tiles then
-		return tileset.tileIDs_flipped_empty[ tileset_enum_value ]
+function LDtk.get_empty_tileIDs(level_name, tileset_enum_value, layer_name)
+	local layer = _.get_tile_layer(level_name, layer_name)
+	if not layer then
+		return
 	end
 
-	return tileset.tileIDs_empty[ tileset_enum_value ]
-end
+	local tileset = _tilesets[layer.tileset_uid]
+	if not tileset then
+		return
+	end
 
+	if layer.has_flipped_tiles then
+		return tileset.tileIDs_flipped_empty[tileset_enum_value]
+	end
+
+	return tileset.tileIDs_empty[tileset_enum_value]
+end
 
 --
 -- internal functions
 --
 
-function _.get_filename( filepath )
+function _.get_filename(filepath)
 	return filepath:match("^.+/(.+)$")
 end
 
-function _.get_folder( filepath )
+function _.get_folder(filepath)
 	local filename = filepath:match("^.+/(.+)$")
-	return filepath:sub(0, -#filename-1)
+	return filepath:sub(0, -(#filename) - 1)
 end
 
-function _.load_tileset( level_name )
+function _.load_tileset(level_name)
 	local level = _levels[level_name]
-	if not level then return end
+	if not level then
+		return
+	end
 
 	for layer_name, layer in pairs(level.layers) do
 		if layer.tileset_file then
@@ -508,7 +537,7 @@ end
 function _.load_tileset_imagetable(path, flipped)
 	local id = path
 	if flipped then
-		id = id.."[flipped]"
+		id = id .. "[flipped]"
 	end
 
 	if _imageTables[id] then
@@ -519,18 +548,25 @@ function _.load_tileset_imagetable(path, flipped)
 	local image_filepath
 	if flipped then
 		local filename = path:match("^.+/(.+)$")
-		local tileset_folder = path:sub(0, -#filename-1)
-		image_filepath = _ldtk_folder..tileset_folder.."flipped-"..filename
+		local tileset_folder = path:sub(0, -(#filename) - 1)
+		image_filepath = _ldtk_folder .. tileset_folder .. "flipped-" .. filename
 	else
-		image_filepath = _ldtk_folder..path
+		image_filepath = _ldtk_folder .. path
 	end
 
 	local image = playdate.graphics.imagetable.new(image_filepath)
 	if not image then
 		if flipped then
-			error( "LDtk cannot load tileset "..image_filepath..". Tileset requires a flipped version of the image: flipped-filename-table-w-h.png", 3)
+			error(
+				"LDtk cannot load tileset " ..
+					image_filepath .. ". Tileset requires a flipped version of the image: flipped-filename-table-w-h.png",
+				3
+			)
 		else
-			error( "LDtk cannot load tileset "..image_filepath..". Filename should have a image table format: name-table-w-h.png", 3)
+			error(
+				"LDtk cannot load tileset " .. image_filepath .. ". Filename should have a image table format: name-table-w-h.png",
+				3
+			)
 		end
 
 		return nil
@@ -545,11 +581,13 @@ function _.load_tileset_imagetable(path, flipped)
 end
 
 function _.release_tileset_imagetable(path, flipped)
-	if not path then return end
+	if not path then
+		return
+	end
 
 	local id = path
 	if flipped then
-		id = id.."[flipped]"
+		id = id .. "[flipped]"
 	end
 
 	if not _imageTables[id] then
@@ -558,17 +596,19 @@ function _.release_tileset_imagetable(path, flipped)
 	end
 
 	_imageTables[id].count = _imageTables[id].count - 1
-	if _imageTables[id].count<=0 then
+	if _imageTables[id].count <= 0 then
 		_imageTables[id] = nil
 	end
 end
 
-function _.get_tile_layer( level_name, layer_name )
+function _.get_tile_layer(level_name, layer_name)
 	local level = _levels[level_name]
-	if not level then return end
+	if not level then
+		return
+	end
 
 	if layer_name then
-		return level.layers[ layer_name ]
+		return level.layers[layer_name]
 	end
 
 	for layer_name, layer in pairs(level.layers) do
@@ -577,7 +617,3 @@ function _.get_tile_layer( level_name, layer_name )
 		end
 	end
 end
-
-
-
-

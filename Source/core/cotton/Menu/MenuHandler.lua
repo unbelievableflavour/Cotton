@@ -1,3 +1,5 @@
+local gfx <const> = playdate.graphics
+
 import "./PagesIcon"
 import "./MenuCursor"
 import "./MenuOptions"

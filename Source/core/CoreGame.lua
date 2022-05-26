@@ -1,7 +1,6 @@
-game = {
-	activeEntities = {}
-}
+local gfx <const> = playdate.graphics
 
+game = {}
 save = {}
 
 cotton = {
@@ -16,7 +15,7 @@ adapterDictionary = {
 	topdown = PlayerTopdown
 }
 
-local _background_sprite = playdate.graphics.sprite.new()
+local _background_sprite = gfx.sprite.new()
 local backgroundImg = nil
 
 function game.init(level_name)
@@ -42,9 +41,9 @@ function game.init(level_name)
 	goto_level(level_name)
 
 	if config.cameraFollowOverflowImage ~= nil then
-		backgroundImg = playdate.graphics.image.new(config.cameraFollowOverflowImage, screenWidth, screenHeight)
+		backgroundImg = gfx.image.new(config.cameraFollowOverflowImage, screenWidth, screenHeight)
 	elseif config.cameraFollowOverflowColor == "black" then
-		backgroundImg = playdate.graphics.image.new(screenWidth, screenHeight, black)
+		backgroundImg = gfx.image.new(screenWidth, screenHeight, black)
 	end
 end
 
@@ -81,7 +80,7 @@ function goto_level(level_name, direction)
 	cotton.game:enter()
 	cotton.room:enter()
 
-	playdate.graphics.sprite.removeAll()
+	gfx.sprite.removeAll()
 
 	game.tilemap = LDtk.create_tilemap(level_name)
 
@@ -91,8 +90,8 @@ function goto_level(level_name, direction)
 	_background_sprite:setZIndex(-1)
 	_background_sprite:add()
 
-	playdate.graphics.sprite.addWallSprites(game.tilemap, LDtk.get_empty_tileIDs(level_name, "Solid"))
-	playdate.graphics.sprite.setBackgroundDrawingCallback(game.drawBackground)
+	gfx.sprite.addWallSprites(game.tilemap, LDtk.get_empty_tileIDs(level_name, "Solid"))
+	gfx.sprite.setBackgroundDrawingCallback(game.drawBackground)
 
 	game.player = adapterDictionary[config.playerType]()
 
@@ -123,7 +122,7 @@ function goto_level(level_name, direction)
 	end
 
 	cotton.player:enter()
-	-- playdate.graphics.sprite.setAlwaysRedraw(true)
+	-- gfx.sprite.setAlwaysRedraw(true)
 end
 
 function game.freeze()
@@ -144,7 +143,7 @@ function game.update()
 	cotton.game:loop()
 	game.player:Update()
 
-	playdate.graphics.sprite.update()
+	gfx.sprite.update()
 	cotton.menuHandler:Update()
 	cotton.messageHandler:Update()
 	cotton.eventHandler:Update()

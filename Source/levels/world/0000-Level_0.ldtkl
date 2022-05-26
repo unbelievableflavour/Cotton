@@ -82,7 +82,7 @@
 				},
 				{
 					"__identifier": "Exit",
-					"__grid": [23,7],
+					"__grid": [24,7],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": null,
@@ -91,7 +91,7 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 61,
-					"px": [376,120],
+					"px": [384,112],
 					"fieldInstances": [{ "__identifier": "EntranceDirection", "__value": "East", "__type": "LocalEnum.EntranceDirection", "__tile": null, "defUid": 62, "realEditorValues": [{
 						"id": "V_String",
 						"params": ["East"]
@@ -108,7 +108,7 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 61,
-					"px": [192,8],
+					"px": [192,0],
 					"fieldInstances": [{ "__identifier": "EntranceDirection", "__value": "North", "__type": "LocalEnum.EntranceDirection", "__tile": null, "defUid": 62, "realEditorValues": [{
 						"id": "V_String",
 						"params": ["North"]

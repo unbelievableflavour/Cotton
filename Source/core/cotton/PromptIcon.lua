@@ -1,3 +1,5 @@
+local gfx <const> = playdate.graphics
+
 import "CoreLibs/animation"
 
 class(

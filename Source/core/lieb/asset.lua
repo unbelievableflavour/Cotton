@@ -7,7 +7,9 @@
 	load sfx
 	lazy loading https://devforum.play.date/t/best-practices-for-managing-lots-of-assets/395
 	asset hot reloading
-]]--
+]] --
+
+local gfx <const> = playdate.graphics
 
 import './readFolder'
 
@@ -20,7 +22,7 @@ asset = setmetatable({}, {
 function asset.loadImage( imagePath, assetName )
 	assetName = assetName or imagePath
 
-	_assetList[assetName] = playdate.graphics.image.new( imagePath )
+	_assetList[assetName] = gfx.image.new( imagePath )
 end
 
 function asset.loadImageFolder( folderPath )

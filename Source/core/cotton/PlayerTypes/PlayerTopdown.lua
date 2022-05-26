@@ -1,3 +1,5 @@
+local gfx <const> = playdate.graphics
+
 class(
 	"PlayerTopdown",
 	{
@@ -8,7 +10,7 @@ class(
 ).extends()
 
 function PlayerTopdown:Init(ldtk_entity)
-	self.sprite = playdate.graphics.sprite.new(asset("player"))
+	self.sprite = gfx.sprite.new(asset("player"))
 	local sprite = self.sprite
 
 	sprite:setZIndex(ldtk_entity.zIndex)

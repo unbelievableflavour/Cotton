@@ -63,7 +63,7 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 61,
-					"px": [8,120],
+					"px": [0,112],
 					"fieldInstances": [{ "__identifier": "EntranceDirection", "__value": "West", "__type": "LocalEnum.EntranceDirection", "__tile": null, "defUid": 62, "realEditorValues": [{
 						"id": "V_String",
 						"params": ["West"]

@@ -1,4 +1,4 @@
-local gfx = playdate.graphics
+local gfx <const> = playdate.graphics
 
 class(
 	"PlayerGrid",
@@ -17,7 +17,7 @@ function PlayerGrid:Init(ldtk_entity)
 	self.destinationCursor =
 		playdate.geometry.point.new(ldtk_entity.position.x / self.tileSize, ldtk_entity.position.y / self.tileSize)
 
-	self.sprite = playdate.graphics.sprite.new(asset("playerGrid"))
+	self.sprite = gfx.sprite.new(asset("playerGrid"))
 	local sprite = self.sprite
 
 	sprite:setZIndex(ldtk_entity.zIndex)
@@ -26,7 +26,7 @@ function PlayerGrid:Init(ldtk_entity)
 	-- sprite:setCollideRect( 0,0, sprite:getSize() )
 	sprite:add()
 
-	self.tempSprite = playdate.graphics.sprite.new(asset("playerGrid"))
+	self.tempSprite = gfx.sprite.new(asset("playerGrid"))
 	self.tempSprite:setZIndex(-100)
 	self.tempSprite:moveTo(ldtk_entity.position.x, ldtk_entity.position.y)
 	self.tempSprite:setCenter(ldtk_entity.center.x, ldtk_entity.center.y)
@@ -135,7 +135,7 @@ end
 
 function PlayerGrid:fixCamera()
 	local spriteX, spriteY = self.sprite:getPosition()
-	playdate.graphics.setDrawOffset(0 + 200 - spriteX, 120 - spriteY)
+	gfx.setDrawOffset(0 + 200 - spriteX, 120 - spriteY)
 end
 
 function PlayerGrid:getEntityOnPosition()

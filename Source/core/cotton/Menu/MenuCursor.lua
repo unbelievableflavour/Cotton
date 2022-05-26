@@ -1,3 +1,5 @@
+local gfx <const> = playdate.graphics
+
 class("MenuCursor", {positionX = 0, positionY = 0, selected = 1}).extends(gfx.sprite)
 
 function MenuCursor:init(positionX, positionY)
