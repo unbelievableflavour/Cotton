@@ -94,7 +94,7 @@ function goto_level(level_name, direction)
 	playdate.graphics.sprite.addWallSprites(game.tilemap, LDtk.get_empty_tileIDs(level_name, "Solid"))
 	playdate.graphics.sprite.setBackgroundDrawingCallback(game.drawBackground)
 
-	game.player = new(adapterDictionary[config.playerType])
+	game.player = adapterDictionary[config.playerType]()
 
 	local opposites = {}
 	opposites["North"] = "South"

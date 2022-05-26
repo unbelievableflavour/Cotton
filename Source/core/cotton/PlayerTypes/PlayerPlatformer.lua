@@ -1,4 +1,19 @@
-PlayerPlatformer = {}
+class(
+	"PlayerPlatformer",
+	{
+		player_speed = 5,
+		player_acc = 1,
+		player_ground_friction = 0.8,
+		player_air_friction = 0.3,
+		jump_grace = 0.1,
+		jump_buffer = 0.1,
+		jump_long_press = 0.12,
+		jump_velocity = -15,
+		gravity_up = 80,
+		gravity_down = 130,
+		player_max_gravity = 40
+	}
+).extends()
 
 function PlayerPlatformer:Init(ldtk_entity)
 	self.sprite = playdate.graphics.sprite.new(asset("player"))
@@ -14,7 +29,7 @@ function PlayerPlatformer:Init(ldtk_entity)
 	self.justLanded = false
 	self.bangCeiling = false
 	self.groundedLast = 0
-	self.lastJumpPress = live.jump_buffer
+	self.lastJumpPress = self.jump_buffer
 	self.jumpPressDuration = 0
 
 	self.velocity = playdate.geometry.vector2D.new(0, 0)
@@ -26,12 +41,12 @@ function PlayerPlatformer:Update()
 	-- Friction
 	if self.isGrounded then
 		if input.x() == 0 then
-			self.velocity.x = math.approach(self.velocity.x, 0, live.player_ground_friction)
+			self.velocity.x = math.approach(self.velocity.x, 0, self.player_ground_friction)
 		end
 		self.velocity.y = 0
 	else
 		if input.x() == 0 then
-			self.velocity.x = math.approach(self.velocity.x, 0, live.player_air_friction)
+			self.velocity.x = math.approach(self.velocity.x, 0, self.player_air_friction)
 		end
 
 		if self.bangCeiling then
@@ -41,11 +56,11 @@ function PlayerPlatformer:Update()
 
 	-- move left/right
 	if input.is(buttonLeft) then
-		self.velocity.x = math.approach(self.velocity.x, -live.player_speed, live.player_acc)
+		self.velocity.x = math.approach(self.velocity.x, -self.player_speed, self.player_acc)
 	-- self.sprite:setImageFlip(playdate.graphics.kImageFlippedX)
 	end
 	if input.is(buttonRight) then
-		self.velocity.x = math.approach(self.velocity.x, live.player_speed, live.player_acc)
+		self.velocity.x = math.approach(self.velocity.x, self.player_speed, self.player_acc)
 	-- self.sprite:setImageFlip(playdate.graphics.kImageUnflipped)
 	end
 
@@ -62,27 +77,27 @@ function PlayerPlatformer:Update()
 
 	if self.jumpPressDuration > 0 then
 		if input.is(buttonA) then
-			self.velocity.y = live.jump_velocity
+			self.velocity.y = self.jump_velocity
 			self.jumpPressDuration = self.jumpPressDuration - dt
 		else
 			self.jumpPressDuration = 0
 		end
 	end
 
-	if self.lastJumpPress < live.jump_buffer and self.groundedLast < live.jump_grace then
-		self.velocity.y = live.jump_velocity
+	if self.lastJumpPress < self.jump_buffer and self.groundedLast < self.jump_grace then
+		self.velocity.y = self.jump_velocity
 		self.isGrounded = false
 
-		self.lastJumpPress = live.jump_buffer
-		self.groundedLast = live.jump_grace
-		self.jumpPressDuration = live.jump_long_press
+		self.lastJumpPress = self.jump_buffer
+		self.groundedLast = self.jump_grace
+		self.jumpPressDuration = self.jump_long_press
 	end
 
 	-- Gravity
 	if self.velocity.y >= 0 then
-		self.velocity.y = math.min(self.velocity.y + live.gravity_down * dt, live.player_max_gravity)
+		self.velocity.y = math.min(self.velocity.y + self.gravity_down * dt, self.player_max_gravity)
 	else
-		self.velocity.y = self.velocity.y + live.gravity_up * dt
+		self.velocity.y = self.velocity.y + self.gravity_up * dt
 	end
 
 	local goalX = self.sprite.x + self.velocity.x

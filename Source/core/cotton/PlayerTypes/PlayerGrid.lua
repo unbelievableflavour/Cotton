@@ -1,20 +1,21 @@
-PlayerGrid = {}
-
 local gfx = playdate.graphics
-local tilesSize = 16
-local tileGridWidth = 50
-local tileGridHeight = 30
 
-local transitionMovement = true
-local transitionSpeed = 2
-local allowDiagonalMovement = false
-
-local currentCollisions = {}
+class(
+	"PlayerGrid",
+	{
+		tileSize = 16,
+		transitionMovement = true,
+		transitionSpeed = 2,
+		allowDiagonalMovement = false,
+		currentCollisions = {}
+	}
+).extends()
 
 function PlayerGrid:Init(ldtk_entity)
-	self.previousTile = playdate.geometry.point.new(ldtk_entity.position.x / tilesSize, ldtk_entity.position.y / tilesSize)
+	self.previousTile =
+		playdate.geometry.point.new(ldtk_entity.position.x / self.tileSize, ldtk_entity.position.y / self.tileSize)
 	self.destinationCursor =
-		playdate.geometry.point.new(ldtk_entity.position.x / tilesSize, ldtk_entity.position.y / tilesSize)
+		playdate.geometry.point.new(ldtk_entity.position.x / self.tileSize, ldtk_entity.position.y / self.tileSize)
 
 	self.sprite = playdate.graphics.sprite.new(asset("playerGrid"))
 	local sprite = self.sprite
@@ -39,7 +40,7 @@ function PlayerGrid:hasMoved()
 	local collisions = self.tempSprite:overlappingSprites()
 	local removedKeys = {}
 
-	for key, value in pairs(currentCollisions) do
+	for key, value in pairs(self.currentCollisions) do
 		local isStillColliding = false
 		for i = 1, #collisions do
 			if collisions[i].entity then
@@ -55,14 +56,14 @@ function PlayerGrid:hasMoved()
 	end
 
 	for i, v in pairs(removedKeys) do
-		currentCollisions[v]:onTileExit()
-		currentCollisions[v] = nil
+		self.currentCollisions[v]:onTileExit()
+		self.currentCollisions[v] = nil
 	end
 end
 
 function PlayerGrid:moveTowards()
 	local spriteX, spriteY = self.sprite:getPosition()
-	if spriteX == self.destinationCursor.x * tilesSize and spriteY == self.destinationCursor.y * tilesSize then
+	if spriteX == self.destinationCursor.x * self.tileSize and spriteY == self.destinationCursor.y * self.tileSize then
 		self:hasMoved()
 		return
 	end
@@ -70,18 +71,18 @@ function PlayerGrid:moveTowards()
 	local newX = spriteX
 	local newY = spriteY
 
-	if spriteX < self.destinationCursor.x * tilesSize then
-		newX = spriteX + transitionSpeed
+	if spriteX < self.destinationCursor.x * self.tileSize then
+		newX = spriteX + self.transitionSpeed
 	end
-	if spriteX > self.destinationCursor.x * tilesSize then
-		newX = spriteX - transitionSpeed
+	if spriteX > self.destinationCursor.x * self.tileSize then
+		newX = spriteX - self.transitionSpeed
 	end
 
-	if spriteY < self.destinationCursor.y * tilesSize then
-		newY = spriteY + transitionSpeed
+	if spriteY < self.destinationCursor.y * self.tileSize then
+		newY = spriteY + self.transitionSpeed
 	end
-	if spriteY > self.destinationCursor.y * tilesSize then
-		newY = spriteY - transitionSpeed
+	if spriteY > self.destinationCursor.y * self.tileSize then
+		newY = spriteY - self.transitionSpeed
 	end
 
 	self.sprite:moveTo(newX, newY)
@@ -92,7 +93,7 @@ function PlayerGrid:doCollisionCheck(spriteX, spriteY)
 	local collisions = self.tempSprite:overlappingSprites()
 	if #collisions > 0 then
 		if collisions[1].collisionType == "overlap" then
-			currentCollisions[collisions[1].id] = collisions[1]
+			self.currentCollisions[collisions[1].id] = collisions[1]
 			collisions[1]:onTileEnter()
 			return canMoveToLocation
 		end
@@ -116,7 +117,7 @@ function PlayerGrid:drawCursor()
 		return
 	end
 
-	self.tempSprite:moveTo(self.destinationCursor.x * tilesSize, self.destinationCursor.y * tilesSize)
+	self.tempSprite:moveTo(self.destinationCursor.x * self.tileSize, self.destinationCursor.y * self.tileSize)
 	local spriteX, spriteY = self.sprite:getPosition()
 	local canMoveToLocation = self:doCollisionCheck(spriteX, spriteY)
 
@@ -124,10 +125,10 @@ function PlayerGrid:drawCursor()
 		return
 	end
 
-	if transitionMovement == true then
+	if self.transitionMovement == true then
 		self:moveTowards()
 	else
-		self.sprite:moveTo(self.destinationCursor.x * tilesSize, self.destinationCursor.y * tilesSize)
+		self.sprite:moveTo(self.destinationCursor.x * self.tileSize, self.destinationCursor.y * self.tileSize)
 		self:hasMoved()
 	end
 end
@@ -142,8 +143,8 @@ function PlayerGrid:getEntityOnPosition()
 	local spriteTileY = self.destinationCursor.y
 	for index, entity in ipairs(LDtk.get_entities("Level_0")) do
 		if
-			entity.fields.HasClass == true and entity.position.x / tilesSize == spriteTileX and
-				entity.position.y / tilesSize == spriteTileY
+			entity.fields.HasClass == true and entity.position.x / self.tileSize == spriteTileX and
+				entity.position.y / self.tileSize == spriteTileY
 		 then
 			return entity
 		end
@@ -183,7 +184,7 @@ function PlayerGrid:detectInput()
 		self.destinationCursor.y = self.destinationCursor.y
 		self.shouldMove = true
 
-		if not allowDiagonalMovement then
+		if not self.allowDiagonalMovement then
 			return
 		end
 	end
@@ -198,7 +199,7 @@ function PlayerGrid:detectInput()
 		self.destinationCursor.y = self.destinationCursor.y
 		self.shouldMove = true
 
-		if not allowDiagonalMovement then
+		if not self.allowDiagonalMovement then
 			return
 		end
 	end
@@ -215,7 +216,7 @@ function PlayerGrid:detectInput()
 		self.destinationCursor.y = self.destinationCursor.y - 1
 		self.shouldMove = true
 
-		if not allowDiagonalMovement then
+		if not self.allowDiagonalMovement then
 			return
 		end
 	end
@@ -231,7 +232,7 @@ function PlayerGrid:detectInput()
 		self.destinationCursor.y = self.destinationCursor.y + 1
 		self.shouldMove = true
 
-		if not allowDiagonalMovement then
+		if not self.allowDiagonalMovement then
 			return
 		end
 	end

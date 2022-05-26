@@ -1,4 +1,11 @@
-PlayerTopdown = {}
+class(
+	"PlayerTopdown",
+	{
+		player_speed = 4,
+		player_acc = 1,
+		player_ground_friction = 0.8
+	}
+).extends()
 
 function PlayerTopdown:Init(ldtk_entity)
 	self.sprite = playdate.graphics.sprite.new(asset("player"))
@@ -12,9 +19,6 @@ function PlayerTopdown:Init(ldtk_entity)
 
 	self.isGrounded = false
 	self.bangCeiling = false
-	self.groundedLast = 0
-	self.lastJumpPress = live.jump_buffer
-	self.jumpPressDuration = 0
 
 	self.velocity = playdate.geometry.vector2D.new(0, 0)
 end
@@ -23,8 +27,8 @@ function PlayerTopdown:Update()
 	local dt = 1 / playdate.display.getRefreshRate()
 
 	if input.x() == 0 then
-		self.velocity.x = math.approach(self.velocity.x, 0, live.player_air_friction)
-		self.velocity.y = math.approach(self.velocity.y, 0, live.player_air_friction)
+		self.velocity.x = math.approach(self.velocity.x, 0, self.player_ground_friction)
+		self.velocity.y = math.approach(self.velocity.y, 0, self.player_ground_friction)
 	end
 
 	if self.bangCeiling then
@@ -37,16 +41,16 @@ function PlayerTopdown:Update()
 
 	-- move left/right/up/down
 	if input.is(buttonLeft) then
-		self.velocity.x = math.approach(self.velocity.x, -live.player_speed, live.player_acc)
+		self.velocity.x = math.approach(self.velocity.x, -self.player_speed, self.player_acc)
 	end
 	if input.is(buttonRight) then
-		self.velocity.x = math.approach(self.velocity.x, live.player_speed, live.player_acc)
+		self.velocity.x = math.approach(self.velocity.x, self.player_speed, self.player_acc)
 	end
 	if input.is(buttonUp) then
-		self.velocity.y = math.approach(self.velocity.y, -live.player_speed, live.player_acc)
+		self.velocity.y = math.approach(self.velocity.y, -self.player_speed, self.player_acc)
 	end
 	if input.is(buttonDown) then
-		self.velocity.y = math.approach(self.velocity.y, live.player_speed, live.player_acc)
+		self.velocity.y = math.approach(self.velocity.y, self.player_speed, self.player_acc)
 	end
 
 	local goalX = self.sprite.x + self.velocity.x

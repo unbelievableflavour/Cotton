@@ -14,8 +14,6 @@ import "core/lieb/all"
 
 import "core/CoreGame"
 
-hot_import "core/live"
-
 playdate.display.setRefreshRate(30)
 
 asset.loadImageFolder("images/")
