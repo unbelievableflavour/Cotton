@@ -10,6 +10,6 @@ import "./Templates/RoomTemplate"
 import "./Dialog"
 import "./Menu/MenuHandler"
 
-import "./eventHandler"
-import "./messageHandler"
+import "./EventHandler"
+import "./MessageHandler"
 import "./CottonScript"

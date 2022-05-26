@@ -21,8 +21,8 @@ local backgroundImg = nil
 
 function game.init(level_name)
 	cotton.menuHandler = MenuHandler()
-	cotton.messageHandler = new(MessageHandler)
-	cotton.eventHandler = new(EventHandler)
+	cotton.messageHandler = MessageHandler()
+	cotton.eventHandler = EventHandler()
 	cotton.game = Game()
 	cotton.game:load()
 

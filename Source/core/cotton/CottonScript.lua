@@ -11,7 +11,7 @@ function say(message, x, y, width, height, callback)
     end
 
     local event = function()
-        cotton.messageHandler:init(message, x, y, width, height)
+        cotton.messageHandler:new(message, x, y, width, height)
     end
 
     cotton.eventHandler:registerCallback({event = event, callback = callback or nil})
@@ -19,7 +19,7 @@ end
 
 function fin(message)
     local event = function()
-        cotton.messageHandler:init(message)
+        cotton.messageHandler:new(message)
     end
 
     local callback = function()
