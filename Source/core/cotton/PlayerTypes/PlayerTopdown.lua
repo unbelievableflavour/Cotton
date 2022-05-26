@@ -10,7 +10,7 @@ class(
 ).extends()
 
 function PlayerTopdown:Init(ldtk_entity)
-	self.sprite = gfx.sprite.new(asset("player"))
+	self.sprite = gfx.sprite.new(asset("playerGrid"))
 	local sprite = self.sprite
 
 	sprite:setZIndex(ldtk_entity.zIndex)
@@ -64,13 +64,36 @@ function PlayerTopdown:Update()
 	self.bangCeiling = my ~= goalY and self.velocity.y < 0
 	self.bangWall = mx ~= goalX and self.velocity.x < 0
 
-	-- check exit
-	local left = self.sprite.x
-	local right = self.sprite.x + self.sprite.width
-	if left < 0 then
-		goto_level(LDtk.get_neighbours(game.level_name, "west")[1], "West")
-	end
-	if right > screenWidth then
+	if self:isAtEastScreenEdge() then
 		goto_level(LDtk.get_neighbours(game.level_name, "east")[1], "East")
+		return
 	end
+	if self:isAtWestScreenEdge() then
+		goto_level(LDtk.get_neighbours(game.level_name, "west")[1], "West")
+		return
+	end
+	if self:isAtNorthScreenEdge() then
+		goto_level(LDtk.get_neighbours(game.level_name, "north")[1], "North")
+		return
+	end
+	if self:isAtSouthScreenEdge() then
+		goto_level(LDtk.get_neighbours(game.level_name, "south")[1], "South")
+		return
+	end
+end
+
+function PlayerTopdown:isAtNorthScreenEdge()
+	return self.sprite.y < 0
+end
+
+function PlayerTopdown:isAtEastScreenEdge()
+	return self.sprite.x + self.sprite.width > screenWidth
+end
+
+function PlayerTopdown:isAtSouthScreenEdge()
+	return self.sprite.y + self.sprite.height > screenHeight
+end
+
+function PlayerTopdown:isAtWestScreenEdge()
+	return self.sprite.x < 0
 end

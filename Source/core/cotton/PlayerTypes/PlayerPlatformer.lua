@@ -113,13 +113,36 @@ function PlayerPlatformer:Update()
 	self.isGrounded = isGrounded
 	self.bangCeiling = my ~= goalY and self.velocity.y < 0
 
-	-- check exit
-	local left = self.sprite.x
-	local right = self.sprite.x + self.sprite.width
-	if left < 0 then
-		goto_level(LDtk.get_neighbours(game.level_name, "west")[1], "West")
-	end
-	if right > 400 then
+	if self:isAtEastScreenEdge() then
 		goto_level(LDtk.get_neighbours(game.level_name, "east")[1], "East")
+		return
 	end
+	if self:isAtWestScreenEdge() then
+		goto_level(LDtk.get_neighbours(game.level_name, "west")[1], "West")
+		return
+	end
+	if self:isAtNorthScreenEdge() then
+		goto_level(LDtk.get_neighbours(game.level_name, "north")[1], "North")
+		return
+	end
+	if self:isAtSouthScreenEdge() then
+		goto_level(LDtk.get_neighbours(game.level_name, "south")[1], "South")
+		return
+	end
+end
+
+function PlayerPlatformer:isAtNorthScreenEdge()
+	return self.sprite.y < 0
+end
+
+function PlayerPlatformer:isAtEastScreenEdge()
+	return self.sprite.x + self.sprite.width > screenWidth
+end
+
+function PlayerPlatformer:isAtSouthScreenEdge()
+	return self.sprite.y + self.sprite.height > screenHeight
+end
+
+function PlayerPlatformer:isAtWestScreenEdge()
+	return self.sprite.x < 0
 end

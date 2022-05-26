@@ -118,6 +118,27 @@ function PlayerGrid:drawCursor()
 	end
 
 	self.tempSprite:moveTo(self.destinationCursor.x * self.tileSize, self.destinationCursor.y * self.tileSize)
+
+	if self:isAtEastScreenEdge() then
+		goto_level(LDtk.get_neighbours(game.level_name, "east")[1], "East")
+		return
+	end
+
+	if self:isAtSouthScreenEdge() then
+		goto_level(LDtk.get_neighbours(game.level_name, "south")[1], "South")
+		return
+	end
+
+	if self:isAtNorthScreenEdge() then
+		goto_level(LDtk.get_neighbours(game.level_name, "north")[1], "North")
+		return
+	end
+
+	if self:isAtWestScreenEdge() then
+		goto_level(LDtk.get_neighbours(game.level_name, "west")[1], "West")
+		return
+	end
+
 	local spriteX, spriteY = self.sprite:getPosition()
 	local canMoveToLocation = self:doCollisionCheck(spriteX, spriteY)
 
@@ -135,7 +156,7 @@ end
 
 function PlayerGrid:fixCamera()
 	local spriteX, spriteY = self.sprite:getPosition()
-	gfx.setDrawOffset(0 + 200 - spriteX, 120 - spriteY)
+	gfx.setDrawOffset(screenCenterX - spriteX, screenCenterY - spriteY)
 end
 
 function PlayerGrid:getEntityOnPosition()
@@ -175,11 +196,6 @@ function PlayerGrid:detectInput()
 	if input.is(buttonLeft) then
 		cotton.player:update()
 
-		if self:isAtWestScreenEdge() then
-			goto_level(LDtk.get_neighbours(game.level_name, "west")[1], "West")
-			return
-		end
-
 		self.destinationCursor.x = self.destinationCursor.x - 1
 		self.destinationCursor.y = self.destinationCursor.y
 		self.shouldMove = true
@@ -191,10 +207,6 @@ function PlayerGrid:detectInput()
 	if input.is(buttonRight) then
 		cotton.player:update()
 
-		if self:isAtEastScreenEdge() then
-			goto_level(LDtk.get_neighbours(game.level_name, "east")[1], "East")
-			return
-		end
 		self.destinationCursor.x = self.destinationCursor.x + 1
 		self.destinationCursor.y = self.destinationCursor.y
 		self.shouldMove = true
@@ -207,11 +219,6 @@ function PlayerGrid:detectInput()
 	if input.is(buttonUp) then
 		cotton.player:update()
 
-		if self:isAtNorthScreenEdge() then
-			goto_level(LDtk.get_neighbours(game.level_name, "north")[1], "North")
-			return
-		end
-
 		self.destinationCursor.x = self.destinationCursor.x
 		self.destinationCursor.y = self.destinationCursor.y - 1
 		self.shouldMove = true
@@ -222,11 +229,6 @@ function PlayerGrid:detectInput()
 	end
 	if input.is(buttonDown) then
 		cotton.player:update()
-
-		if self:isAtSouthScreenEdge() then
-			goto_level(LDtk.get_neighbours(game.level_name, "south")[1], "South")
-			return
-		end
 
 		self.destinationCursor.x = self.destinationCursor.x
 		self.destinationCursor.y = self.destinationCursor.y + 1
@@ -274,19 +276,19 @@ function PlayerGrid:Update()
 end
 
 function PlayerGrid:isAtNorthScreenEdge()
-	return self.sprite.y == 0
+	return self.sprite.y < 0
 end
 
 function PlayerGrid:isAtEastScreenEdge()
-	return self.sprite.x + self.sprite.width == screenWidth
+	return self.sprite.x + self.sprite.width > screenWidth
 end
 
 function PlayerGrid:isAtSouthScreenEdge()
-	return self.sprite.y + self.sprite.height == screenHeight
+	return self.sprite.y + self.sprite.height > screenHeight
 end
 
 function PlayerGrid:isAtWestScreenEdge()
-	return self.sprite.x == 0
+	return self.sprite.x < 0
 end
 
 function PlayerGrid:freeze()
