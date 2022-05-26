@@ -20,9 +20,6 @@ Docs can be found in `Docs`. Press the preview button in the topRight corner of 
 ### How to creating your map
 Open the `map.idtk` file to open map in LDtk.
 
-### How to font
-I recommend using the official online Caps tool from Panic. `https://play.date/caps/`
-
 ## How to compile & play
 
 1. Open `VS Code`.
@@ -34,6 +31,7 @@ I recommend using the official online Caps tool from Panic. `https://play.date/c
 
 Here's a little overview. See more details below.
 
+* 30 frames per second
 * FPS Counter
 * Different player types (grid, topdown, platformer)
 * Caching levels
