@@ -27,33 +27,21 @@ function PlayerTopdown:update()
         return
     end
 
+    self:doBasicInputChecks()
+
     if input.x() == 0 then
         self.velocity.x = math.approach(self.velocity.x, 0, self.player_ground_friction)
         self.velocity.y = math.approach(self.velocity.y, 0, self.player_ground_friction)
     end
 
     if self.bangCeiling then
+        cotton.player:bump()
         self.velocity.y = 0
     end
 
     if self.bangWall then
+        cotton.player:bump()
         self.velocity.x = 0
-    end
-
-    if input.justPressed(buttonA) then
-        cotton.player:confirmPressed()
-    end
-
-    if input.justPressed(buttonA) then
-        cotton.player:confirmReleased()
-    end
-
-    if input.justPressed(buttonB) then
-        cotton.player:cancelPressed()
-    end
-
-    if input.justPressed(buttonB) then
-        cotton.player:cancelReleased()
     end
 
     -- move left/right/up/down

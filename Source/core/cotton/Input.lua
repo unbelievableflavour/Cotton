@@ -127,6 +127,14 @@ function input.y()
     return r
 end
 
+function input.getCrankAngle()
+    return playdate.getCrankPosition()
+end
+
+function input.isCranking()
+    return playdate.getCrankChange() ~= 0.0
+end
+
 function input.onCrankDock()
     local isCrankDocked = input.isCrankDocked
     return isCrankDocked.previous == false and isCrankDocked.current == true

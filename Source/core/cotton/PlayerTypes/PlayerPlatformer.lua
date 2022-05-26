@@ -27,6 +27,7 @@ function PlayerPlatformer:Init(ldtk_entity)
     self.isGrounded = false
     self.justLanded = false
     self.bangCeiling = false
+    self.bangWall = false
     self.groundedLast = 0
     self.lastJumpPress = self.jump_buffer
     self.jumpPressDuration = 0
@@ -38,6 +39,8 @@ function PlayerPlatformer:update()
     if self.isFrozen then
         return
     end
+
+    self:doBasicInputChecks()
 
     local dt = 1 / playdate.display.getRefreshRate()
 
@@ -53,24 +56,13 @@ function PlayerPlatformer:update()
         end
 
         if self.bangCeiling then
+            cotton.player:bump()
             self.velocity.y = 0
         end
     end
 
-    if input.justPressed(buttonA) then
-        cotton.player:confirmPressed()
-    end
-
-    if input.justPressed(buttonA) then
-        cotton.player:confirmReleased()
-    end
-
-    if input.justPressed(buttonB) then
-        cotton.player:cancelPressed()
-    end
-
-    if input.justPressed(buttonB) then
-        cotton.player:cancelReleased()
+    if self.bangWall then
+        cotton.player:bump()
     end
 
     -- move left/right
@@ -90,7 +82,7 @@ function PlayerPlatformer:update()
     end
 
     self.lastJumpPress = self.lastJumpPress + dt
-    if input.on(buttonA) then
+    if input.justPressed(buttonA) then
         self.lastJumpPress = 0
     end
 
@@ -129,6 +121,7 @@ function PlayerPlatformer:update()
     self.justLanded = isGrounded and not self.isGrounded
     self.isGrounded = isGrounded
     self.bangCeiling = my ~= goalY and self.velocity.y < 0
+    self.bangWall = mx ~= goalX and self.velocity.x < 0
 
     if self:isAtEastScreenEdge() then
         goto_level(LDtk.get_neighbours(game.level_name, "east")[1], "East")

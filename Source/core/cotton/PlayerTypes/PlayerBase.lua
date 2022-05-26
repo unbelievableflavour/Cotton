@@ -11,6 +11,36 @@ end
 function PlayerBase:update()
 end
 
+function PlayerBase:doBasicInputChecks()
+    if input.justPressed(buttonA) then
+        cotton.player:confirmPressed()
+    end
+
+    if input.justPressed(buttonA) then
+        cotton.player:confirmReleased()
+    end
+
+    if input.justPressed(buttonB) then
+        cotton.player:cancelPressed()
+    end
+
+    if input.justPressed(buttonB) then
+        cotton.player:cancelReleased()
+    end
+
+    if input.onCrankDock() then
+        cotton.player:dock()
+    end
+
+    if input.onCrankUndock() then
+        cotton.player:undock()
+    end
+
+    if input.isCranking() then
+        cotton.player:crank()
+    end
+end
+
 function PlayerBase:isAtNorthScreenEdge()
     return self.sprite.y < 0
 end

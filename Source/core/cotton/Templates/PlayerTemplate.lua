@@ -40,6 +40,10 @@ function PlayerTemplate:cancelReleased()
     -- log("player: cancel released")
 end
 
+function PlayerTemplate:crank()
+    -- log("player: crank")
+end
+
 function PlayerTemplate:dock()
     -- log("player: dock")
 end

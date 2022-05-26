@@ -171,21 +171,7 @@ end
 function PlayerGrid:detectInput()
     self:resetPreviousTileToPlayer()
 
-    if input.justPressed(buttonA) then
-        cotton.player:confirmPressed()
-    end
-
-    if input.justPressed(buttonA) then
-        cotton.player:confirmReleased()
-    end
-
-    if input.justPressed(buttonB) then
-        cotton.player:cancelPressed()
-    end
-
-    if input.justPressed(buttonB) then
-        cotton.player:cancelReleased()
-    end
+    self:doBasicInputChecks()
 
     if input.is(buttonLeft) then
         cotton.player:update()
