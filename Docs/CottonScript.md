@@ -44,32 +44,32 @@ or for all tiles that implement a particular event with:
 
 These are the built-in events:
 
-`load`: called once on the game, each room, and each tile when all assets are first loaded
-`start`: called once on the game after all rooms and tiles have handled their load event
-`enter`: called on the game, the current room, and each tile in the current room every time the Player enters a new room
-`exit`: called on the game, the current room, and each tile in the current room every time the Player exits the current room
-`finish`: called once on the game when the game is completed
-`loop` : called on the game, 30 frames per second, before anything else is done that frame (except when a say text box or menu is on screen)
-`update`: called on the Player every time they move or interact with something
-`bump`: called on the Player every time they bump into a solid world tile
-`confirmPressed`: called on the Player when the A button is pressed
-`confirmReleased`: called on the Player when the A button is released
-`cancelPressed`: called on the Player when the B button is pressed
-`cancelReleased`: called on the Player when the B button is released
-`crank`: NOT-YET-SUPPORTED called on the Player when the crank is turned
-`dock`: NOT-YET-SUPPORTED called on the Player when the crank is docked
-`undock`: NOT-YET-SUPPORTED called on the Player when the crank is undocked
-`draw`: called on the Player 30 frames per second, before drawing
-`interact`: called on an entity when the Player bumps into or acts upon it
-`collect`: called on an entity when the Player steps onto or acts upon it
-`change`: NOT-YET-SUPPORTED called on the game when the cursor moves to a different option in a menu or ask menu and when the menu first appears
-`select`: NOT-YET-SUPPORTED called on the game when the player selects an option in a menu or ask menu
-`dismiss`: NOT-YET-SUPPORTED called on the game when the player dismisses a menu submenu
-`invalid`: NOT-YET-SUPPORTED called on the game when the player attempts to back out of an ask menu or selects an empty option
+* `load`: called once on the game, each room, and each tile when all assets are first loaded
+* `start`: called once on the game after all rooms and tiles have handled their load event
+* `enter`: called on the game, the current room, and each tile in the current room every time the Player enters a new room
+* `exit`: called on the game, the current room, and each tile in the current room every time the Player exits the current room
+* `finish`: called once on the game when the game is completed
+* `loop` : called on the game, 30 frames per second, before anything else is done that frame (except when a say text box or menu is on screen)
+* `update`: called on the Player every time they move or interact with something
+* `bump`: called on the Player every time they bump into a solid world tile
+* `confirmPressed`: called on the Player when the A button is pressed
+* `confirmReleased`: called on the Player when the A button is released
+* `cancelPressed`: called on the Player when the B button is pressed
+* `cancelReleased`: called on the Player when the B button is released
+* `crank`: NOT-YET-SUPPORTED called on the Player when the crank is turned
+* `dock`: NOT-YET-SUPPORTED called on the Player when the crank is docked
+* `undock`: NOT-YET-SUPPORTED called on the Player when the crank is undocked
+* `draw`: called on the Player 30 frames per second, before drawing
+* `interact`: called on an entity when the Player bumps into or acts upon it
+* `collect`: called on an entity when the Player steps onto or acts upon it
+* `change`: NOT-YET-SUPPORTED called on the game when the cursor moves to a different option in a menu or ask menu and when the menu first appears
+* `select`: NOT-YET-SUPPORTED called on the game when the player selects an option in a menu or ask menu
+* `dismiss`: NOT-YET-SUPPORTED called on the game when the player dismisses a menu submenu
+* `invalid`: NOT-YET-SUPPORTED called on the game when the player attempts to back out of an ask menu or selects an empty option
 
 There is one more special catch-all event:
 
-`any`: NOT-YET-SUPPORTED called before any event the game or a tile may receive
+* `any`: NOT-YET-SUPPORTED called before any event the game or a tile may receive
 This is useful with the `mimic` NOT-YET-SUPPORTED function to allow one tile to behave exactly like another without having to copy/paste behavior.
 
 ### Variables

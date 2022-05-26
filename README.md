@@ -9,18 +9,22 @@ Make sure you have the following applications installed.
 2. Visual studio code https://code.visualstudio.com/
 3. LDtk https://ldtk.io/
 
+## Documentation
+
+Documentation for CottonScript can be found here: [CottonScript Documentation](https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md).
+
 ## Working on the project
 
-### How to script and read the docs
+### How to create scripts
 Open the `simple.code-workspace` to open the scrips of the project in Visual Studio Code.
 (Best to start with `simple` workspace. The other workspace just shows you everything.)
 
 Docs can be found in `Docs`. Press the preview button in the topRight corner of your scripting window to have a nicer reading view.
 
-### How to creating your map
+### How to create levels
 Open the `map.idtk` file to open map in LDtk.
 
-## How to compile & play
+### How to compile & play
 
 1. Open `VS Code`.
 1. Click `Terminal` from the toolbar.
