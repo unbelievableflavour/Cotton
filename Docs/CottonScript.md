@@ -27,6 +27,7 @@ CottonScript is a friendly scripting library that allows you to add Pulp-like in
   - [wait](#wait)
   - [tell](#tell)
   - [ignore/listen](#ignorelisten)
+  - [act](#act)
   - [hide](#hide)
   - [show](#show)
   - [sound](#sound)
@@ -455,6 +456,14 @@ listen()
 ```
 
 Toggle whether the game should accept user input or not. Does not affect advancing or dismissing text.
+
+### act
+
+```lua
+act()
+```
+
+Make the player interact with the sprite or collect the item one tile in front of them based on their last movement direction. Note that this function is only really useful if you’ve set config.autoAct to `false`.
 
 ### hide
 

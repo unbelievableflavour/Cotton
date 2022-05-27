@@ -209,3 +209,7 @@ end
 function listen()
     game.player:unfreeze()
 end
+
+function act()
+    game.player:act()
+end

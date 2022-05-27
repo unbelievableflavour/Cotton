@@ -85,7 +85,7 @@ function PlayerGrid:moveTowards()
     self.sprite:moveTo(newX, newY)
 end
 
-function PlayerGrid:doCollisionCheck(spriteX, spriteY)
+function PlayerGrid:doCollisionCheck()
     local canMoveToLocation = true
     local collisions = self.tempSprite:overlappingSprites()
     if #collisions > 0 then
@@ -99,14 +99,19 @@ function PlayerGrid:doCollisionCheck(spriteX, spriteY)
         else
             cotton.player:bump()
         end
-        self.destinationCursor.x = self.previousTile.x
-        self.destinationCursor.y = self.previousTile.y
-        self.sprite:moveTo(spriteX, spriteY)
-        self.shouldMove = false
         return false
     end
 
     return canMoveToLocation
+end
+
+function PlayerGrid:interact()
+    local collisions = self.tempSprite:overlappingSprites()
+    if #collisions > 0 then
+        if collisions[1].type == "entity" then
+            collisions[1].interact()
+        end
+    end
 end
 
 function PlayerGrid:drawCursor()
@@ -136,10 +141,11 @@ function PlayerGrid:drawCursor()
         return
     end
 
-    local spriteX, spriteY = self.sprite:getPosition()
-    local canMoveToLocation = self:doCollisionCheck(spriteX, spriteY)
-
+    local canMoveToLocation = self:doCollisionCheck()
     if not canMoveToLocation then
+        self.destinationCursor.x = self.previousTile.x
+        self.destinationCursor.y = self.previousTile.y
+        self.shouldMove = false
         return
     end
 
@@ -168,6 +174,34 @@ function PlayerGrid:getEntityOnPosition()
     return nil
 end
 
+function PlayerGrid:act()
+    local tile = self:getPositionForDirection(self.faceDirection)
+    self.tempSprite:moveTo(tile.x * self.tileSize, tile.y * self.tileSize)
+    self:interact()
+end
+
+function PlayerGrid:getPositionForDirection(direction)
+    local destinationDictionary = {
+        left = {
+            x = self.destinationCursor.x - 1,
+            y = self.destinationCursor.y
+        },
+        right = {
+            x = self.destinationCursor.x + 1,
+            y = self.destinationCursor.y
+        },
+        up = {
+            x = self.destinationCursor.x,
+            y = self.destinationCursor.y - 1
+        },
+        down = {
+            x = self.destinationCursor.x,
+            y = self.destinationCursor.y + 1
+        }
+    }
+    return destinationDictionary[direction]
+end
+
 function PlayerGrid:detectInput()
     self:resetPreviousTileToPlayer()
 
@@ -176,8 +210,11 @@ function PlayerGrid:detectInput()
     if input.onRepeat(buttonLeft) then
         cotton.player:update()
 
-        self.destinationCursor.x = self.destinationCursor.x - 1
-        self.destinationCursor.y = self.destinationCursor.y
+        self.faceDirection = "left"
+
+        local destination = self:getPositionForDirection(self.faceDirection)
+        self.destinationCursor.x = destination.x
+        self.destinationCursor.y = destination.y
         self.shouldMove = true
 
         if not self.allowDiagonalMovement then
@@ -188,8 +225,11 @@ function PlayerGrid:detectInput()
     if input.onRepeat(buttonRight) then
         cotton.player:update()
 
-        self.destinationCursor.x = self.destinationCursor.x + 1
-        self.destinationCursor.y = self.destinationCursor.y
+        self.faceDirection = "right"
+
+        local destination = self:getPositionForDirection(self.faceDirection)
+        self.destinationCursor.x = destination.x
+        self.destinationCursor.y = destination.y
         self.shouldMove = true
 
         if not self.allowDiagonalMovement then
@@ -200,8 +240,11 @@ function PlayerGrid:detectInput()
     if input.onRepeat(buttonUp) then
         cotton.player:update()
 
-        self.destinationCursor.x = self.destinationCursor.x
-        self.destinationCursor.y = self.destinationCursor.y - 1
+        self.faceDirection = "up"
+
+        local destination = self:getPositionForDirection(self.faceDirection)
+        self.destinationCursor.x = destination.x
+        self.destinationCursor.y = destination.y
         self.shouldMove = true
 
         if not self.allowDiagonalMovement then
@@ -212,8 +255,11 @@ function PlayerGrid:detectInput()
     if input.onRepeat(buttonDown) then
         cotton.player:update()
 
-        self.destinationCursor.x = self.destinationCursor.x
-        self.destinationCursor.y = self.destinationCursor.y + 1
+        self.faceDirection = "down"
+
+        local destination = self:getPositionForDirection(self.faceDirection)
+        self.destinationCursor.x = destination.x
+        self.destinationCursor.y = destination.y
         self.shouldMove = true
 
         if not self.allowDiagonalMovement then
