@@ -224,9 +224,9 @@ config.followCenterY = 7
 NOT-YET-SUPPORTED Controls where the “center” of the screen is located. The default coordinates are the middle of the screen, `12`,`7`.
 
 ```lua
-config.cameraFollowOverflowColor = "white"
+config.cameraFollowOverflowColor = "black"
 ```
-Controls which color is drawn beyond the room’s borders when the camera is following the Player. The default is `white`.
+Controls which color is drawn beyond the room’s borders when the camera is following the Player. The default is `black`.
 
 ```lua
 config.cameraFollowOverflowImage = nil

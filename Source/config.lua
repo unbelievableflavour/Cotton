@@ -5,7 +5,7 @@ config = {
     font = "Pulp",
     cameraFollow = false,
     cameraFollowOverflowImage = nil,
-    cameraFollowOverflowColor = "white",
+    cameraFollowOverflowColor = "black",
     allowDismissRootMenu = false,
     inputRepeatBetween = 0.2
 }
