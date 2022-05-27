@@ -94,7 +94,7 @@ function PlayerGrid:doCollisionCheck(spriteX, spriteY)
             collisions[1]:onTileEnter()
             return canMoveToLocation
         end
-        if collisions[1].type == "entity" then
+        if collisions[1].type == "entity" and config.autoAct then
             collisions[1].interact()
         else
             cotton.player:bump()

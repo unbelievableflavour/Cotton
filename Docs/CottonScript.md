@@ -252,7 +252,7 @@ In Pulp there is a config variable which can be used to override some of Pulp’
 ```lua
 config.autoAct = true
 ```
-NOT-YET-SUPPORTED Controls whether the Player automatically interacts with sprites. The default value is `true`. When set to `false` you can use the act function to interact with the sprite or collect the item directly in front of the Player (usually from the Player’s confirm event handler).
+Controls whether the Player automatically interacts with sprites. The default value is `true`. When set to `false` you can use the act function to interact with the sprite or collect the item directly in front of the Player (usually from the Player’s confirm event handler).
 
 ```lua
 config.inputRepeat = true
