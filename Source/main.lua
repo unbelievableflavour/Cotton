@@ -21,7 +21,7 @@ asset.loadImageFolder("images/")
 LDtk.load("levels/world.ldtk", config.useFastLoader)
 
 if playdate.isSimulator then
-    LDtk.export_to_lua()
+    LDtk.export_to_lua_files()
 end
 
 scene.set(game, "Level_0")

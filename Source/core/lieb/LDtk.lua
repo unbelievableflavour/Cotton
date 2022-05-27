@@ -37,8 +37,6 @@
 
 local gfx <const> = playdate.graphics
 
-import "core/lieb/writeLua"
-
 LDtk = {}
 
 local _ldtk_filepath = nil
@@ -175,17 +173,13 @@ function LDtk.load(ldtk_file, use_lua_levels)
 			tileset.tileIDs_flipped[enum_def.enumValueId] = tileIDs_flipped
 			tileset.tileIDs_flipped_empty[enum_def.enumValueId] = tileIDs_flipped_empty
 		end
+
 	end
 
 	-- we list the level names (the complete list needs to be ready before calling LDtk.load_level())
 	for level_index, level_data in ipairs(data.levels) do
 		_level_names[level_data.uid] = level_data.identifier
-		_level_rects[level_data.identifier] = {
-			x = level_data.worldX,
-			y = level_data.worldY,
-			width = level_data.pxWid,
-			height = level_data.pxHei
-		}
+		_level_rects[level_data.identifier] = { x = level_data.worldX, y = level_data.worldY, width = level_data.pxWid, height = level_data.pxHei }
 	end
 
 	-- we load the levels
@@ -201,7 +195,7 @@ end
 
 -- Call this function to save the LDtk level in lua files to improve loading performance
 -- The files will be saved in the aave folder of the game (PlaydateSDK/Disk/Data)
-function LDtk.export_to_lua()
+function LDtk.export_to_lua_files()
 	if _use_lua_levels then
 		print("LDtk, cannot export level in lua. The system had loaded lua files instead of .ldtk")
 		return
@@ -217,23 +211,20 @@ function LDtk.export_to_lua()
 	end
 
 	print("Export LDtk world")
-	writeLua(
-		folder .. _.get_filename(_ldtk_filepath) .. ".lua",
-		{
-			tilesets = _tilesets,
-			level_files = lua_level_files,
-			level_names = _level_names,
-			level_rects = _level_rects,
-			levels = _levels,
-			use_external_files = _use_external_files
-		}
-	)
+	_.export_lua_table(folder .. _.get_filename(_ldtk_filepath) .. ".lua", {
+		tilesets = _tilesets,
+		level_files = lua_level_files,
+		level_names = _level_names,
+		level_rects = _level_rects,
+		levels = _levels,
+		use_external_files = _use_external_files
+	})
 
 	for level_name, level_file in pairs(_level_files) do
 		print("Export LDtk level", level_name)
 
 		LDtk.load_level(level_name)
-		writeLua(folder .. _.get_filename(level_file) .. ".lua", _levels[level_name])
+		_.export_lua_table(folder .. _.get_filename(level_file) .. ".lua", _levels[level_name])
 		LDtk.release_level(level_name)
 	end
 end
@@ -261,8 +252,8 @@ function LDtk.load_level(level_name)
 	local level = {}
 	_levels[level_data.identifier] = level
 
-	level.neighbours = {east = {}, west = {}, north = {}, south = {}}
-	local direction_table = {e = "east", w = "west", n = "north", s = "south"}
+	level.neighbours = { east = {}, west = {}, north = {}, south = {} }
+	local direction_table = { e = "east", w = "west", n = "north", s = "south" }
 	for index, neighbour_data in ipairs(level_data.__neighbours) do
 		local direction = direction_table[neighbour_data.dir]
 		if direction then
@@ -273,6 +264,7 @@ function LDtk.load_level(level_name)
 	-- handle layers
 	level.layers = {}
 	for layer_index, layer_data in ipairs(level_data.layerInstances) do
+
 		local layer = {}
 		level.layers[layer_data.__identifier] = layer
 
@@ -318,7 +310,6 @@ function LDtk.load_level(level_name)
 				end
 			end
 			::finish_flip_search::
-
 			local tiles_list = {}
 			for tile_index, tile_data in ipairs(tiles_data) do
 				local id = (tile_data.px[2] / gsize) * layer_data.__cWid + tile_data.px[1] / gsize
@@ -343,7 +334,12 @@ function LDtk.load_level(level_name)
 			for y = 0, layer_data.__cHei - 1 do
 				for x = 0, layer_data.__cWid - 1 do
 					local id = y * layer_data.__cWid + x
-					table.insert(layer.tiles, math.floor(tiles_list[id]) or 1)
+
+					if tiles_list[id] then
+						table.insert(layer.tiles, math.floor(tiles_list[id]))
+					else
+						table.insert(layer.tiles, 0)
+					end
 				end
 			end
 		end
@@ -358,18 +354,15 @@ function LDtk.load_level(level_name)
 					properties[field_data.__identifier] = field_data.__value
 				end
 
-				table.insert(
-					layer.entities,
-					{
-						id = entity_data.iid,
-						name = entity_data.__identifier,
-						position = {x = entity_data.px[1], y = entity_data.px[2]},
-						center = {x = entity_data.__pivot[1], y = entity_data.__pivot[2]},
-						size = {width = entity_data.width, height = entity_data.height},
-						zIndex = layer_index,
-						fields = properties
-					}
-				)
+				table.insert(layer.entities, {
+					id = entity_data.iid,
+					name = entity_data.__identifier,
+					position = { x = entity_data.px[1], y = entity_data.px[2] },
+					center = { x = entity_data.__pivot[1], y = entity_data.__pivot[2] },
+					size = { width = entity_data.width, height = entity_data.height },
+					zIndex = layer_index,
+					fields = properties,
+				})
 			end
 		end
 	end
@@ -386,9 +379,7 @@ function LDtk.release_level(level_name)
 	end
 
 	local level = _levels[level_name]
-	if not level then
-		return
-	end
+	if not level then return end
 
 	-- release image table tilesets
 	for layer_name, layer in pairs(level.layers) do
@@ -409,9 +400,7 @@ end
 -- 	.fields : all the custom fields data entered in the LDtk editor
 function LDtk.get_entities(level_name, layer_name)
 	local level = _levels[level_name]
-	if not level then
-		return
-	end
+	if not level then return end
 
 	if not layer_name then
 		local all_entities = {}
@@ -425,9 +414,7 @@ function LDtk.get_entities(level_name, layer_name)
 	end
 
 	local layer = level.layers[layer_name]
-	if not layer then
-		return
-	end
+	if not layer then return end
 
 	return layer.entities
 end
@@ -436,9 +423,7 @@ end
 -- @layer_name is optional, if nil than will return the first layer with tiles
 function LDtk.create_tilemap(level_name, layer_name)
 	local layer = _.get_tile_layer(level_name, layer_name)
-	if not layer then
-		return
-	end
+	if not layer then return end
 
 	local tilemap = gfx.tilemap.new()
 	tilemap:setImageTable(layer.tileset_image)
@@ -451,9 +436,7 @@ end
 -- @direction is optional: values can be "east", "west", "north", "south"
 function LDtk.get_neighbours(level_name, direction)
 	local level = _levels[level_name]
-	if not level then
-		return
-	end
+	if not level then return end
 
 	if not direction then
 		return level.neighbours
@@ -472,14 +455,10 @@ end
 -- LDtk.get_tileIDs( "Level_0", "Solid" )
 function LDtk.get_tileIDs(level_name, tileset_enum_value, layer_name)
 	local layer = _.get_tile_layer(level_name, layer_name)
-	if not layer then
-		return
-	end
+	if not layer then return end
 
 	local tileset = _tilesets[layer.tileset_uid]
-	if not tileset then
-		return
-	end
+	if not tileset then return end
 
 	if layer.has_flipped_tiles then
 		return tileset.tileIDs_flipped[tileset_enum_value]
@@ -492,14 +471,10 @@ end
 -- playdate functions usually require this function (getCollisionRects(emptyIDs), addWallSprites() )
 function LDtk.get_empty_tileIDs(level_name, tileset_enum_value, layer_name)
 	local layer = _.get_tile_layer(level_name, layer_name)
-	if not layer then
-		return
-	end
+	if not layer then return end
 
 	local tileset = _tilesets[layer.tileset_uid]
-	if not tileset then
-		return
-	end
+	if not tileset then return end
 
 	if layer.has_flipped_tiles then
 		return tileset.tileIDs_flipped_empty[tileset_enum_value]
@@ -518,14 +493,12 @@ end
 
 function _.get_folder(filepath)
 	local filename = filepath:match("^.+/(.+)$")
-	return filepath:sub(0, -(#filename) - 1)
+	return filepath:sub(0, - #filename - 1)
 end
 
 function _.load_tileset(level_name)
 	local level = _levels[level_name]
-	if not level then
-		return
-	end
+	if not level then return end
 
 	for layer_name, layer in pairs(level.layers) do
 		if layer.tileset_file then
@@ -548,25 +521,18 @@ function _.load_tileset_imagetable(path, flipped)
 	local image_filepath
 	if flipped then
 		local filename = path:match("^.+/(.+)$")
-		local tileset_folder = path:sub(0, -(#filename) - 1)
+		local tileset_folder = path:sub(0, - #filename - 1)
 		image_filepath = _ldtk_folder .. tileset_folder .. "flipped-" .. filename
 	else
 		image_filepath = _ldtk_folder .. path
 	end
 
-	local image = playdate.graphics.imagetable.new(image_filepath)
+	local image = gfx.imagetable.new(image_filepath)
 	if not image then
 		if flipped then
-			error(
-				"LDtk cannot load tileset " ..
-					image_filepath .. ". Tileset requires a flipped version of the image: flipped-filename-table-w-h.png",
-				3
-			)
+			error("LDtk cannot load tileset " .. image_filepath .. ". Tileset requires a flipped version of the image: flipped-filename-table-w-h.png", 3)
 		else
-			error(
-				"LDtk cannot load tileset " .. image_filepath .. ". Filename should have a image table format: name-table-w-h.png",
-				3
-			)
+			error("LDtk cannot load tileset " .. image_filepath .. ". Filename should have a image table format: name-table-w-h.png", 3)
 		end
 
 		return nil
@@ -581,9 +547,7 @@ function _.load_tileset_imagetable(path, flipped)
 end
 
 function _.release_tileset_imagetable(path, flipped)
-	if not path then
-		return
-	end
+	if not path then return end
 
 	local id = path
 	if flipped then
@@ -603,9 +567,7 @@ end
 
 function _.get_tile_layer(level_name, layer_name)
 	local level = _levels[level_name]
-	if not level then
-		return
-	end
+	if not level then return end
 
 	if layer_name then
 		return level.layers[layer_name]
@@ -616,4 +578,60 @@ function _.get_tile_layer(level_name, layer_name)
 			return layer
 		end
 	end
+end
+
+-- write the content of a table in a lua file
+function _.export_lua_table(filepath, table_to_export)
+	local function _isArray(t)
+		if type(t[1]) == "nil" then return false end
+
+		local pairs_count = 0
+		for key in pairs(t) do
+			pairs_count = pairs_count + 1
+			if type(key) ~= "number" then
+				return false
+			end
+		end
+
+		return pairs_count == #t
+	end
+
+	assert(filepath, "LDtk Importer export_lua_table(), filepath required")
+	assert(table_to_export, "LDtk Importer export_lua_table(), table_to_export required")
+
+	local file, file_error = playdate.file.open(filepath, playdate.file.kFileWrite)
+	assert(file, "LDtk Importer export_lua_table(), Cannot open file", filepath, " (", file_error, ")")
+
+	local _write_entry
+	_write_entry = function(entry, name)
+		local entry_type = type(entry)
+
+		if entry_type == "table" then
+			file:write("{")
+			if _isArray(entry) then
+				for key, value in ipairs(entry) do
+					_write_entry(value, key)
+					file:write(",")
+				end
+			else
+				for key, value in pairs(entry) do
+					file:write("[\"" .. tostring(key) .. "\"]=")
+					_write_entry(value, key)
+					file:write(",")
+				end
+			end
+			file:write("}")
+		elseif entry_type == "string" then
+			file:write("\"" .. tostring(entry) .. "\"")
+		elseif entry_type == "boolean" or entry_type == "number" then
+			file:write(tostring(entry))
+		else
+			file:write("nil")
+		end
+	end
+
+	file:write("return ")
+	_write_entry(table_to_export)
+
+	file:close()
 end
