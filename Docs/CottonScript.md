@@ -30,6 +30,7 @@ CottonScript is a friendly scripting library that allows you to add Pulp-like in
   - [act](#act)
   - [hide](#hide)
   - [show](#show)
+  - [window](#window)
   - [sound](#sound)
   - [store](#store)
   - [restore](#restore)
@@ -480,6 +481,22 @@ showPlayer()
 ```
 
 Makes sure the Player is being drawn. Can only be called from the `Player` entity.
+
+### window
+
+```lua
+local window = window(x, y, w, h)
+```
+
+Draws a window frame at x,y with dimensions w,h. (Coordinates and dimensions are in pixels, not tiles.) Unlike with Pulp this window is can be created everywhere. Just remember that you need to call:
+```lua
+window:add()
+```
+to add it to the screen, and
+```lua
+window:remove()
+```
+to remove it afterwards.
 
 ### sound
 

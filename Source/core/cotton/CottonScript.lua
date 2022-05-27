@@ -213,3 +213,7 @@ end
 function act()
     game.player:act()
 end
+
+function window(x, y, width, height)
+    return Dialog(x, y, width, height)
+end
