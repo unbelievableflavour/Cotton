@@ -1,5 +1,5 @@
 name=Cotton
-author=UnbelievableFlavour
+author=You, Inc.
 description=A Pulp-like lua development environment to make development in Lua a little easier!
 bundleID=com.UnbelievableFlavour.Cotton
-imagePath=
+imagePath=images/application
