@@ -88,7 +88,7 @@ varName = 0
 
 ### Math
 
-Lua supports simple arithmetic operations. Compound expressions are ALSO supported.
+Lua supports simple arithmetic operations.
 
 Variables can be incremented or decremented like so:
 
@@ -111,6 +111,12 @@ varName = varName * 6 -- now equals 6
 varName = varName / 3 -- now equals 2
 ```
 
+Compound expressions are also supported like so:
+```lua
+varName = varName + 1 * 2 -- now equals 2
+varName = varName - 1 + 1 - 1 -- equals 0 again
+```
+
 ### Control Flow
 
 #### Conditionals
@@ -129,14 +135,21 @@ end
 
 Both the `elseif [condition] then` and `else` are optional. The following boolean comparisons are available:
 
-`==`: equal to
-`~=`: not equal to
-`>`: greater than
-`<`: less than
-`>=`: greater than or equal to
-`<=`: less than or equal to
+* `==`: equal to
+* `~=`: not equal to
+* `>`: greater than
+* `<`: less than
+* `>=`: greater than or equal to
+* `<=`: less than or equal to
 
-Compound expressions are supported. String comparisons are case-sensitive. This also applies to functions, room, and tile names when used as arguments for functions.
+String comparisons are case-sensitive. This also applies to functions, room, and tile names when used as arguments for functions.
+
+Compound expressions are supported like so:
+```lua
+if varName1 == 0 and varName2 == 0 then
+    -- do something when varName1 and varName2 are both 0
+end
+```
 
 #### Loops
 CottonScript also includes a while loop which can be thought of as a repeating if:
