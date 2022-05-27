@@ -352,12 +352,34 @@ fin("message")
 
 Displays message in a text and marks the game as finished. Also triggers the finish event.
 
+### wait
+
+```lua
+wait(duration, function()
+    -- do something after duration seconds
+end)
+```
+
+Note that this does not stop the run loop. If you do not want the player to be able to move during the pause you can call `ignore` before the `wait` call and `listen` at the end of its body.
+
 ### tell
 
 ```lua
 local otherTile = tell("id-of-the-other-tile")
 otherTile:eventName()
 ```
+
+### ignore/listen
+
+```lua
+ignore()
+```  
+and
+```lua
+listen()
+```
+
+Toggle whether the game should accept user input or not. Does not affect advancing or dismissing text.
 
 ### hide
 

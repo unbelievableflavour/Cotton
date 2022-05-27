@@ -2,6 +2,7 @@ import "CoreLibs/graphics"
 import "CoreLibs/object"
 import "CoreLibs/sprites"
 import "CoreLibs/nineslice"
+import "CoreLibs/timer"
 
 import "config"
 
@@ -34,4 +35,6 @@ function playdate.update()
     if config.showFPS then
         playdate.drawFPS()
     end
+
+    playdate.timer.updateTimers()
 end

@@ -198,3 +198,14 @@ function showPlayer()
     game.player.sprite:add()
 end
 
+function wait(delay, callback)
+    playdate.timer.performAfterDelay(delay, callback)
+end
+
+function ignore()
+    game.player:freeze()
+end
+
+function listen()
+    game.player:unfreeze()
+end
