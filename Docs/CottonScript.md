@@ -42,7 +42,6 @@
     - [invert](#invert)
     - [isSolid](#issolid)
 
-
 # CottonScript
 
 CottonScript is a friendly scripting library that allows you to add Pulp-like interactivity to your Lua games. Its syntax is terse but powerful. A good rule of thumb when writing CottonScript is do less, less often.
@@ -119,7 +118,9 @@ This is useful with the `mimic` NOT-YET-SUPPORTED function to allow one tile to 
 
 ### Variables
 
-All uninitialized variables have a default value of 0. Variables can hold a number or a string. Strings must be wrapped in double quotes. Variables are initialized like so:
+All uninitialized variables have a default value of 0. Variables can hold a number or a string. 
+
+Variables are initialized like so:
 
 ```lua
 local varName = nil
@@ -129,6 +130,16 @@ And assigned like so:
 
 ```lua
 varName = 0
+```
+
+Strings can be wrapped in double or single quotes. But for consistency I recommend using only on of the two: 
+
+```lua
+varName = "some string"
+```
+or
+```lua
+varName = 'some string'
 ```
 
 ### Math
