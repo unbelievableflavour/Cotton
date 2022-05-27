@@ -74,15 +74,28 @@ The cached files are saved in in your PlayDate game's data directory. You will h
 1. Move `<playdate_sdk_location>/Disk/Data/<yourgame>/LDtk_lua_levels` to `<this_project>/Source/levels/LDtk_lua_levels`
 2. finally enable the cache by changing `useFastLoader = true` in `config.lua`
 
-## Smooth movement
+## Updating
+
+You can update Cotton in your project at any time IF you did not edit any code in the `core` folder.
+
+1. Download the latest version of `Cotton`.
+2. Replace your `core` folder with the `core` folder from the download.
+3. Replace your `main.lua` with the on from the download. BUT keep the old file as reference.
+4. Make sure to readd any code you added to `main.lua` yourself.
+
+## Player type specific settings
 
 Docs are WIP, but works
 
-## Diagonal movement
+### Smooth movement
 
 Docs are WIP, but works
 
-### FAQ
+## #Diagonal movement
+
+Docs are WIP, but works
+
+## FAQ
 
 Q: Collider is covering the whole screen after I build cached levels. (also can't move or player is not shown) Whats up?
 A: Better not mix different tile sizes in tile layers! (entities is fine)
