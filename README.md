@@ -45,7 +45,7 @@ Docs can be found in `Docs`. Press the preview button in the topRight corner of 
 
 ### Creating levels
 
-Open the `map.idtk` file to open map in LDtk.
+Open the `map.ldtk` file to open map in LDtk.
 
 ### Compile & play
 
@@ -53,18 +53,6 @@ Open the `map.idtk` file to open map in LDtk.
 1. Click `Terminal` from the toolbar.
 1. Click `Run task` from the dropdown.
 1. Click `Playdate:Build and Run`
-
-## FPS Counter
-
-The FPS counter can be enabled by settings by `showFPS` to `true`
-
-## Different player types
-
-By default the application will use grid mode just like Pulp. BUT this framework also supports some other play types! Do know that these are still in WIP and will require a little more tinkering to get right. But the base is there.
-
-```lua
-playerType = "grid" -- options: grid, topdown, platformer
-```
 
 ## Caching levels
 

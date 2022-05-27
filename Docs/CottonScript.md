@@ -235,7 +235,7 @@ NOT-YET-SUPPORTED Controls the amount of time that must elapse before the player
 ```lua
 config.useFastLoader = false
 ```
-Controls the usage of cached files. Levels will automatically be cached when tthe cache is not being used. The default value  is `false`. When set to `true` the cached levels will be used. This will increase performance on actual device.
+Controls the usage of cached files. Levels will automatically be cached when tthe cache is not being used. The default value  is `false`. When set to `true` the cached levels will be used. This will increase performance on actual device. More information about the caching levels is found in the [https://github.com/unbelievableflavour/Cotton](Cotton Readme)
 
 ```lua
 config.playerType = "grid"
@@ -246,6 +246,11 @@ Controls which type of player will spawn. The default value is `grid`. Options a
 config.font = "Pulp"
 ```
 Controls the font being used throughout the game. Fonts are read from the `fonts` folder.
+
+```lua
+config.showFPS = "false
+```
+Controls if the FPS counter is enabled. The default value  is `true`. When set to `false` the FPS counter will not be rendered.
 
 ### datetime
 
