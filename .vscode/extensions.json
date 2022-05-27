@@ -1,6 +1,6 @@
 {
 	"recommendations": [
 		"midouest.playdate-debug",
-		"yinfei.luahelper"
+		"sumneko.lua"
 	]
 }

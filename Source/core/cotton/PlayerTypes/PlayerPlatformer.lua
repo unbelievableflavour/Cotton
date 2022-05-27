@@ -1,4 +1,4 @@
-local gfx<const> = playdate.graphics
+local gfx <const> = playdate.graphics
 
 class("PlayerPlatformer", {
     player_speed = 5,

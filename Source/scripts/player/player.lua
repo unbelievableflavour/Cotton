@@ -3,7 +3,7 @@ class("Player", {}).extends(PlayerTemplate)
 
 -- Example:
 function Player:confirmPressed()
-    local mainMenu = {{
+    local mainMenu = { {
         name = "Option 1",
         callback = (function()
             say("You've selected option 1!")
@@ -33,7 +33,7 @@ function Player:confirmPressed()
         callback = (function()
             say("Not yet implemented")
         end)
-    }}
+    } }
 
     menu(mainMenu)
 end
