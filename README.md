@@ -101,3 +101,7 @@ Docs are WIP, but works
 **Q: Collider is covering the whole screen after I build cached levels. (also can't move or player is not shown) Whats up?`**
 
 **A:** Better not mix different tile sizes in tile layers! (entities is fine)
+
+## Credit
+
+[Nic Magnier](https://github.com/NicMagnier)
