@@ -6,28 +6,29 @@ Cotton is a framework for Pulp-like experiences in Lua. It will allow you to use
 
 Some of the key features you will not see in Pulp but are already available here.
 
-* LDtk build-in
 * Easy preconfigured compile functions
 * Automatic code formatting on saving to keep your code clean and organised.
 * 30 frames per second
+* LDtk build-in
+* Optionable version control on your project
 * FPS Counter
 * Different player types (grid, topdown, platformer)
 * Caching levels
 * Smooth movement
 
-## Important
+## WIP
 
 Hi! This project is not yet finished, it's still missing some key features from Pulp, BUT it's pretty stable and useable.
 
 ## Requirements
 
-Make sure you have the following applications installed.
+Make sure you have the following applications installed:
 
-1. Playdate SDK https://code.visualstudio.com/
-2. Visual studio code https://code.visualstudio.com/
-3. LDtk https://ldtk.io/
+* [Playdate SDK](https://play.date/dev/) 
+* [Visual studio code](https://code.visualstudio.com/)
+* [LDtk](https://ldtk.io/)
 
-IMPORTANT: Make sure to install the recommended plugins in VS code to have access to compile tasks, automatic Lua formatting, etc.
+Also, after installing the above, make sure to install the recommended plugins in VS code to gain access to features like compile tasks, automatic Lua formatting, etc.
 
 ## CottonScript
 
@@ -97,5 +98,6 @@ Docs are WIP, but works
 
 ## FAQ
 
-Q: Collider is covering the whole screen after I build cached levels. (also can't move or player is not shown) Whats up?
-A: Better not mix different tile sizes in tile layers! (entities is fine)
+**Q: Collider is covering the whole screen after I build cached levels. (also can't move or player is not shown) Whats up?`**
+
+**A:** Better not mix different tile sizes in tile layers! (entities is fine)
