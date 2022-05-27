@@ -12,9 +12,10 @@ Make sure you have the following applications installed.
 2. Visual studio code https://code.visualstudio.com/
 3. LDtk https://ldtk.io/
 
-## Documentation
+## CottonScript
 
-Documentation for CottonScript can be found here: [CottonScript Documentation](https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md).
+CottonScript is a scripting library that contains most Pulp features.
+Documentation for CottonScript can be found here: [CottonScript](https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md).
 
 ## Working on the project
 
@@ -50,7 +51,7 @@ The FPS counter can be enabled by settings by `showFPS` to `true`
 
 ## Different player types
 
-By defaul the application will use grid mode just like Pulp. BUT this framework also supports some other play types! Do know that these are still in WIP and will require a little more tinkering to get right. But the base is there.
+By default the application will use grid mode just like Pulp. BUT this framework also supports some other play types! Do know that these are still in WIP and will require a little more tinkering to get right. But the base is there.
 
 ```lua
 playerType = "grid" -- options: grid, topdown, platformer
