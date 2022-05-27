@@ -1,6 +1,7 @@
 {
 	"recommendations": [
 		"midouest.playdate-debug",
-		"sumneko.lua"
+		"sumneko.lua",
+		"SanaAjani.taskrunnercode"
 	]
 }

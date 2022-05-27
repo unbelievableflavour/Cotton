@@ -51,6 +51,12 @@ Open the `map.ldtk` file to open map in LDtk.
 ### Compile & play
 
 1. Open `VS Code`.
+2. Click `Task Runner` from the sidebar.
+3. Click `Playdate:Build and Run`
+
+OR (if you didn't install the recommended Task Runner extension)
+
+1. Open `VS Code`.
 1. Click `Terminal` from the toolbar.
 1. Click `Run task` from the dropdown.
 1. Click `Playdate:Build and Run`
