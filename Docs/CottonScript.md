@@ -1,12 +1,12 @@
 # CottonScript
 
-CottonScript is a friendly scripting language that allows you to add Pulp-like interactivity to your Lua games. Its syntax is terse but powerful. A good rule of thumb when writing CottonScript is do less, less often.
+CottonScript is a friendly scripting library that allows you to add Pulp-like interactivity to your Lua games. Its syntax is terse but powerful. A good rule of thumb when writing CottonScript is do less, less often.
 
 ## General
 
 ### Comments
 
-You can comment your Lua with two slashes:
+You can comment your Lua with two dashes:
 
 ```lua
 -- this is a comment
