@@ -13,7 +13,6 @@ class("MessageHandler", {
 
 function MessageHandler:new(message, x, y, width, height)
     game.freeze()
-    self.isFirstFrame = true
 
     self.dialogWidth = width or 300
     self.dialogHeight = height or 98
@@ -54,11 +53,6 @@ function MessageHandler:update()
         return
     end
 
-    if not self.isFirstFrame then
-        self:detectInput()
-    end
-
-    self.isFirstFrame = false
     self:drawMessage()
     self.arrowDown:draw()
 end

@@ -19,6 +19,7 @@ local _background_sprite = gfx.sprite.new()
 local backgroundImg = nil
 
 function game.init(level_name)
+    cotton.keyListener = KeyListener()
     cotton.menuHandler = MenuHandler()
     cotton.messageHandler = MessageHandler()
     cotton.eventHandler = EventHandler()
@@ -146,7 +147,8 @@ function game.update()
     game.player:update()
 
     gfx.sprite.update()
-    cotton.menuHandler:update()
+
+    cotton.keyListener:update()
     cotton.messageHandler:update()
     cotton.eventHandler:update()
 end

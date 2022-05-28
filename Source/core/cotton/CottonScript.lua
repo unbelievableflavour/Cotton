@@ -14,8 +14,13 @@ function say(message, x, y, width, height, callback)
         cotton.messageHandler:new(message, x, y, width, height)
     end
 
+    local keyListener = function()
+        cotton.messageHandler:detectInput()
+    end
+
     cotton.eventHandler:registerCallback({
         event = event,
+        keyListener = keyListener,
         callback = callback or nil
     })
 end
@@ -25,12 +30,17 @@ function fin(message)
         cotton.messageHandler:new(message)
     end
 
+    local keyListener = function()
+        cotton.messageHandler:detectInput()
+    end
+
     local callback = function()
         cotton.game:finish()
     end
 
     cotton.eventHandler:registerCallback({
         event = event,
+        keyListener = keyListener,
         callback = callback or nil
     })
 end
@@ -52,8 +62,13 @@ function menu(x, y, width, height, options)
         cotton.menuHandler:new(x, y, width, height, options)
     end
 
+    local keyListener = function()
+        cotton.menuHandler:detectInput()
+    end
+
     cotton.eventHandler:registerCallback({
-        event = event
+        event = event,
+        keyListener = keyListener
     })
 end
 

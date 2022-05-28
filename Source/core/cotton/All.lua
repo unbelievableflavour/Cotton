@@ -12,6 +12,7 @@ import "./Input"
 import "./Dialog"
 import "./Menu/MenuHandler"
 
+import "./KeyListener"
 import "./EventHandler"
 import "./MessageHandler"
 import "./CottonScript"

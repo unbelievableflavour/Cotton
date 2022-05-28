@@ -30,7 +30,6 @@ function MenuHandler:new(x, y, width, height, options)
     self.numberOfLines = math.floor((self.dialogHeight - (self.margin * 2)) / self.textFontHeight)
     self.options = options
     self.chunks = self:splitIntoChunksBasedOnNumberOfLines(self.numberOfLines)
-    self.isActive = true
 
     self.cursor = MenuCursor(self.positionX + self.margin, self.positionY + self.margin)
     self.cursor:setNumberOfLines(#self.chunks[self.currentChunk])
@@ -45,14 +44,6 @@ function MenuHandler:new(x, y, width, height, options)
 
     gfx.setFont(self.textFont)
     self:refreshMenu()
-end
-
-function MenuHandler:update()
-    if not self.isActive then
-        return
-    end
-
-    self:detectInput()
 end
 
 function MenuHandler:refreshMenu()
@@ -130,7 +121,6 @@ function MenuHandler:previousChunkPage()
 end
 
 function MenuHandler:disableDialog()
-    self.isActive = false
     self.dialog:remove()
     self.pagesIcon:remove()
     self.cursor:remove()
