@@ -100,7 +100,7 @@ end
 function MessageHandler:detectInput()
     if input.justPressed(buttonA) or input.justPressed(buttonB) or input.justPressed(buttonUp) or
         input.justPressed(buttonDown) or input.justPressed(buttonLeft) or input.justPressed(buttonRight) then
-        if #self.chunkList == self.currentChunk then
+        if #self.chunkList == self.currentChunk and self.currentChunkLength[self.currentChunk] == #self.chunkList[self.currentChunk] then
             -- End of all chunks!
             self:disableDialog()
             return
