@@ -10,6 +10,7 @@ class("MenuHandler", {
 }).extends()
 
 function MenuHandler:init(options, callback)
+    local dialogDepth = 1
     game.freeze()
     dialogDepth = dialogDepth + 1
 
@@ -22,11 +23,20 @@ function MenuHandler:init(options, callback)
     self.positionY = options.y or 50
     self.margin = 16
 
-    self.dialog = Dialog(self.positionX, self.positionY, self.dialogWidth, self.dialogHeight)
+    self.dialog = Dialog(
+        self.positionX,
+        self.positionY,
+        self.dialogWidth,
+        self.dialogHeight,
+        dialogDepth
+    )
     self.dialog:add()
-
-    self.menuOptions = MenuOptions(self.positionX + self.margin, self.positionY, self.dialogWidth - self.margin,
-        self.dialogHeight)
+    self.menuOptions = MenuOptions(
+        self.positionX + self.margin,
+        self.positionY, self.dialogWidth - self.margin,
+        self.dialogHeight,
+        dialogDepth
+    )
     self.menuOptions:add()
 
     self.textFont = gfx.font.new("fonts/" .. config.font)
@@ -35,12 +45,19 @@ function MenuHandler:init(options, callback)
     self.options = options.options
     self.chunks = self:splitIntoChunksBasedOnNumberOfLines(self.numberOfLines)
 
-    self.cursor = MenuCursor(self.positionX + self.margin, self.positionY + self.margin)
+    self.cursor = MenuCursor(
+        self.positionX + self.margin,
+        self.positionY + self.margin,
+        dialogDepth
+    )
     self.cursor:setNumberOfLines(#self.chunks[self.currentChunk])
     self.cursor:add()
 
-    self.pagesIcon = PagesIcon(self.positionX + self.dialogWidth - self.margin * 2,
-        self.positionY + self.dialogHeight - self.margin)
+    self.pagesIcon = PagesIcon(
+        self.positionX + self.dialogWidth - self.margin * 2,
+        self.positionY + self.dialogHeight - self.margin,
+        dialogDepth
+    )
 
     if #self.chunks > 1 then
         self.pagesIcon:add()

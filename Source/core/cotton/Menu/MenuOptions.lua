@@ -11,18 +11,19 @@ class(
     }
 ).extends(gfx.sprite)
 
-function MenuOptions:init(positionX, positionY, dialogWidth, dialogHeight)
+function MenuOptions:init(positionX, positionY, dialogWidth, dialogHeight, zIndex)
+    self.zIndex = zIndex or 0
     self.positionX = positionX
     self.positionY = positionY
     self.dialogWidth = dialogWidth
     self.dialogHeight = dialogHeight
 
     local topLeftCorner = getTopLeftCorner()
-    self:moveTo(topLeftCorner.x + positionX + (self.dialogWidth / 2),topLeftCorner.y + positionY + (self.dialogHeight / 2))
+    self:moveTo(topLeftCorner.x + positionX + (self.dialogWidth / 2), topLeftCorner.y + positionY + (self.dialogHeight / 2))
 
     self.optionsImage = gfx.image.new(self.dialogWidth, self.dialogHeight)
 
-    self:setZIndex(32767)
+    self:setZIndex(30001 + self.zIndex)
     self:setImage(self.optionsImage)
 end
 

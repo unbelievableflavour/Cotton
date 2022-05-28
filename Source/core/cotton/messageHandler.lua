@@ -13,6 +13,7 @@ class("MessageHandler", {
 }).extends()
 
 function MessageHandler:new(message, options)
+    self.dialogDepth = 1
     self.afterClose = options.afterClose
     game.freeze()
 
@@ -23,11 +24,21 @@ function MessageHandler:new(message, options)
     self.positionY = options.y or 50
     self.margin = 16
 
-    self.dialog = Dialog(self.positionX, self.positionY, self.dialogWidth, self.dialogHeight)
+    self.dialog = Dialog(
+        self.positionX,
+        self.positionY,
+        self.dialogWidth,
+        self.dialogHeight,
+        self.dialogDepth
+    )
+
     self.dialog:add()
 
-    self.arrowDown = PromptIcon(self.positionX + self.dialogWidth - self.margin * 2,
-        self.positionY + self.dialogHeight - self.margin)
+    self.arrowDown = PromptIcon(
+        self.positionX + self.dialogWidth - self.margin * 2,
+        self.positionY + self.dialogHeight - self.margin,
+        self.dialogDepth
+    )
 
     self.textFont = gfx.font.new("fonts/" .. config.font)
     self.textFontHeight = self.textFont:getHeight()

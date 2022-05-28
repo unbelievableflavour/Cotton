@@ -7,13 +7,14 @@ class("PromptIcon", {
     positionY = 0
 }).extends(gfx.sprite)
 
-function PromptIcon:init(positionX, positionY)
+function PromptIcon:init(positionX, positionY, zIndex)
+    self.zIndex = zIndex or 0
     local imagetable = gfx.imagetable.new("images/interface/prompt-table-16-16.png")
     self.animation = gfx.animation.loop.new(200, imagetable)
 
     local topLeftCorner = getTopLeftCorner()
     self:moveTo(topLeftCorner.x + positionX + (16 / 2), topLeftCorner.y + positionY + (16 / 2))
-    self:setZIndex(32767)
+    self:setZIndex(30001 + self.zIndex)
 
     self.promptImage = gfx.image.new(16, 16)
     self:setImage(self.promptImage)

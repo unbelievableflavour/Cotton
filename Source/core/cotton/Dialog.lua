@@ -7,7 +7,8 @@ class("Dialog", {
     dialogHeight = 0
 }).extends(gfx.sprite)
 
-function Dialog:init(positionX, positionY, dialogWidth, dialogHeight)
+function Dialog:init(positionX, positionY, dialogWidth, dialogHeight, zIndex)
+    self.zIndex = zIndex or 0
     self.positionX = positionX
     self.positionY = positionY
     self.dialogWidth = dialogWidth
@@ -24,7 +25,7 @@ function Dialog:init(positionX, positionY, dialogWidth, dialogHeight)
     nineslice:drawInRect(0, 0, self.dialogWidth, self.dialogHeight)
     gfx.popContext()
 
-    self:setZIndex(32766)
+    self:setZIndex(30000 + self.zIndex)
 
     self:setImage(self.dialogImage)
 end
