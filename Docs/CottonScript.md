@@ -378,13 +378,13 @@ Logs the current values contained in the `config`, and persistent storage.
 ### say
 
 ```lua
-say("message")
+say("message", {})
 ```
 
 and
 
 ```lua
-say("message", function()
+say("message", {}, function()
     -- do something after the text box is dismissed
 end)
 ```
@@ -393,17 +393,17 @@ Displays `message` in a text box.
 
 The text box can optionally be manually positioned and sized:
 ```lua
-say("message", x, y)
+say("message", {x = 10, y = 10 })
 ```
 or
 ```lua
-say("message", x, y, w, h)
+say("message", { x = 10, y = 10, w = 200, h = 100 })
 ```
 
 ### menu
 
 ```lua
-menu(x,y,w,h, {
+menu({ x = 10, y = 10, w = 200, h = 100 }, {
     {
       name = "optionOne",
       callback = (function()

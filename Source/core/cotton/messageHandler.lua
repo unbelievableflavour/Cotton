@@ -3,6 +3,7 @@ local gfx <const> = playdate.graphics
 import "./PromptIcon"
 
 class("MessageHandler", {
+    options = {},
     isActive = false,
     wordList = {},
     chunkList = {},
@@ -11,14 +12,15 @@ class("MessageHandler", {
     currentChunk = 0
 }).extends()
 
-function MessageHandler:new(message, x, y, width, height)
+function MessageHandler:new(message, options)
+    self.afterClose = options.afterClose
     game.freeze()
 
-    self.dialogWidth = width or 300
-    self.dialogHeight = height or 98
+    self.dialogWidth = options.w or 300
+    self.dialogHeight = options.h or 98
 
-    self.positionX = x or 50
-    self.positionY = y or 50
+    self.positionX = options.x or 50
+    self.positionY = options.y or 50
     self.margin = 16
 
     self.dialog = Dialog(self.positionX, self.positionY, self.dialogWidth, self.dialogHeight)
@@ -102,7 +104,7 @@ function MessageHandler:detectInput()
         input.justPressed(buttonDown) or input.justPressed(buttonLeft) or input.justPressed(buttonRight) then
         if #self.chunkList == self.currentChunk and self.currentChunkLength[self.currentChunk] == #self.chunkList[self.currentChunk] then
             -- End of all chunks!
-            self:disableDialog()
+            self:tryClose()
             return
         end
 
@@ -115,6 +117,13 @@ function MessageHandler:detectInput()
 
         self:skipTransition()
         return
+    end
+end
+
+function MessageHandler:tryClose()
+    self:disableDialog()
+    if self.afterClose ~= nil then
+        self.afterClose()
     end
 end
 
@@ -140,7 +149,6 @@ function MessageHandler:disableDialog()
     self.arrowDown:remove()
     self.isActive = false
     self.dialog:remove()
-    cotton.eventHandler:markEventAsDone()
     game.unfreeze()
 end
 

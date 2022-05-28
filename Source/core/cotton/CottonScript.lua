@@ -1,75 +1,38 @@
-function say(message, x, y, width, height, callback)
-    -- workaround to use multiple structures
-    if (type(x) == "function") then
-        callback = x
-        x = nil
-    end
-    -- workaround to use multiple structures
-    if (type(width) == "function") then
-        callback = width
-        width = nil
-    end
+function say(message, positionAndSize, callback)
 
-    local event = function()
-        cotton.messageHandler:new(message, x, y, width, height)
-    end
-
-    local keyListener = function()
-        cotton.messageHandler:detectInput()
-    end
-
-    cotton.eventHandler:registerCallback({
-        event = event,
-        keyListener = keyListener,
-        callback = callback or nil
+    cotton.messageHandler:new(message, {
+        x = positionAndSize.x,
+        y = positionAndSize.y,
+        w = positionAndSize.w,
+        h = positionAndSize.h,
+        afterClose = callback
     })
+    cotton.keyListener:setCurrentKeyListener(
+        function() cotton.messageHandler:detectInput() end
+    )
 end
 
 function fin(message)
-    local event = function()
-        cotton.messageHandler:new(message)
-    end
 
-    local keyListener = function()
-        cotton.messageHandler:detectInput()
-    end
-
-    local callback = function()
-        cotton.game:finish()
-    end
-
-    cotton.eventHandler:registerCallback({
-        event = event,
-        keyListener = keyListener,
-        callback = callback or nil
+    cotton.messageHandler:new(message, {
+        afterClose = function() cotton.game:finish() end
     })
+    cotton.keyListener:setCurrentKeyListener(
+        function() cotton.messageHandler:detectInput() end
+    )
 end
 
-function menu(x, y, width, height, options)
-    -- workaround to use multiple structures
-    if (type(x) == "table") then
-        options = x
-        x = nil
-    end
-
-    -- workaround to use multiple structures
-    if (type(width) == "table") then
-        options = width
-        width = nil
-    end
-
-    local event = function()
-        cotton.menuHandler:new(x, y, width, height, options)
-    end
-
-    local keyListener = function()
-        cotton.menuHandler:detectInput()
-    end
-
-    cotton.eventHandler:registerCallback({
-        event = event,
-        keyListener = keyListener
-    })
+function menu(positionAndSize, options)
+    cotton.menuHandler = MenuHandler({
+        x = positionAndSize.x,
+        y = positionAndSize.y,
+        w = positionAndSize.w,
+        h = positionAndSize.h,
+        options = options
+    }, function() end)
+    cotton.keyListener:setCurrentKeyListener(
+        function() cotton.menuHandler:detectInput() end
+    )
 end
 
 function sound(fileName, volume)
@@ -103,7 +66,7 @@ end
 
 function log(node)
     if type(node) == "string" or type(node) == "nil" or type(node) == "number" or type(node) == "userdata" or type(node) ==
-        "boolean" then
+        "boolean" or type(node) == "function" then
         print(node)
         return
     end

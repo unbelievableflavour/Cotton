@@ -20,9 +20,7 @@ local backgroundImg = nil
 
 function game.init(level_name)
     cotton.keyListener = KeyListener()
-    cotton.menuHandler = MenuHandler()
     cotton.messageHandler = MessageHandler()
-    cotton.eventHandler = EventHandler()
     cotton.game = Game()
     cotton.game:load()
 
@@ -150,7 +148,6 @@ function game.update()
 
     cotton.keyListener:update()
     cotton.messageHandler:update()
-    cotton.eventHandler:update()
 end
 
 function game.drawBackground(x, y, w, h)

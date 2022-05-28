@@ -9,13 +9,17 @@ class("MenuHandler", {
     currentChunk = 1
 }).extends()
 
-function MenuHandler:new(x, y, width, height, options)
+function MenuHandler:init(options, callback)
     game.freeze()
-    self.dialogWidth = width or 300
-    self.dialogHeight = height or 98
+    dialogDepth = dialogDepth + 1
 
-    self.positionX = x or 50
-    self.positionY = y or 50
+    self.callback = callback or nil
+
+    self.dialogWidth = options.w or 300
+    self.dialogHeight = options.h or 98
+
+    self.positionX = options.x or 50
+    self.positionY = options.y or 50
     self.margin = 16
 
     self.dialog = Dialog(self.positionX, self.positionY, self.dialogWidth, self.dialogHeight)
@@ -28,7 +32,7 @@ function MenuHandler:new(x, y, width, height, options)
     self.textFont = gfx.font.new("fonts/" .. config.font)
     self.textFontHeight = self.textFont:getHeight()
     self.numberOfLines = math.floor((self.dialogHeight - (self.margin * 2)) / self.textFontHeight)
-    self.options = options
+    self.options = options.options
     self.chunks = self:splitIntoChunksBasedOnNumberOfLines(self.numberOfLines)
 
     self.cursor = MenuCursor(self.positionX + self.margin, self.positionY + self.margin)
@@ -75,7 +79,7 @@ function MenuHandler:detectInput()
 
     if input.justPressed(buttonA) then
         self.chunks[self.currentChunk][self.cursor.selected].callback()
-        self:disableDialog()
+        self:tryClose()
         return
     end
 
@@ -83,7 +87,7 @@ function MenuHandler:detectInput()
         if not config.allowDismissRootMenu then
             return
         end
-        self:disableDialog()
+        self:tryClose()
         return
     end
 end
@@ -99,15 +103,11 @@ function MenuHandler:nextChunkPage()
     self:refreshMenu()
 end
 
-function MenuHandler:moveCursorUp()
-    if self.currentChunk == #self.chunks then
-        self.currentChunk = 1
-        self:refreshMenu()
-        return
+function MenuHandler:tryClose()
+    self:disableDialog()
+    if self.afterClose ~= nil then
+        self.afterClose()
     end
-
-    self.currentChunk = self.currentChunk + 1
-    self:refreshMenu()
 end
 
 function MenuHandler:previousChunkPage()
@@ -125,7 +125,7 @@ function MenuHandler:disableDialog()
     self.pagesIcon:remove()
     self.cursor:remove()
     self.menuOptions:remove()
-    cotton.eventHandler:markEventAsDone()
+
     game.unfreeze()
 end
 
