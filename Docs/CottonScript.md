@@ -537,6 +537,7 @@ Deletes the storage file.
 ## Math functions
 
 ### random
+
 ```lua
 local varName = math.random (max)
 ```
@@ -547,48 +548,56 @@ local varName = math.random (min, max)
 Returns an integer between the positive integers `min` (or 0) and `max` inclusive.
 
 ### floor
+
 ```lua
 local varName = math.floor(num)
 ```
 Returns the largest integer less than or equal to the given number.
 
 ### ceil
+
 ```lua
 local varName = math.ceil(num)
 ```
 Returns the next largest integer greater than or equal to the given number.
 
 ### round
+
 ```lua
 Not supported
 ```
 Round is not supported by the math library. Though you could use `ceil` and `floor` as alternatives.
 
 ### sine
+
 ```lua
 local varName = math.sine(num)
 ```
 Returns the sine of the given number (in radians).
 
 ### cosine
+
 ```lua
 local varName = math.cos(num)
 ```
 Returns the cosine of the given number (in radians).
 
 ### tangent
+
 ```lua
 local varName = math.tan(num)
 ```
 Returns the tangent of the given number (in radians).
 
 ### radians
+
 ```lua
 local varName = math.rad(num)
 ```
 Returns the given number (in degrees) converted to radians.
 
 ### degrees
+
 ```lua
 local varName = math.deg(num)
 ```
@@ -609,6 +618,7 @@ local varName = invert()
 Causes all drawing to be inverted (white displays as black and vice versa) until called again. Returns `true` when drawing is inverted and `false` when drawing is not inverted.
 
 ### isSolid
+
 ```lua
 local varName = isSolid(entity)
 ```
