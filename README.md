@@ -43,6 +43,11 @@ Documentation for CottonScript can be found here: [CottonScript](https://github.
 4. Open the `simple.code-workspace` file. When it asks "do you want to install recommended plugins?" you say yes and do so.
 5. You are now ready to work in the project!
 
+### IMPORTANT FOR WINDOWS
+
+If you are on Windows, some environment vars need to be set before you can compile your games.
+Follow [SquidGodDevs video](https://www.youtube.com/watch?v=J0ufxinp7No) TILL 2:04 to set environment vars for Windows.
+
 ## Working in Cotton
 
 ## Updating Cotton
