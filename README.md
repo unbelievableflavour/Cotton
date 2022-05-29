@@ -22,14 +22,8 @@ Some of the key features you will not see in Pulp but are already available here
 * Smooth movement
 
 <p align="center">
-    <div>
-        <b>Grid player</b>
-        <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_grid.gif" />
-    </div>
-    <div>
-        <b>Platformer player</b>
-        <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_platformer.gif" />
-    </div>
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_grid.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_platformer.gif" />
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_topdown.gif" />
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/movement_smooth.gif" />
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/camera_follow.gif" />
