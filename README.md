@@ -126,4 +126,5 @@ Docs are WIP, but works
 
 ## Credit
 
-[Nic Magnier](https://github.com/NicMagnier)
+* [Nic Magnier](https://github.com/NicMagnier) for offering the LDtk library
+* Guv_Bubbs for helping out with the docs
