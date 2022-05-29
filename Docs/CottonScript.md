@@ -49,6 +49,7 @@ CottonScript is a friendly scripting library that allows you to add Pulp-like in
 - [More functions](#more-functions)
   - [invert](#invert)
   - [isSolid](#issolid)
+  - [at](#at)
 
 ## General
 
@@ -394,17 +395,17 @@ Displays `message` in a text box.
 
 The text box can optionally be manually positioned and sized:
 ```lua
-say("message", {x = 10, y = 10 })
+say("message", at( 10, 10 ))
 ```
 or
 ```lua
-say("message", { x = 10, y = 10, w = 200, h = 100 })
+say("message", at( 10, 10, 200, 100 ))
 ```
 
 ### menu
 
 ```lua
-menu({ x = 10, y = 10, w = 200, h = 100 }, {
+menu(at( 10, 10, 200, 100 ), {
     {
       name = "optionOne",
       callback = (function()
@@ -425,9 +426,9 @@ Presents a paginated menu with one or more options at `x`,`y`. `w` and `h` are o
 Here's an example for a menu with a submenu:
 
 ```lua
-menu({ x = 10, y = 10, w = 200, h = 100 }, {
+menu( at( 10, 10, 200, 100 ), {
         { name = "mainOptionOne", type = "submenu", callback = function()
-            menu({ x = 20, y = 20 }, {
+            menu( at( 20, 20 ), {
                 { name = "subOptionOne", callback = function() 
                   -- do sub things
                 end
@@ -510,7 +511,7 @@ Makes sure the Player is being drawn. Can only be called from the `Player` entit
 ### window
 
 ```lua
-local window = window(x, y, w, h)
+local window = window(at(x, y, w, h))
 ```
 
 Draws a window frame at `x`,`y` with dimensions `w`,`h`. (Coordinates and dimensions are in pixels, not tiles.) Unlike with Pulp this window is can be created everywhere. Just remember that you need to call:
@@ -525,7 +526,7 @@ to remove it afterwards.
 
 ### label
 ```lua
-label "stringValue" at x, y, maxLength, maxHeight
+label("stringValue", at(x, y, w, h))
 ```
 
 Draws text `stringValue` at `x`,`y`. len is an optional maximum width to draw. lines is an optional maximum height to draw. Does not soft-wrap but does support the `\n` newline character for hard-wrapping. Can only be called from the Player’s draw event.
@@ -656,3 +657,22 @@ local varName = isSolid(entity)
 ```
 
 Returns `true` if the entity identified by coordinates, id, or name is solid, otherwise returns `false`.
+
+
+### at
+
+```lua
+at(x,y,w,h)
+```
+
+Returns an object `{ x = x, y = y, w = w, h = h }`. This makes it easier and more readable to position dialogs and windows. This function is used in the docs above, though if you prefer you can also write position and size without this function. 
+
+Example with `at` function:
+```lua
+say("Message", at( 20, 20 ))
+```
+
+Example without `at` function:
+```lua
+say("Message", { x = 20, y = 20 })
+```

@@ -194,18 +194,34 @@ function act()
     game.player:act()
 end
 
-function window(x, y, width, height)
-    return Dialog(x, y, width, height)
+function window(positionAndSize)
+    return Dialog(
+        positionAndSize.x,
+        positionAndSize.y,
+        positionAndSize.w,
+        positionAndSize.h
+    )
 end
 
-function label(message, x, y, maxWidth, maxHeight)
+function label(message, positionAndSize)
     gfx.setFont(cotton.textFont)
 
     gfx.drawTextInRect(
         message,
-        x,
-        y,
-        maxWidth or screenWidth,
-        maxHeight or screenHeight
+        positionAndSize.x,
+        positionAndSize.y,
+        positionAndSize.w or screenWidth,
+        positionAndSize.h or screenHeight
     )
+end
+
+function at(x, y, w, h)
+    local positionAndSize = {
+        x = x or nil,
+        y = y or nil,
+        w = w or nil,
+        h = h or nil
+    }
+
+    return positionAndSize
 end
