@@ -12,11 +12,17 @@ function KeyListener:update()
         return
     end
 
+    if self.firstFrame then
+        self.firstFrame = false
+        return
+    end
+
     self.keyListener()
 end
 
 function KeyListener:setCurrentKeyListener(listener)
     self.keyListener = listener
+    self.firstFrame = true
 end
 
 function KeyListener:unsetKeyListener()

@@ -421,6 +421,30 @@ menu({ x = 10, y = 10, w = 200, h = 100 }, {
 
 Presents a paginated menu with one or more options at `x`,`y`. `w` and `h` are optional and specify the width and height of the menu minus chrome tiles and cursor. Menu options are selected by pressing the A button. Submenus can be dismissed by pressing the B button. By default the root menu cannot be dismissed. Set `config.allowDismissRootMenu` to `true` to allow the root menu to be dismissed by pressing B.
 
+Here's an example for a menu with a submenu:
+
+```lua
+menu({ x = 10, y = 10, w = 200, h = 100 }, {
+        { name = "mainOptionOne", type = "submenu", callback = function()
+            menu({ x = 20, y = 20 }, {
+                { name = "subOptionOne", callback = function() 
+                  -- do sub things
+                end
+                },
+                { name = "subOptionTwo", callback = function() 
+                  -- do sub things
+                end
+                }
+            })
+        end
+        },
+        { name = "mainOptionTwo", callback = function()
+            -- do another
+        end
+        }
+    })
+```
+
 ### fin
 
 ```lua

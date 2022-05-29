@@ -9,10 +9,14 @@ class("MenuHandler", {
     currentChunk = 1
 }).extends()
 
+dialogDepth = 0
+subMenu = {}
+
 function MenuHandler:init(options, callback)
-    local dialogDepth = 1
-    game.freeze()
     dialogDepth = dialogDepth + 1
+    subMenu[dialogDepth] = self
+
+    game.freeze()
 
     self.callback = callback or nil
 
@@ -95,16 +99,17 @@ function MenuHandler:detectInput()
     end
 
     if input.justPressed(buttonA) then
-        self.chunks[self.currentChunk][self.cursor.selected].callback()
-        self:tryClose()
+        if self.chunks[self.currentChunk][self.cursor.selected].type == "submenu" then
+            self.chunks[self.currentChunk][self.cursor.selected].callback()
+        else
+            self:tryCloseAll()
+            self.chunks[self.currentChunk][self.cursor.selected].callback()
+        end
         return
     end
 
     if input.justPressed(buttonB) then
-        if not config.allowDismissRootMenu then
-            return
-        end
-        self:tryClose()
+        self:tryClose(buttonB)
         return
     end
 end
@@ -120,11 +125,34 @@ function MenuHandler:nextChunkPage()
     self:refreshMenu()
 end
 
-function MenuHandler:tryClose()
-    self:disableDialog()
-    if self.afterClose ~= nil then
-        self.afterClose()
+function MenuHandler:tryClose(button)
+    if self:isRootMenu() and config.allowDismissRootMenu == false and button == buttonB then
+        return
     end
+
+    if self:isRootMenu() then
+        cotton.keyListener:unsetKeyListener()
+    else
+        cotton.keyListener:setCurrentKeyListener(
+            function() subMenu[dialogDepth]:detectInput() end
+        )
+    end
+
+    dialogDepth = dialogDepth - 1
+    self:disableDialog()
+end
+
+function MenuHandler:tryCloseAll()
+    cotton.keyListener:unsetKeyListener()
+    self:disableDialog()
+    while dialogDepth > 1 do
+        dialogDepth = dialogDepth - 1
+        subMenu[dialogDepth]:disableDialog()
+    end
+    dialogDepth = 0
+    subMenu = {}
+
+    game.unfreeze()
 end
 
 function MenuHandler:previousChunkPage()
@@ -143,7 +171,13 @@ function MenuHandler:disableDialog()
     self.cursor:remove()
     self.menuOptions:remove()
 
-    game.unfreeze()
+    if type(self.callback) == "function" then
+        self.callback()
+    end
+    log(dialogDepth)
+    if dialogDepth == 0 then
+        game.unfreeze()
+    end
 end
 
 function MenuHandler:splitIntoChunksBasedOnNumberOfLines(numberOfLines)
@@ -172,4 +206,8 @@ function MenuHandler:splitIntoChunksBasedOnNumberOfLines(numberOfLines)
     end
 
     return chunks
+end
+
+function MenuHandler:isRootMenu()
+    return dialogDepth == 1
 end
