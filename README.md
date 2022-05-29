@@ -34,7 +34,7 @@ Some of the key features you will not see in Pulp but are already available here
 
 ## WIP
 
-Hi! This project is not yet finished, it's still missing some key features from Pulp, BUT it's pretty stable and useable.
+Hi! This project is not yet finished, it's still missing some features from Pulp, BUT it's pretty stable and useable!
 
 ## Requirements
 
