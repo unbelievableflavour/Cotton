@@ -502,8 +502,15 @@ Note that this does not stop the run loop. If you do not want the player to be a
 ### tell
 
 ```lua
-local otherTile = tell("id-of-the-other-tile")
-otherTile:eventName()
+local otherTile = tell("id-of-the-entity")
+-- do something with the entity with id: id-of-the-entity
+```
+
+Allows one entity to interact with other entity. You can for instance; call functions on it like so:
+
+```lua
+local otherTile = tell("id-of-the-entity")
+otherTile:functionName()
 ```
 
 ### ignore/listen
