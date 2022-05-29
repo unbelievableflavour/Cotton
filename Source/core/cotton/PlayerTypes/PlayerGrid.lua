@@ -5,7 +5,8 @@ class("PlayerGrid", {
     transitionMovement = true,
     transitionSpeed = 2,
     allowDiagonalMovement = false,
-    currentCollisions = {}
+    currentCollisions = {},
+    faceDirection = nil
 }).extends(PlayerBase)
 
 function PlayerGrid:Init(ldtk_entity)
@@ -175,6 +176,11 @@ function PlayerGrid:getEntityOnPosition()
 end
 
 function PlayerGrid:act()
+    if not self.faceDirection then
+        log("just entered the game!")
+        return
+    end
+
     local tile = self:getPositionForDirection(self.faceDirection)
     self.tempSprite:moveTo(tile.x * self.tileSize, tile.y * self.tileSize)
     self:interact()
@@ -182,19 +188,19 @@ end
 
 function PlayerGrid:getPositionForDirection(direction)
     local destinationDictionary = {
-        left = {
+        west = {
             x = self.destinationCursor.x - 1,
             y = self.destinationCursor.y
         },
-        right = {
+        east = {
             x = self.destinationCursor.x + 1,
             y = self.destinationCursor.y
         },
-        up = {
+        north = {
             x = self.destinationCursor.x,
             y = self.destinationCursor.y - 1
         },
-        down = {
+        south = {
             x = self.destinationCursor.x,
             y = self.destinationCursor.y + 1
         }
@@ -210,7 +216,7 @@ function PlayerGrid:detectInput()
     if input.onRepeat(buttonLeft) then
         cotton.player:update()
 
-        self.faceDirection = "left"
+        self.faceDirection = "west"
 
         local destination = self:getPositionForDirection(self.faceDirection)
         self.destinationCursor.x = destination.x
@@ -225,7 +231,7 @@ function PlayerGrid:detectInput()
     if input.onRepeat(buttonRight) then
         cotton.player:update()
 
-        self.faceDirection = "right"
+        self.faceDirection = "east"
 
         local destination = self:getPositionForDirection(self.faceDirection)
         self.destinationCursor.x = destination.x
@@ -240,7 +246,7 @@ function PlayerGrid:detectInput()
     if input.onRepeat(buttonUp) then
         cotton.player:update()
 
-        self.faceDirection = "up"
+        self.faceDirection = "north"
 
         local destination = self:getPositionForDirection(self.faceDirection)
         self.destinationCursor.x = destination.x
@@ -255,7 +261,7 @@ function PlayerGrid:detectInput()
     if input.onRepeat(buttonDown) then
         cotton.player:update()
 
-        self.faceDirection = "down"
+        self.faceDirection = "south"
 
         local destination = self:getPositionForDirection(self.faceDirection)
         self.destinationCursor.x = destination.x

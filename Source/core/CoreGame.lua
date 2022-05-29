@@ -108,6 +108,7 @@ function goto_level(level_name, direction)
         if entity.name == "Exit" then
             if entity.fields.EntranceDirection == opposites[direction] then
                 game.player:Init(entity)
+                game.player.faceDirection = string.lower(direction)
             end
         end
 
