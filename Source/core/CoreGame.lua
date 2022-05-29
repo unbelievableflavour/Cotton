@@ -19,6 +19,9 @@ local _background_sprite = gfx.sprite.new()
 local backgroundImg = nil
 
 function game.init(level_name)
+    cotton.textFont = gfx.font.new("fonts/" .. config.font)
+    cotton.textFontHeight = cotton.textFont:getHeight()
+
     cotton.keyListener = KeyListener()
     cotton.messageHandler = MessageHandler()
     cotton.game = Game()
@@ -140,11 +143,11 @@ function game.shutdown()
 end
 
 function game.update()
+    gfx.sprite.update()
+
     cotton.player:draw()
     cotton.game:loop()
     game.player:update()
-
-    gfx.sprite.update()
 
     cotton.keyListener:update()
     cotton.messageHandler:update()

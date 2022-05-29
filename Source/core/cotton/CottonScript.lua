@@ -1,3 +1,5 @@
+local gfx <const> = playdate.graphics
+
 function say(message, positionAndSize, callback)
 
     cotton.messageHandler:new(message, {
@@ -194,4 +196,16 @@ end
 
 function window(x, y, width, height)
     return Dialog(x, y, width, height)
+end
+
+function label(message, x, y, maxWidth, maxHeight)
+    gfx.setFont(cotton.textFont)
+
+    gfx.drawTextInRect(
+        message,
+        x,
+        y,
+        maxWidth or screenWidth,
+        maxHeight or screenHeight
+    )
 end

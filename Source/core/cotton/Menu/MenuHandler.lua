@@ -43,9 +43,7 @@ function MenuHandler:init(options, callback)
     )
     self.menuOptions:add()
 
-    self.textFont = gfx.font.new("fonts/" .. config.font)
-    self.textFontHeight = self.textFont:getHeight()
-    self.numberOfLines = math.floor((self.dialogHeight - (self.margin * 2)) / self.textFontHeight)
+    self.numberOfLines = math.floor((self.dialogHeight - (self.margin * 2)) / cotton.textFontHeight)
     self.options = options.options
     self.chunks = self:splitIntoChunksBasedOnNumberOfLines(self.numberOfLines)
 
@@ -67,12 +65,12 @@ function MenuHandler:init(options, callback)
         self.pagesIcon:add()
     end
 
-    gfx.setFont(self.textFont)
+    gfx.setFont(cotton.textFont)
     self:refreshMenu()
 end
 
 function MenuHandler:refreshMenu()
-    self.menuOptions:drawOptions(self.chunks[self.currentChunk], self.textFontHeight)
+    self.menuOptions:drawOptions(self.chunks[self.currentChunk], cotton.textFontHeight)
 end
 
 function MenuHandler:detectInput()
@@ -174,7 +172,7 @@ function MenuHandler:disableDialog()
     if type(self.callback) == "function" then
         self.callback()
     end
-    log(dialogDepth)
+
     if dialogDepth == 0 then
         game.unfreeze()
     end

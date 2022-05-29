@@ -40,12 +40,10 @@ function MessageHandler:new(message, options)
         self.dialogDepth
     )
 
-    self.textFont = gfx.font.new("fonts/" .. config.font)
-    self.textFontHeight = self.textFont:getHeight()
-    self.numberOfLines = math.floor((self.dialogHeight - (self.margin * 2)) / self.textFontHeight)
+    self.numberOfLines = math.floor((self.dialogHeight - (self.margin * 2)) / cotton.textFontHeight)
 
     self.wordList = self:splitMessageIntoWordsList(message)
-    self.chunkList = self:splitIntoChunksBasedOnWidth(self.dialogWidth - (self.margin * 2), self.textFont)
+    self.chunkList = self:splitIntoChunksBasedOnWidth(self.dialogWidth - (self.margin * 2), cotton.textFont)
     self.completeMessageLength = #message
     self.chunkOffset = 1
     self.currentChunk = 1
@@ -80,8 +78,8 @@ function MessageHandler:drawMessage()
         end
 
         local truncatedMessage = string.sub(chunk, 0, self.currentChunkLength[self.chunkOffset + lineLoopIndex] or 0)
-        self.textFont:drawText(truncatedMessage, self.textPosition.x,
-            self.textPosition.y + (self.textFontHeight * lineLoopIndex))
+        cotton.textFont:drawText(truncatedMessage, self.textPosition.x,
+            self.textPosition.y + (cotton.textFontHeight * lineLoopIndex))
         lineLoopIndex = lineLoopIndex + 1
     end
 

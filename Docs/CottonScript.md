@@ -31,6 +31,7 @@ CottonScript is a friendly scripting library that allows you to add Pulp-like in
   - [hide](#hide)
   - [show](#show)
   - [window](#window)
+  - [label](#label)
   - [sound](#sound)
   - [store](#store)
   - [restore](#restore)
@@ -512,7 +513,7 @@ Makes sure the Player is being drawn. Can only be called from the `Player` entit
 local window = window(x, y, w, h)
 ```
 
-Draws a window frame at x,y with dimensions w,h. (Coordinates and dimensions are in pixels, not tiles.) Unlike with Pulp this window is can be created everywhere. Just remember that you need to call:
+Draws a window frame at `x`,`y` with dimensions `w`,`h`. (Coordinates and dimensions are in pixels, not tiles.) Unlike with Pulp this window is can be created everywhere. Just remember that you need to call:
 ```lua
 window:add()
 ```
@@ -521,6 +522,13 @@ to add it to the screen, and
 window:remove()
 ```
 to remove it afterwards.
+
+### label
+```lua
+label "stringValue" at x, y, maxLength, maxHeight
+```
+
+Draws text `stringValue` at `x`,`y`. len is an optional maximum width to draw. lines is an optional maximum height to draw. Does not soft-wrap but does support the `\n` newline character for hard-wrapping. Can only be called from the Player’s draw event.
 
 ### sound
 
