@@ -104,8 +104,6 @@ The cached files are saved in in your PlayDate game's data directory. You will h
 1. Move `<playdate_sdk_location>/Disk/Data/<yourgame>/LDtk_lua_levels` to `<this_project>/Source/levels/LDtk_lua_levels`
 2. finally enable the cache by changing `useFastLoader = true` in `config.lua`
 
-
-
 ## Player type specific settings
 
 Docs are WIP, but works
