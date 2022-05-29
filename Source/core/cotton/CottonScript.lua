@@ -1,6 +1,7 @@
 local gfx <const> = playdate.graphics
 
 function say(message, positionAndSize, callback)
+    positionAndSize = positionAndSize or at()
 
     cotton.messageHandler:new(message, {
         x = positionAndSize.x,
