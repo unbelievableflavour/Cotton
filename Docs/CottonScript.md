@@ -13,6 +13,7 @@ CottonScript is a friendly scripting library that allows you to add Pulp-like in
     - [Conditionals](#conditionals)
     - [Loops](#loops)
     - [Returning](#returning)
+    - [Continue](#continue)
   - [Persistent storage](#persistent-storage)
   - [event](#event)
   - [config](#config)
@@ -139,7 +140,7 @@ And assigned like so:
 varName = 0
 ```
 
-Strings can be wrapped in double or single quotes. But for consistency I recommend using only on of the two: 
+Strings can be wrapped in double or single quotes. But for consistency I recommend using only one of the two: 
 
 ```lua
 varName = "some string"
@@ -156,6 +157,7 @@ Lua supports simple arithmetic operations.
 Variables can be incremented or decremented like so:
 
 ```lua
+varName = 0
 varName = varName + 1 -- now equals 1
 varName = varName - 1 -- equals 0 again
 ```
@@ -163,6 +165,7 @@ varName = varName - 1 -- equals 0 again
 You can add to or subtract from a variable like so:
 
 ```lua
+varName = 0
 varName = varName + 4 -- now equals 4
 varName = varName - 3 -- now equals 1
 ```
@@ -170,14 +173,16 @@ varName = varName - 3 -- now equals 1
 You can also multiply or divide a variable like so:
 
 ```lua
-varName = varName * 6 -- now equals 6
+varName = 0
+varName = varName + 1 * 6 -- now equals 6
 varName = varName / 3 -- now equals 2
 ```
 
 Compound expressions are also supported like so:
 ```lua
+varName = 0
 varName = varName + 1 * 2 -- now equals 2
-varName = varName - 1 + 1 - 1 -- equals 0 again
+varName = varName - 1 + 1 - 2 -- equals 0 again
 ```
 
 ### Control Flow
@@ -215,6 +220,7 @@ end
 ```
 
 #### Loops
+
 CottonScript also includes a while loop which can be thought of as a repeating if:
 
 ```lua
@@ -224,7 +230,8 @@ end
 ```
 
 #### Returning
-CottonScript does has user-defined functions and event handlers return values. They can be exited early with
+
+User-defined functions and event handlers can return values. They can be exited early with `return` like so.
 
 ```lua
 while varName==0 do
@@ -236,6 +243,24 @@ while varName==0 do
     ticks = ticks - interval
 
     -- do something at a regular interval
+end
+```
+
+#### Continue
+
+You can also skip only 1 cycle of the while loop and keep going instead of completely returning from the loop like so:
+
+```lua
+local redFound = 0
+
+while varName==0 do
+    if color == "blue" then
+        goto continue -- skips loop while the color is blue
+    end
+
+    redFound = redFound + 1
+
+    ::continue::
 end
 ```
 
@@ -311,12 +336,16 @@ NOT-YET-SUPPORTED Controls the amount of time that must elapse before the player
 ```lua
 config.useFastLoader = false
 ```
-Controls the usage of cached files. Levels will automatically be cached when tthe cache is not being used. The default value  is `false`. When set to `true` the cached levels will be used. This will increase performance on actual device. More information about the caching levels is found in the [https://github.com/unbelievableflavour/Cotton](Cotton Readme)
+Controls the usage of cached files. Levels will automatically be cached when the cache is not being used. The default value  is `false`. When set to `true` the cached levels will be used. This will increase performance on actual device. More information about the caching levels is found in the [https://github.com/unbelievableflavour/Cotton](Cotton Readme)
 
 ```lua
 config.playerType = "grid"
 ```
 Controls which type of player will spawn. The default value is `grid`. Options are: `grid`, `topdown`, `platformer`
+
+* `grid` means you are viewing the player from above, but locked to a grid. It can move freely in all directions but only to locations on the grid. (Pulp style)
+* `topdown` means you are viewing the player from above, but not locked to a grid. It can move freely in all directions.
+* `platformer` means you are viewing the player from the side with gravity, but not locked to a grid. It can move freely in all directions except from above and down. Moving up and down is affected by gravity.
 
 ```lua
 config.font = "Pulp"
@@ -355,7 +384,7 @@ return seconds since midnight (hour 0), January 1 2000 UTC
 
 ### String formatting
 
-You can include variable values in a string by wrapping the variable name in curly braces:
+You can include variables in a string by adding `..` between the string and the variable:
 
 ```lua
 log("count is now set to " .. count)
@@ -382,13 +411,13 @@ Logs the current values contained in the `config`, and persistent storage.
 ### say
 
 ```lua
-say("message", {})
+say("message", at())
 ```
 
 and
 
 ```lua
-say("message", {}, function()
+say("message", at(), function()
     -- do something after the text box is dismissed
 end)
 ```
