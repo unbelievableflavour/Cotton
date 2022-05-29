@@ -22,6 +22,7 @@ function game.init(level_name)
     cotton.textFont = gfx.font.new("fonts/" .. config.font)
     cotton.textFontHeight = cotton.textFont:getHeight()
 
+    cotton.songPlayer = SongPlayer()
     cotton.keyListener = KeyListener()
     cotton.messageHandler = MessageHandler()
     cotton.game = Game()

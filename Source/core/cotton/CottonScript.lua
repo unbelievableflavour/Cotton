@@ -39,9 +39,21 @@ function menu(positionAndSize, options)
 end
 
 function sound(fileName, volume)
-    local fp = playdate.sound.fileplayer.new("sounds/" .. fileName)
-    fp:setVolume(volume or 1.0)
-    fp:play(1)
+    local sp = playdate.sound.fileplayer.new("sounds/" .. fileName)
+    sp:setVolume(volume or 1.0)
+    sp:play(1)
+end
+
+function once(fileName)
+    cotton.songPlayer:once(fileName)
+end
+
+function loop(fileName)
+    cotton.songPlayer:loop(fileName)
+end
+
+function stop()
+    cotton.songPlayer:stop()
 end
 
 function tell(tileId)

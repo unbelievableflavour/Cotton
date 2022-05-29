@@ -36,6 +36,9 @@ CottonScript is a friendly scripting library that allows you to add Pulp-like in
   - [fill rect](#fill-rect)
   - [fill circle](#fill-circle)
   - [sound](#sound)
+  - [once](#once)
+  - [loop](#loop)
+  - [stop](#stop)
   - [store](#store)
   - [restore](#restore)
   - [toss](#toss)
@@ -583,13 +586,48 @@ Fills a circle with colorName (either `white` or `black`) at `x`,`y` with dimens
 sound("audioFileName")
 ```
 
-Plays the sound matching ```audioFileName.<extension>``` located in ```Source/sounds```.
+Plays the sound matching `audioFileName.<extension>` located in `Source/sounds`. 
+Supports:
+
+* `wav`
+* `mp3`
 
 You can also decrease the volume of the sound.
 Do:
 ```lua
 sound("audioFileName", 0.5)
 ```
+
+### once
+
+```lua
+once("audioFileName")
+```
+
+or
+```lua
+once("songName", function()
+    -- do something when the song ends
+end)
+```
+Plays the song matching `audioFileName.<extension>` located in `Source/sounds` then stops. Does nothing if the requested song is already playing.
+WIP, callback not yet working
+
+### loop
+
+```lua
+loop("audioFileName") 
+```
+
+Plays the song matching `audioFileName.<extension>` located in `Source/sounds`, looping back to the beginning (or the song’s loopFrom point if set in the editor) each time it completes. Does nothing if the requested song is already playing.
+
+### stop
+
+```lua
+stop()
+```
+
+Stops the currently playing song.
 
 ### store
 
