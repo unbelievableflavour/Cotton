@@ -5,14 +5,6 @@ Cotton is a framework for Pulp-like experiences in Lua. It will allow you to use
 <p align="center">
     <img
     src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/environment.png" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_grid.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_platformer.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_topdown.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/movement_smooth.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/camera_follow.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/dialogs.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/bigger_maps.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/big_player.gif" />
 </p>
 
 ## Features
@@ -28,6 +20,17 @@ Some of the key features you will not see in Pulp but are already available here
 * Different player types (grid, topdown, platformer)
 * Caching levels
 * Smooth movement
+
+<p align="center">
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_grid.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_platformer.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_topdown.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/movement_smooth.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/camera_follow.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/dialogs.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/bigger_maps.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/big_player.gif" />
+</p>
 
 ## WIP
 
