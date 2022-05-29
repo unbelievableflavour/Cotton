@@ -545,7 +545,7 @@ Makes sure the Player is being drawn. Can only be called from the `Player` entit
 local window = window(at(x, y, w, h))
 ```
 
-Draws a window frame at `x`,`y` with dimensions `w`,`h`. (Coordinates and dimensions are in pixels, not tiles.) Unlike with Pulp this window is can be created everywhere. Just remember that you need to call:
+Draws a window frame at `x`,`y` with dimensions `w`,`h`. (Coordinates and dimensions are in pixels, not tiles.) Unlike in Pulp, this window can be created everywhere. Just remember that you need to call:
 ```lua
 window:add()
 ```
