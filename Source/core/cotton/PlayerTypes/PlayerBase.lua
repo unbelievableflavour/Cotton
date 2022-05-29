@@ -16,7 +16,7 @@ function PlayerBase:doBasicInputChecks()
         cotton.player:confirmPressed()
     end
 
-    if input.justPressed(buttonA) then
+    if input.justReleased(buttonA) then
         cotton.player:confirmReleased()
     end
 
@@ -24,7 +24,7 @@ function PlayerBase:doBasicInputChecks()
         cotton.player:cancelPressed()
     end
 
-    if input.justPressed(buttonB) then
+    if input.justReleased(buttonB) then
         cotton.player:cancelReleased()
     end
 
