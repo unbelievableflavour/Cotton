@@ -15,6 +15,21 @@ function say(message, positionAndSize, callback)
     )
 end
 
+function ask(message, positionAndSize, callback)
+    positionAndSize = positionAndSize or at()
+
+    cotton.messageHandler:new(message, {
+        x = positionAndSize.x,
+        y = positionAndSize.y,
+        w = positionAndSize.w,
+        h = positionAndSize.h,
+        options = callback
+    })
+    cotton.keyListener:setCurrentKeyListener(
+        function() cotton.messageHandler:detectInput() end
+    )
+end
+
 function fin(message)
 
     cotton.messageHandler:new(message, {

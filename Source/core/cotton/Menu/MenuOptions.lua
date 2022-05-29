@@ -30,9 +30,6 @@ end
 function MenuOptions:drawOptions(chunkOfOptions, textFontHeight)
     local lineLoopIndex = 0
 
-    local textPositionX = self.positionX + self.margin
-    local textPositionY = self.positionY + self.margin
-
     self.optionsImage = gfx.image.new(self.dialogWidth, self.dialogHeight)
 
     gfx.pushContext(self.optionsImage)

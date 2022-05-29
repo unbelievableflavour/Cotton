@@ -23,6 +23,7 @@ CottonScript is a friendly scripting library that allows you to add Pulp-like in
   - [log](#log)
   - [dump](#dump)
   - [say](#say)
+  - [ask](#ask)
   - [menu](#menu)
   - [fin](#fin)
   - [wait](#wait)
@@ -436,6 +437,35 @@ or
 say("message", at( 10, 10, 200, 100 ))
 ```
 
+### ask
+
+```lua
+ask("stringValue", at(), {
+    {
+      name = "optionOne",
+      callback = function()
+        -- do one thing
+      end
+    },
+    {
+      name = "optionTwo",
+      callback = function()
+        -- do another
+      end
+    }
+})
+```
+
+Displays `stringValue` in a text box. The player can then select from the provided options. The options are presented as a vertical list in another box overlaying the bottom right corner of the question box. `ask` requires at least one option, six or more options will be paginated. 
+Its text box can optionally be manually positioned and sized:
+```lua
+ask("stringValue", at( x, y ), ...
+```
+or
+```lua
+ask("stringValue", at( x, y, w, h ), ...
+```
+
 ### menu
 
 ```lua
@@ -448,9 +478,9 @@ menu(at( 10, 10, 200, 100 ), {
     },
     {
       name = "optionTwo",
-      callback = (function()
+      callback = function()
         -- do another
-      end)
+      end
     }
 })
 ```
@@ -461,24 +491,24 @@ Here's an example for a menu with a submenu:
 
 ```lua
 menu( at( 10, 10, 200, 100 ), {
-        { name = "mainOptionOne", type = "submenu", callback = function()
-            menu( at( 20, 20 ), {
-                { name = "subOptionOne", callback = function() 
-                  -- do sub things
-                end
-                },
-                { name = "subOptionTwo", callback = function() 
-                  -- do sub things
-                end
-                }
-            })
-        end
-        },
-        { name = "mainOptionTwo", callback = function()
-            -- do another
-        end
-        }
-    })
+    { name = "mainOptionOne", type = "submenu", callback = function()
+        menu( at( 20, 20 ), {
+            { name = "subOptionOne", callback = function() 
+              -- do sub things
+            end
+            },
+            { name = "subOptionTwo", callback = function() 
+              -- do sub things
+            end
+            }
+        })
+    end
+    },
+    { name = "mainOptionTwo", callback = function()
+        -- do another
+    end
+    }
+})
 ```
 
 ### fin

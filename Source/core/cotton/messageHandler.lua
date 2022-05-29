@@ -14,7 +14,9 @@ class("MessageHandler", {
 
 function MessageHandler:new(message, options)
     self.dialogDepth = 1
+    self.options = options.options
     self.afterClose = options.afterClose
+
     game.freeze()
 
     self.dialogWidth = options.w or 300
@@ -129,7 +131,42 @@ function MessageHandler:detectInput()
     end
 end
 
+function MessageHandler:getMaxWidthForOptions(options, fontSize)
+    local maxWidth = 0
+
+    for k, option in pairs(options) do
+        local textSize = option.name:len() * fontSize
+        if maxWidth < textSize then
+            maxWidth = textSize
+        end
+    end
+
+    return maxWidth
+end
+
 function MessageHandler:tryClose()
+    if #self.options > 0 then
+        local fontSize = 16
+        local maxNumberOfItems = #self.options
+        if maxNumberOfItems > 5 then
+            maxNumberOfItems = 5
+        end
+        local minWidthForOption = self:getMaxWidthForOptions(self.options, fontSize)
+        cotton.menuHandler = MenuHandler({
+            x = self.positionX + self.dialogWidth - (minWidthForOption + self.margin * 2),
+            y = (self.positionY + self.dialogHeight) - (self.margin),
+            w = minWidthForOption + self.margin,
+            h = (maxNumberOfItems * fontSize) + (self.margin * 2),
+            options = self.options,
+            zIndex = 1
+        }, function()
+            cotton.keyListener:unsetKeyListener()
+            self:disableDialog()
+        end)
+        cotton.keyListener:setCurrentKeyListener(function() cotton.menuHandler:detectInput() end)
+        return
+    end
+
     self:disableDialog()
     if self.afterClose ~= nil then
         self.afterClose()

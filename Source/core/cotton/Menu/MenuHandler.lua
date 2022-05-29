@@ -32,14 +32,14 @@ function MenuHandler:init(options, callback)
         self.positionY,
         self.dialogWidth,
         self.dialogHeight,
-        dialogDepth
+        dialogDepth + options.zIndex
     )
     self.dialog:add()
     self.menuOptions = MenuOptions(
         self.positionX + self.margin,
         self.positionY, self.dialogWidth - self.margin,
         self.dialogHeight,
-        dialogDepth
+        dialogDepth + options.zIndex
     )
     self.menuOptions:add()
 
@@ -50,7 +50,7 @@ function MenuHandler:init(options, callback)
     self.cursor = MenuCursor(
         self.positionX + self.margin,
         self.positionY + self.margin,
-        dialogDepth
+        dialogDepth + options.zIndex
     )
     self.cursor:setNumberOfLines(#self.chunks[self.currentChunk])
     self.cursor:add()
@@ -58,7 +58,7 @@ function MenuHandler:init(options, callback)
     self.pagesIcon = PagesIcon(
         self.positionX + self.dialogWidth - self.margin * 2,
         self.positionY + self.dialogHeight - self.margin,
-        dialogDepth
+        dialogDepth + options.zIndex
     )
 
     if #self.chunks > 1 then
