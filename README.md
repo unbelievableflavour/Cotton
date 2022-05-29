@@ -38,9 +38,10 @@ Documentation for CottonScript can be found here: [CottonScript](https://github.
 ## Setting up Cotton
 
 1. Download and install the requirements above.
-2. Download [the latest version of Cotton](https://github.com/unbelievableflavour/Cotton/releases).
-3. Open the `simple.code-workspace` file. When it asks "do you want to install recommended plugins?" you say yes and do so.
-4. You are now ready to work in the project!
+2. Download [the latest version of Cotton](https://github.com/unbelievableflavour/Cotton/releases) `zip` file.
+3. Extract it in the projects folder your choosing.
+4. Open the `simple.code-workspace` file. When it asks "do you want to install recommended plugins?" you say yes and do so.
+5. You are now ready to work in the project!
 
 ## Working in Cotton
 
@@ -48,10 +49,11 @@ Documentation for CottonScript can be found here: [CottonScript](https://github.
 
 You can update Cotton in your project at any time IF you did not edit any code in the `core` folder.
 
-1. Download the latest version of `Cotton`.
-2. Replace your `core` folder with the `core` folder from the download.
-3. Replace your `main.lua` with the on from the download. BUT keep the old file as reference.
-4. Make sure to readd any code you added to `main.lua` yourself.
+1. Download [the latest version of Cotton](https://github.com/unbelievableflavour/Cotton/releases) `zip` file.
+2. Extract it somewhere.
+3. Replace your `core` folder with the `core` folder from the download.
+4. Replace your `main.lua` with the on from the download. BUT keep the old file as reference.
+5. Make sure to readd any code you added to `main.lua` yourself.
 
 ### Scripting
 
