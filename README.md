@@ -12,6 +12,7 @@ Cotton is a framework for Pulp-like experiences in Lua. It will allow you to use
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/camera_follow.gif" />
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/dialogs.gif" />
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/bigger_maps.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/big_player.gif" />
 </p>
 
 ## Features
