@@ -215,6 +215,25 @@ function label(message, positionAndSize)
     )
 end
 
+function fillRect(color, positionAndSize)
+    gfx.setColor(color)
+    gfx.fillRect(
+        positionAndSize.x,
+        positionAndSize.y,
+        positionAndSize.w,
+        positionAndSize.h
+    )
+end
+
+function fillCircle(color, positionAndSize)
+    gfx.setColor(color)
+    gfx.fillCircleAtPoint(
+        positionAndSize.x,
+        positionAndSize.y,
+        positionAndSize.w
+    )
+end
+
 function at(x, y, w, h)
     local positionAndSize = {
         x = x or nil,

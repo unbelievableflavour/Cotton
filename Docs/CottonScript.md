@@ -32,6 +32,8 @@ CottonScript is a friendly scripting library that allows you to add Pulp-like in
   - [show](#show)
   - [window](#window)
   - [label](#label)
+  - [fill rect](#fill-rect)
+  - [fill circle](#fill-circle)
   - [sound](#sound)
   - [store](#store)
   - [restore](#restore)
@@ -525,11 +527,26 @@ window:remove()
 to remove it afterwards.
 
 ### label
+
 ```lua
 label("stringValue", at(x, y, w, h))
 ```
 
 Draws text `stringValue` at `x`,`y`. len is an optional maximum width to draw. lines is an optional maximum height to draw. Does not soft-wrap but does support the `\n` newline character for hard-wrapping. Can only be called from the Player’s draw event.
+
+### fill rect
+
+```lua
+fillRect(colorName, at(x, y, w, h))
+```
+Fills a rect with colorName (either `white` or `black`) at `x`,`y` with dimensions `w`,`h`. (Coordinates and dimensions are in pixels.) Can only be called from the Player’s draw event.
+
+### fill circle
+
+```lua
+fillCircle(colorName, at(x, y, r))
+```
+Fills a circle with colorName (either `white` or `black`) at `x`,`y` with dimensions `w`. (Coordinates and dimensions are in pixels.) Can only be called from the Player’s draw event.
 
 ### sound
 
