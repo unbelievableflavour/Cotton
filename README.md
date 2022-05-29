@@ -21,6 +21,13 @@ Some of the key features you will not see in Pulp but are already available here
 * Caching levels
 * Smooth movement
 
+<img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/smooth_movement.gif" width="32%" />
+<img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/camera_follow.gif" width="32%" />
+<img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/platformer.gif" width="32%" />
+<img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/topdown.gif" width="32%" />
+<img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/dialogs.gif" width="32%" />
+<img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/bigger_maps.gif" width="32%" />
+
 ## WIP
 
 Hi! This project is not yet finished, it's still missing some key features from Pulp, BUT it's pretty stable and useable.
