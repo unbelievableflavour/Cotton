@@ -599,7 +599,7 @@ to remove it afterwards.
 ### sprite
 
 ```lua
-local sprite = sprite(imagePath,at(x, y))
+local sprite = sprite(imagePath, at(x, y))
 ```
 Draws the requested image at x,y. Unlike `draw` in Pulp, `sprite` can be used everywhere. Just remember that you need to call:
 ```lua

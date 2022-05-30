@@ -9,17 +9,21 @@ Cotton is a framework for Pulp-like experiences in Lua. It will allow you to use
 
 ## Features
 
-Some of the key features you will not see in Pulp but are already available here.
+Some of the key features you find in Cotton.
 
-* Easy preconfigured compile functions
-* Automatic code formatting on saving to keep your code clean and organised.
-* 30 frames per second
-* LDtk build-in
-* Optionable version control on your project
-* FPS Counter
-* Different player types (grid, topdown, platformer)
-* Caching levels
-* Smooth movement
+* A library containing most features that Pulp has to offer ([CottonScript](https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md))
+* Preconfigured level editor ([LDtk](https://ldtk.io/))
+* Runs at 30 frames per second.
+* Toggleable FPS counter.
+* A versionable project structure for easy git use.
+* Custom folder structuring allows for better organizing your project.
+* Toggleable player types (grid, topdown, platformer)
+* Toggleable smooth movement.
+* Preconfigured compile & play buttons in VS code.
+* Resizeable levels.
+* Easy level caching for fast level loading.
+* Automatic code formatting on save to keep your code clean and organised.
+* Multi-tile player support.
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_grid.gif" />
