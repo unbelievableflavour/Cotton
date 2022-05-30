@@ -1,6 +1,7 @@
 local gfx <const> = playdate.graphics
 
 import "./PromptIcon"
+import "./TextImage"
 
 class("MessageHandler", {
     options = {},
@@ -35,6 +36,16 @@ function MessageHandler:new(message, options)
     )
 
     self.dialog:add()
+
+    self.text = TextImage(
+        self.positionX + self.margin,
+        self.positionY + self.margin,
+        self.dialogWidth - (self.margin * 2),
+        self.dialogHeight - (self.margin * 2),
+        self.dialogDepth
+    )
+
+    self.text:add()
 
     self.arrowDown = PromptIcon(
         self.positionX + self.dialogWidth - self.margin * 2,
@@ -71,19 +82,6 @@ function MessageHandler:update()
 end
 
 function MessageHandler:drawMessage()
-    local lineLoopIndex = 0
-
-    while (lineLoopIndex < self.numberOfLines) do
-        local chunk = self.chunkList[self.chunkOffset + lineLoopIndex]
-        if chunk == nil then
-            break
-        end
-
-        local truncatedMessage = string.sub(chunk, 0, self.currentChunkLength[self.chunkOffset + lineLoopIndex] or 0)
-        cotton.textFont:drawText(truncatedMessage, self.textPosition.x,
-            self.textPosition.y + (cotton.textFontHeight * lineLoopIndex))
-        lineLoopIndex = lineLoopIndex + 1
-    end
 
     if self.currentChunkLength[self.currentChunk] == #self.chunkList[self.currentChunk] then
         if #self.chunkList == self.currentChunk then
@@ -107,7 +105,28 @@ function MessageHandler:drawMessage()
         return
     end
 
+    self:drawTextInDialog()
+
     self.currentChunkLength[self.currentChunk] = (self.currentChunkLength[self.currentChunk] or 0) + 1
+end
+
+function MessageHandler:drawTextInDialog()
+    local lineLoopIndex = 0
+
+    while (lineLoopIndex < self.numberOfLines) do
+        local chunk = self.chunkList[self.chunkOffset + lineLoopIndex]
+        if chunk == nil then
+            break
+        end
+
+        local truncatedMessage = string.sub(chunk, 0, self.currentChunkLength[self.chunkOffset + lineLoopIndex] or 0)
+        self.text:drawText(
+            truncatedMessage,
+            0,
+            0 + (cotton.textFontHeight * lineLoopIndex)
+        )
+        lineLoopIndex = lineLoopIndex + 1
+    end
 end
 
 function MessageHandler:detectInput()
@@ -154,7 +173,7 @@ function MessageHandler:tryClose()
         local minWidthForOption = self:getMaxWidthForOptions(self.options, fontSize)
         cotton.menuHandler = MenuHandler({
             x = self.positionX + self.dialogWidth - (minWidthForOption + self.margin * 2),
-            y = (self.positionY + self.dialogHeight) - (self.margin),
+            y = (self.positionY + self.dialogHeight) - (self.margin * 2),
             w = minWidthForOption + self.margin,
             h = (maxNumberOfItems * fontSize) + (self.margin * 2),
             options = self.options,
@@ -174,6 +193,7 @@ function MessageHandler:tryClose()
 end
 
 function MessageHandler:nextChunkPage()
+    self.text:clean()
     self.arrowDown:remove()
     self.currentChunk = self.currentChunk + 1
     self.chunkOffset = self.chunkOffset + self.numberOfLines
@@ -189,12 +209,15 @@ function MessageHandler:skipTransition()
         self.currentChunkLength[self.chunkOffset + lineLoopIndex] = #self.chunkList[self.chunkOffset + lineLoopIndex]
         lineLoopIndex = lineLoopIndex + 1
     end
+
+    self:drawTextInDialog()
 end
 
 function MessageHandler:disableDialog()
     self.arrowDown:remove()
     self.isActive = false
     self.dialog:remove()
+    self.text:remove()
     game.unfreeze()
 end
 
