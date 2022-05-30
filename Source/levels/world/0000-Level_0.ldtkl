@@ -81,40 +81,6 @@
 					"fieldInstances": [{ "__identifier": "HasClass", "__value": true, "__type": "Bool", "__tile": null, "defUid": 60, "realEditorValues": [null] }]
 				},
 				{
-					"__identifier": "Exit",
-					"__grid": [24,7],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#DCDC98",
-					"iid": "4ac10f30-b4d0-11ec-94d2-6195340a6eb2",
-					"width": 16,
-					"height": 16,
-					"defUid": 61,
-					"px": [384,112],
-					"fieldInstances": [{ "__identifier": "EntranceDirection", "__value": "East", "__type": "LocalEnum.EntranceDirection", "__tile": null, "defUid": 62, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["East"]
-					}] }]
-				},
-				{
-					"__identifier": "Exit",
-					"__grid": [12,0],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#DCDC98",
-					"iid": "4bcc8bc0-b4d0-11ec-94d2-8be9760ba893",
-					"width": 16,
-					"height": 16,
-					"defUid": 61,
-					"px": [192,0],
-					"fieldInstances": [{ "__identifier": "EntranceDirection", "__value": "North", "__type": "LocalEnum.EntranceDirection", "__tile": null, "defUid": 62, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["North"]
-					}] }]
-				},
-				{
 					"__identifier": "Player",
 					"__grid": [3,12],
 					"__pivot": [0,0],

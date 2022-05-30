@@ -75,6 +75,8 @@ function goto_level(level_name, direction)
         cotton.player:exit()
 
         cotton.activeEntities = {}
+    else
+        game.player = adapterDictionary[config.playerType]()
     end
 
     if roomDictionary[level_name] then
@@ -108,8 +110,6 @@ function goto_level(level_name, direction)
     gfx.sprite.addWallSprites(game.tilemap, LDtk.get_empty_tileIDs(level_name, "Solid"))
     gfx.sprite.setBackgroundDrawingCallback(game.drawBackground)
 
-    game.player = adapterDictionary[config.playerType]()
-
     local opposites = {}
     opposites["North"] = "South"
     opposites["South"] = "North"
@@ -117,42 +117,6 @@ function goto_level(level_name, direction)
     opposites["East"] = "West"
 
     for index, entity in ipairs(LDtk.get_entities(level_name)) do
-        -- if player came from other room
-        if entity.name == "Exit" then
-            if entity.fields.EntranceDirection == opposites[direction] then
-                game.player:Init(entity)
-                game.player.faceDirection = string.lower(direction)
-
-                if opposites[direction] == "North" then
-                    game.player:moveTo(
-                        previousPlayerPosition.x - cotton.room.offsetFromPreviousRoom.x,
-                        0
-                    )
-                end
-
-                if opposites[direction] == "South" then
-                    game.player:moveTo(
-                        previousPlayerPosition.x - cotton.room.offsetFromPreviousRoom.x,
-                        cotton.room.h - game.player.sprite.height
-                    )
-                end
-
-                if opposites[direction] == "East" then
-                    game.player:moveTo(
-                        cotton.room.w - game.player.sprite.width,
-                        previousPlayerPosition.y - cotton.room.offsetFromPreviousRoom.y
-                    )
-                end
-
-                if opposites[direction] == "West" then
-                    game.player:moveTo(
-                        0,
-                        previousPlayerPosition.y - cotton.room.offsetFromPreviousRoom.y
-                    )
-                end
-            end
-        end
-
         -- if player just started the game
         if entity.name == "Player" then
             if direction == nil then
@@ -164,6 +128,43 @@ function goto_level(level_name, direction)
             local newEntity = entityDictionary[entity.name](entity)
             newEntity:enter()
             cotton.activeEntities[entity.id] = newEntity
+        end
+    end
+
+    -- if player came from other room
+    if direction ~= nil then
+        game.player.faceDirection = string.lower(direction)
+
+        if opposites[direction] == "North" then
+            game.player.sprite:add()
+            game.player:moveTo(
+                previousPlayerPosition.x - cotton.room.offsetFromPreviousRoom.x,
+                0
+            )
+        end
+
+        if opposites[direction] == "South" then
+            game.player.sprite:add()
+            game.player:moveTo(
+                previousPlayerPosition.x - cotton.room.offsetFromPreviousRoom.x,
+                cotton.room.h - game.player.sprite.height
+            )
+        end
+
+        if opposites[direction] == "East" then
+            game.player.sprite:add()
+            game.player:moveTo(
+                cotton.room.w - game.player.sprite.width,
+                previousPlayerPosition.y - cotton.room.offsetFromPreviousRoom.y
+            )
+        end
+
+        if opposites[direction] == "West" then
+            game.player.sprite:add()
+            game.player:moveTo(
+                0,
+                previousPlayerPosition.y - cotton.room.offsetFromPreviousRoom.y
+            )
         end
     end
 

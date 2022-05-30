@@ -32,6 +32,5 @@ function RoomTemplate:setDimensions(positionAndSize, previousDimension)
             x = self.x - previousDimension.x,
             y = self.y - previousDimension.y
         }
-        log(self.offsetFromPreviousRoom)
     end
 end

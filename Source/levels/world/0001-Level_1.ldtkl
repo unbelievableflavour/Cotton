@@ -51,25 +51,7 @@
 			"seed": 498502,
 			"overrideTilesetUid": null,
 			"gridTiles": [],
-			"entityInstances": [
-				{
-					"__identifier": "Exit",
-					"__grid": [0,7],
-					"__pivot": [0,0],
-					"__tags": [],
-					"__tile": null,
-					"__smartColor": "#DCDC98",
-					"iid": "55fa7120-b4d0-11ec-94d2-a73ec6d58684",
-					"width": 16,
-					"height": 16,
-					"defUid": 61,
-					"px": [0,112],
-					"fieldInstances": [{ "__identifier": "EntranceDirection", "__value": "West", "__type": "LocalEnum.EntranceDirection", "__tile": null, "defUid": 62, "realEditorValues": [{
-						"id": "V_String",
-						"params": ["West"]
-					}] }]
-				}
-			]
+			"entityInstances": []
 		},
 		{
 			"__identifier": "Tiles",
