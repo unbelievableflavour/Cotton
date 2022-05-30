@@ -44,8 +44,6 @@ Make sure you have the following applications installed:
 * [Visual studio code](https://code.visualstudio.com/)
 * [LDtk](https://ldtk.io/)
 
-Also, after installing the above, make sure to install the recommended plugins in VS code to gain access to features like compile tasks, automatic Lua formatting, etc.
-
 ## CottonScript
 
 CottonScript is a scripting library that contains most Pulp features.
@@ -56,7 +54,7 @@ Documentation for CottonScript can be found here: [CottonScript](https://github.
 1. Download and install the requirements above.
 2. Download [the latest version of Cotton](https://github.com/unbelievableflavour/Cotton/releases) `zip` file.
 3. Extract it in the projects folder your choosing.
-4. Open the `simple.code-workspace` file. When it asks "do you want to install recommended plugins?" you say yes and do so.
+4. Open the `simple.code-workspace` file. When it asks "do you want to install recommended plugins?" you say yes and do so. ( This will give acces to to features like compile tasks, automatic Lua formatting, etc.)
 5. You are now ready to work in the project!
 
 ### IMPORTANT FOR WINDOWS
