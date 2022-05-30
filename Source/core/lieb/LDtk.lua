@@ -635,3 +635,12 @@ function _.export_lua_table(filepath, table_to_export)
 
 	file:close()
 end
+
+function LDtk.get_level_dimensions(level_name, layer)
+	local level = _levels[level_name]
+
+	if not level then return end
+	if not level.layers[layer] then return end
+
+	return level.layers[layer].rect
+end

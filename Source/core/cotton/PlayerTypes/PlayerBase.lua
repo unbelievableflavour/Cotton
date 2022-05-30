@@ -41,19 +41,19 @@ function PlayerBase:doBasicInputChecks()
     end
 end
 
-function PlayerBase:isAtNorthScreenEdge()
+function PlayerBase:isAtNorthRoomEdge()
     return self.sprite.y < 0
 end
 
-function PlayerBase:isAtEastScreenEdge()
-    return self.sprite.x + self.sprite.width > screenWidth
+function PlayerBase:isAtEastRoomEdge()
+    return self.sprite.x + self.sprite.width > cotton.room.w
 end
 
-function PlayerBase:isAtSouthScreenEdge()
-    return self.sprite.y + self.sprite.height > screenHeight
+function PlayerBase:isAtSouthRoomEdge()
+    return self.sprite.y + self.sprite.height > cotton.room.h
 end
 
-function PlayerBase:isAtWestScreenEdge()
+function PlayerBase:isAtWestRoomEdge()
     return self.sprite.x < 0
 end
 

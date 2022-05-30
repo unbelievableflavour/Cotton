@@ -77,6 +77,9 @@ function goto_level(level_name, direction)
     game.level_name = level_name
     LDtk.load_level(level_name)
 
+    local levelDimensions = LDtk.get_level_dimensions(level_name, "Tiles")
+    cotton.room:setDimensions(levelDimensions)
+
     -- we release the previous level after loading the new one so that it doesn't unload the tileset if we reuse it
     LDtk.release_level(previous_level)
 

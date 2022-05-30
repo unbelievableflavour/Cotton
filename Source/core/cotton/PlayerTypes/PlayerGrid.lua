@@ -122,22 +122,22 @@ function PlayerGrid:drawCursor()
 
     self.tempSprite:moveTo(self.destinationCursor.x * self.tileSize, self.destinationCursor.y * self.tileSize)
 
-    if self:isAtEastScreenEdge() then
+    if self:isAtEastRoomEdge() then
         goto_level(LDtk.get_neighbours(game.level_name, "east")[1], "East")
         return
     end
 
-    if self:isAtSouthScreenEdge() then
+    if self:isAtSouthRoomEdge() then
         goto_level(LDtk.get_neighbours(game.level_name, "south")[1], "South")
         return
     end
 
-    if self:isAtNorthScreenEdge() then
+    if self:isAtNorthRoomEdge() then
         goto_level(LDtk.get_neighbours(game.level_name, "north")[1], "North")
         return
     end
 
-    if self:isAtWestScreenEdge() then
+    if self:isAtWestRoomEdge() then
         goto_level(LDtk.get_neighbours(game.level_name, "west")[1], "West")
         return
     end
