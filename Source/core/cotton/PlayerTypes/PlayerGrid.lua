@@ -158,11 +158,6 @@ function PlayerGrid:drawCursor()
     end
 end
 
-function PlayerGrid:fixCamera()
-    local spriteX, spriteY = self.sprite:getPosition()
-    gfx.setDrawOffset(screenCenterX - spriteX, screenCenterY - spriteY)
-end
-
 function PlayerGrid:getEntityOnPosition()
     local spriteTileX = self.destinationCursor.x
     local spriteTileY = self.destinationCursor.y

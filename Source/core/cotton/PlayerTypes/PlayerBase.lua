@@ -64,3 +64,8 @@ end
 function PlayerBase:unfreeze()
     self.isFrozen = false
 end
+
+function PlayerBase:fixCamera()
+    local spriteX, spriteY = self.sprite:getPosition()
+    gfx.setDrawOffset(screenCenterX - spriteX, screenCenterY - spriteY)
+end
