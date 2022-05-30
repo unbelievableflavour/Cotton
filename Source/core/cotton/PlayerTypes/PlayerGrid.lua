@@ -301,3 +301,9 @@ function PlayerGrid:update()
         self:fixCamera()
     end
 end
+
+function PlayerGrid:moveTo(x, y)
+    self.sprite:moveTo(x, y)
+    self.destinationCursor.x = x / self.tileSize
+    self.destinationCursor.y = y / self.tileSize
+end

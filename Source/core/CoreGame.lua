@@ -55,15 +55,18 @@ function goto_level(level_name, direction)
         return
     end
 
-    if roomDictionary[level_name] then
-        cotton.room = roomDictionary[level_name]()
-    else
-        cotton.room = RoomTemplate()
-    end
-
     local previous_level = game.level_name
+    local previousPlayerPosition = {
+        x = nil,
+        y = nil,
+    }
+    local previousRoomDimensions = nil
 
     if previous_level then
+        local backupX, backupY = game.player.sprite:getPosition()
+        previousPlayerPosition.x = backupX
+        previousPlayerPosition.y = backupY
+        previousRoomDimensions = cotton.room
         cotton.game:exit()
         cotton.room:exit()
         for i, activeEntity in pairs(cotton.activeEntities) do
@@ -74,11 +77,17 @@ function goto_level(level_name, direction)
         cotton.activeEntities = {}
     end
 
+    if roomDictionary[level_name] then
+        cotton.room = roomDictionary[level_name]()
+    else
+        cotton.room = RoomTemplate()
+    end
+
     game.level_name = level_name
     LDtk.load_level(level_name)
 
-    local levelDimensions = LDtk.get_level_dimensions(level_name, "Tiles")
-    cotton.room:setDimensions(levelDimensions)
+    local newDimensions = LDtk.get_level_dimensions(level_name, "Tiles")
+    cotton.room:setDimensions(newDimensions, previousRoomDimensions)
 
     -- we release the previous level after loading the new one so that it doesn't unload the tileset if we reuse it
     LDtk.release_level(previous_level)
@@ -113,6 +122,34 @@ function goto_level(level_name, direction)
             if entity.fields.EntranceDirection == opposites[direction] then
                 game.player:Init(entity)
                 game.player.faceDirection = string.lower(direction)
+
+                if opposites[direction] == "North" then
+                    game.player:moveTo(
+                        previousPlayerPosition.x - cotton.room.offsetFromPreviousRoom.x,
+                        0
+                    )
+                end
+
+                if opposites[direction] == "South" then
+                    game.player:moveTo(
+                        previousPlayerPosition.x - cotton.room.offsetFromPreviousRoom.x,
+                        cotton.room.h - game.player.sprite.height
+                    )
+                end
+
+                if opposites[direction] == "East" then
+                    game.player:moveTo(
+                        cotton.room.w - game.player.sprite.width,
+                        previousPlayerPosition.y - cotton.room.offsetFromPreviousRoom.y
+                    )
+                end
+
+                if opposites[direction] == "West" then
+                    game.player:moveTo(
+                        0,
+                        previousPlayerPosition.y - cotton.room.offsetFromPreviousRoom.y
+                    )
+                end
             end
         end
 
