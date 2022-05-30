@@ -262,6 +262,14 @@ function fillCircle(color, positionAndSize)
     )
 end
 
+function sprite(path, positionAndSize)
+    local image = playdate.graphics.image.new(path)
+    local sprite = playdate.graphics.sprite.new(image)
+    sprite:moveTo(positionAndSize.x, positionAndSize.y)
+    sprite:setCenter(positionAndSize.x / 2, positionAndSize.y / 2)
+    return sprite
+end
+
 function at(x, y, w, h)
     local positionAndSize = {
         x = x or nil,

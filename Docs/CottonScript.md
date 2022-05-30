@@ -33,6 +33,7 @@ CottonScript is a friendly scripting library that allows you to add Pulp-like in
   - [hide](#hide)
   - [show](#show)
   - [window](#window)
+  - [sprite](#sprite)
   - [label](#label)
   - [fill rect](#fill-rect)
   - [fill circle](#fill-circle)
@@ -585,7 +586,7 @@ Makes sure the Player is being drawn. Can only be called from the `Player` entit
 local window = window(at(x, y, w, h))
 ```
 
-Draws a window frame at `x`,`y` with dimensions `w`,`h`. (Coordinates and dimensions are in pixels, not tiles.) Unlike in Pulp, this window can be created everywhere. Just remember that you need to call:
+Draws a window frame at `x`,`y` with dimensions `w`,`h`. (Coordinates and dimensions are in pixels, not tiles.) Unlike in Pulp, `window` can be used everywhere. Just remember that you need to call:
 ```lua
 window:add()
 ```
@@ -594,6 +595,23 @@ to add it to the screen, and
 window:remove()
 ```
 to remove it afterwards.
+
+### sprite
+
+```lua
+local sprite = sprite(imagePath,at(x, y))
+```
+Draws the requested image at x,y. Unlike `draw` in Pulp, `sprite` can be used everywhere. Just remember that you need to call:
+```lua
+sprite:add()
+```
+to add it to the screen, and
+```lua
+sprite:remove()
+```
+to remove it afterwards.
+
+This function is an alternative for the `draw` function in Pulp, but less performance heavy.
 
 ### label
 
