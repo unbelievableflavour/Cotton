@@ -33,7 +33,7 @@ function PlayerTopdown:update()
 
     self:doBasicInputChecks()
 
-    if input.x() == 0 then
+    if input.x() == 0 or input.y() == 0 then
         self.velocity.x = math.approach(self.velocity.x, 0, self.player_ground_friction)
         self.velocity.y = math.approach(self.velocity.y, 0, self.player_ground_friction)
     end
