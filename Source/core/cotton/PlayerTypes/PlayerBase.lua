@@ -73,3 +73,8 @@ end
 function PlayerBase:moveTo(x, y)
     self.sprite:moveTo(x, y)
 end
+
+function PlayerBase:readd(x, y)
+    self.sprite:add()
+    self:moveTo(x, y)
+end

@@ -307,3 +307,9 @@ function PlayerGrid:moveTo(x, y)
     self.destinationCursor.x = x / self.tileSize
     self.destinationCursor.y = y / self.tileSize
 end
+
+function PlayerBase:readd(x, y)
+    self.sprite:add()
+    self.tempSprite:add()
+    self:moveTo(x, y)
+end

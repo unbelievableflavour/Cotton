@@ -137,32 +137,28 @@ function goto_level(level_name, direction)
         game.player.faceDirection = string.lower(direction)
 
         if opposites[direction] == "North" then
-            game.player.sprite:add()
-            game.player:moveTo(
+            game.player:readd(
                 previousPlayerPosition.x - cotton.room.offsetFromPreviousRoom.x,
                 0
             )
         end
 
         if opposites[direction] == "South" then
-            game.player.sprite:add()
-            game.player:moveTo(
+            game.player:readd(
                 previousPlayerPosition.x - cotton.room.offsetFromPreviousRoom.x,
                 cotton.room.h - game.player.sprite.height
             )
         end
 
         if opposites[direction] == "East" then
-            game.player.sprite:add()
-            game.player:moveTo(
+            game.player:readd(
                 cotton.room.w - game.player.sprite.width,
                 previousPlayerPosition.y - cotton.room.offsetFromPreviousRoom.y
             )
         end
 
         if opposites[direction] == "West" then
-            game.player.sprite:add()
-            game.player:moveTo(
+            game.player:readd(
                 0,
                 previousPlayerPosition.y - cotton.room.offsetFromPreviousRoom.y
             )
