@@ -37,13 +37,24 @@
 			"problemMatcher": [],
 		},
 		{
-			"label": "Playdate: CottonScript",
+			"label": "Documentation: CottonScript",
 			"type": "shell",
 			"windows": {
 				"command": "- start chrome https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md"
 			},
 			"osx": {
 				"command": "open https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md"
+			},
+			"problemMatcher": [],
+		},
+		{
+			"label": "Documentation: SDK",
+			"type": "shell",
+			"windows": {
+				"command": "- start chrome https://sdk.play.date/"
+			},
+			"osx": {
+				"command": "open https://sdk.play.date/"
 			},
 			"problemMatcher": [],
 		},
