@@ -64,7 +64,7 @@ Documentation for CottonScript can be found here: [CottonScript](https://github.
 ### IMPORTANT FOR WINDOWS
 
 If you are on Windows, some environment vars need to be set before you can compile your games.
-Follow [SquidGodDevs video](https://www.youtube.com/watch?v=J0ufxinp7No) TILL 2:04 to set environment vars for Windows.
+Follow the [Environment Variables Guide](https://github.com/unbelievableflavour/Cotton/blob/master/Docs/EnvironmentVariables.md) to set the environment variables for Windows.
 
 ## Working in Cotton
 
