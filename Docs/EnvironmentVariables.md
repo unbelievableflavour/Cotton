@@ -1,12 +1,12 @@
 # Environment Variables On Windows
 
-Cotton is a framework for Pulp-like experiences in Lua. It will allow you to use most of the features Pulp has to offer, but instead of being limited by Pulp, this framework is extendible, has LDtk build-in for easy level editing, and more!
+Setting up the environment variable on Windows takes a little more time the on other platforms. So I'd thought I'd help you guys out a bit.
 
-### Requirements.
+## Requirements.
 
-Make sure the Playdate SDK is already installed before following this tutorial.
+Playdate SDK should be installed.
 
-### Let's start!
+## Let's start!
 
 1. Search in Windows for the Playdate Simulator & open it's file location.
 
