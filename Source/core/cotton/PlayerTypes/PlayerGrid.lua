@@ -5,7 +5,6 @@ class("PlayerGrid", {
     transitionMovement = true,
     transitionSpeed = 2,
     allowDiagonalMovement = false,
-    currentCollisions = {},
     faceDirection = nil
 }).extends(PlayerBase)
 
@@ -35,28 +34,7 @@ end
 function PlayerGrid:hasMoved()
     self.shouldMove = false
 
-    local collisions = self.tempSprite:overlappingSprites()
-    local removedKeys = {}
-
-    for key, value in pairs(self.currentCollisions) do
-        local isStillColliding = false
-        for i = 1, #collisions do
-            if collisions[i].entity then
-                if collisions[i].entity.id == key then
-                    isStillColliding = true
-                end
-            end
-        end
-
-        if not isStillColliding then
-            table.insert(removedKeys, key)
-        end
-    end
-
-    for i, v in pairs(removedKeys) do
-        self.currentCollisions[v]:onTileExit()
-        self.currentCollisions[v] = nil
-    end
+    self:checkIfStillColliding(self.tempSprite)
 end
 
 function PlayerGrid:moveTowards()

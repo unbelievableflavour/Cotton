@@ -3,7 +3,8 @@ local gfx <const> = playdate.graphics
 class("PlayerTopdown", {
     player_speed = 4,
     player_acc = 1,
-    player_ground_friction = 0.8
+    player_ground_friction = 0.8,
+    currentCollisions = {}
 }).extends(PlayerBase)
 
 function PlayerTopdown:Init(ldtk_entity)
@@ -23,6 +24,15 @@ function PlayerTopdown:Init(ldtk_entity)
 
     function sprite:collisionResponse(other)
         if other.collisionType then
+            if other.collisionType == collisionTypes.overlap then
+                game.player.currentCollisions[other.id] = other
+                other:onTileEnter()
+            end
+
+            if config.autoAct then
+                other:interact()
+            end
+
             return collisionTypes[other.collisionType]
         end
 
@@ -40,6 +50,7 @@ function PlayerTopdown:update()
     end
 
     self:doBasicInputChecks()
+    self:checkIfStillColliding(self.sprite)
 
     if input.x() == 0 or input.y() == 0 then
         self.velocity.x = math.approach(self.velocity.x, 0, self.player_ground_friction)

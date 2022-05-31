@@ -2,7 +2,8 @@ local gfx <const> = playdate.graphics
 
 class("PlayerBase", {
     isFrozen = false,
-    sprite = nil
+    sprite = nil,
+    currentCollisions = {},
 }).extends()
 
 function PlayerBase:Init()
@@ -77,4 +78,29 @@ end
 function PlayerBase:readd(x, y)
     self.sprite:add()
     self:moveTo(x, y)
+end
+
+function PlayerBase:checkIfStillColliding(sprite)
+    local collisions = sprite:overlappingSprites()
+    local removedKeys = {}
+
+    for key, value in pairs(game.player.currentCollisions) do
+        local isStillColliding = false
+        for i = 1, #collisions do
+            if collisions[i] then
+                if collisions[i].id == key then
+                    isStillColliding = true
+                end
+            end
+        end
+
+        if not isStillColliding then
+            table.insert(removedKeys, key)
+        end
+    end
+
+    for i, v in pairs(removedKeys) do
+        game.player.currentCollisions[v]:onTileExit()
+        game.player.currentCollisions[v] = nil
+    end
 end

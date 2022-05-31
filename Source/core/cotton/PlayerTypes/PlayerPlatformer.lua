@@ -36,6 +36,17 @@ function PlayerPlatformer:Init(ldtk_entity)
 
     function sprite:collisionResponse(other)
         if other.collisionType then
+            if other.collisionType == collisionTypes.overlap then
+                if game.player.currentCollisions[other.id] == nil then
+                    game.player.currentCollisions[other.id] = other
+                    other:onTileEnter()
+                end
+            end
+
+            if config.autoAct then
+                other:interact()
+            end
+
             return collisionTypes[other.collisionType]
         end
 
@@ -53,6 +64,7 @@ function PlayerPlatformer:update()
     end
 
     self:doBasicInputChecks()
+    self:checkIfStillColliding(self.sprite)
 
     local dt = 1 / playdate.display.getRefreshRate()
 
