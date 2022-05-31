@@ -24,6 +24,17 @@
 			],
 			"dependsOrder": "sequence",
 			"problemMatcher": []
+		},
+		{
+			"label": "Playdate: Level Editor",
+			"type": "shell",
+			"windows": {
+				"command": "Source/levels/world.ldtk"
+			},
+			"osx": {
+				"command": "open Source/levels/world.ldtk"
+			},
+			"problemMatcher": [],
 		}
 	]
 }

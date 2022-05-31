@@ -58,8 +58,10 @@ Documentation for CottonScript can be found here: [CottonScript](https://github.
 1. Download and install the requirements above.
 2. Download [the latest version of Cotton](https://github.com/unbelievableflavour/Cotton/releases) `zip` file.
 3. Extract it in the projects folder your choosing.
-4. Open the `simple.code-workspace` file. When it asks "do you want to install recommended plugins?" you say yes and do so. ( This will give acces to to features like compile tasks, automatic Lua formatting, etc.)
-5. You are now ready to work in the project!
+4. Open the folder in VS Code, 
+5. When it asks you which `workspace` you want to open? Choose `simple.code-workspace`. 
+6. When it asks "do you want to install recommended plugins?" You say yes and do so. ( This will give acces to to features like compile tasks, automatic Lua formatting, etc.)
+7. You are now ready to work in the project!
 
 ### IMPORTANT FOR WINDOWS
 
@@ -67,6 +69,38 @@ If you are on Windows, some environment vars need to be set before you can compi
 Follow the [Environment Variables Guide](https://github.com/unbelievableflavour/Cotton/blob/master/Docs/EnvironmentVariables.md) to set the environment variables for Windows.
 
 ## Working in Cotton
+
+### Scripting
+
+Make sure `VS Code` with a `Cotton` workspace is open. (`simple` or `advanced` are both fine)
+
+Docs can be found in `Docs`. Press the preview button in the topRight corner of your scripting window to have a nicer reading view.
+
+### Creating levels
+
+Make sure `VS Code` with a `Cotton` workspace is open. (`simple` or `advanced` are both fine)
+
+1. Click `Task Runner` from the sidebar.
+2. Click `Playdate: Level Editor`
+
+OR (if you didn't install the recommended Task Runner extension)
+
+1. Click `Terminal` from the toolbar.
+2. Click `Run task` from the dropdown.
+3. Click `Playdate: Level Editor`
+
+### Compile & play
+
+Make sure `VS Code` with a `Cotton` workspace is open. (`simple` or `advanced` are both fine)
+
+1. Click `Task Runner` from the sidebar.
+2. Click `Playdate: Build and Run`
+
+OR (if you didn't install the recommended Task Runner extension)
+
+1. Click `Terminal` from the toolbar.
+2. Click `Run task` from the dropdown.
+3. Click `Playdate: Build and Run`
 
 ## Updating Cotton
 
@@ -77,30 +111,6 @@ You can update Cotton in your project at any time IF you did not edit any code i
 3. Replace your `core` folder with the `core` folder from the download.
 4. Replace your `main.lua` with the on from the download. BUT keep the old file as reference.
 5. Make sure to readd any code you added to `main.lua` yourself.
-
-### Scripting
-
-Open the `simple.code-workspace` to open the scrips of the project in Visual Studio Code.
-(Best to start with `simple` workspace. The other workspace just shows you everything.)
-
-Docs can be found in `Docs`. Press the preview button in the topRight corner of your scripting window to have a nicer reading view.
-
-### Creating levels
-
-Open the `world.ldtk` file to open map in LDtk.
-
-### Compile & play
-
-1. Open `VS Code` by opening the `simple.code-workspace` file.
-2. Click `Task Runner` from the sidebar.
-3. Click `Playdate:Build and Run`
-
-OR (if you didn't install the recommended Task Runner extension)
-
-1. Open `VS Code` by opening the `simple.code-workspace` file.
-1. Click `Terminal` from the toolbar.
-1. Click `Run task` from the dropdown.
-1. Click `Playdate:Build and Run`
 
 ## Caching levels
 
