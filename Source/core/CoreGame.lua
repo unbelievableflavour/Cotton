@@ -15,7 +15,7 @@ adapterDictionary = {
     topdown = PlayerTopdown
 }
 
-local _background_sprite = gfx.sprite.new()
+local _background_sprite = nil
 local backgroundImg = nil
 
 function game.init(level_name)
@@ -101,6 +101,7 @@ function goto_level(level_name, direction)
 
     game.tilemap = LDtk.create_tilemap(level_name)
 
+    _background_sprite = gfx.sprite.new()
     _background_sprite:setTilemap(game.tilemap)
     _background_sprite:moveTo(0, 0)
     _background_sprite:setCenter(0, 0)
