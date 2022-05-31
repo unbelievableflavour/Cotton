@@ -187,7 +187,7 @@ function invert()
 end
 
 function isSolid(entity)
-    return entity.collisionType == "solid"
+    return entity.collisionType ~= collisionTypes.overlap
 end
 
 function datetime()

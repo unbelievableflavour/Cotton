@@ -4,7 +4,6 @@ class("Computer", {}).extends(EntityTemplate)
 function Computer:init(ldtk_entity)
     Computer.super.init(self, ldtk_entity)
 
-    self:setCollisionType("solid")
     self:setImage(asset("computer"))
 end
 

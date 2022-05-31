@@ -2,7 +2,7 @@ local gfx <const> = playdate.graphics
 
 class("EntityTemplate", {
     onTile = false,
-    collisionType = "solid"
+    collisionType = collisionTypes.default
 }).extends(gfx.sprite)
 
 function EntityTemplate:init(ldtk_entity)

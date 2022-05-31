@@ -90,7 +90,7 @@ function PlayerGrid:doCollisionCheck()
     local canMoveToLocation = true
     local collisions = self.tempSprite:overlappingSprites()
     if #collisions > 0 then
-        if collisions[1].collisionType == "overlap" then
+        if collisions[1].collisionType == collisionTypes.overlap then
             self.currentCollisions[collisions[1].id] = collisions[1]
             collisions[1]:onTileEnter()
             return canMoveToLocation

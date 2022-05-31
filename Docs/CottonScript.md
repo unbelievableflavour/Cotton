@@ -795,8 +795,7 @@ Causes all drawing to be inverted (white displays as black and vice versa) until
 local varName = isSolid(entity)
 ```
 
-Returns `true` if the entity identified by coordinates, id, or name is solid, otherwise returns `false`.
-
+Returns `true` if the entity is solid, otherwise returns `false`. Just to clarify: All entities with collisionTypes other than `overlap` are solid.
 
 ### at
 

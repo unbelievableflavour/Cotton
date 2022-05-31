@@ -6,7 +6,7 @@ disks = 0
 function Floppy:init(ldtk_entity)
     Floppy.super.init(self, ldtk_entity)
 
-    self:setCollisionType("overlap")
+    self:setCollisionType(collisionTypes.overlap)
     self:setImage(asset("floppy"))
 end
 

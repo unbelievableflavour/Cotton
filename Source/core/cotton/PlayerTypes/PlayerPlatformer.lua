@@ -33,6 +33,14 @@ function PlayerPlatformer:Init(ldtk_entity)
     self.jumpPressDuration = 0
 
     self.velocity = playdate.geometry.vector2D.new(0, 0)
+
+    function sprite:collisionResponse(other)
+        if other.collisionType then
+            return collisionTypes[other.collisionType]
+        end
+
+        return collisionTypes.slide
+    end
 end
 
 function PlayerPlatformer:update()

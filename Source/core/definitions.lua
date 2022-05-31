@@ -5,6 +5,13 @@ black = gfx.kColorBlack
 screenWidth, screenHeight = playdate.display.getSize()
 screenCenterX = screenWidth / 2
 screenCenterY = screenHeight / 2
+collisionTypes = {
+    default = "freeze",
+    freeze = "freeze",
+    slide = "slide",
+    overlap = "overlap",
+    bounce = "bounce"
+}
 
 function getTopLeftCorner()
     if config.cameraFollow then
