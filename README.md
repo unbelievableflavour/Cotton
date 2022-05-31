@@ -87,17 +87,17 @@ Docs can be found in `Docs`. Press the preview button in the topRight corner of 
 
 ### Creating levels
 
-Open the `map.ldtk` file to open map in LDtk.
+Open the `world.ldtk` file to open map in LDtk.
 
 ### Compile & play
 
-1. Open `VS Code`.
+1. Open `VS Code` by opening the `simple.code-workspace` file.
 2. Click `Task Runner` from the sidebar.
 3. Click `Playdate:Build and Run`
 
 OR (if you didn't install the recommended Task Runner extension)
 
-1. Open `VS Code`.
+1. Open `VS Code` by opening the `simple.code-workspace` file.
 1. Click `Terminal` from the toolbar.
 1. Click `Run task` from the dropdown.
 1. Click `Playdate:Build and Run`
@@ -136,8 +136,19 @@ Docs are WIP, but works
 
 ## FAQ
 
-**Q: Collider is covering the whole screen after I build cached levels. (also can't move or player is not shown) Whats up?`**
+**Q: Im getting the following error during compiling. What do I do?**
+```bash
+> Executing task: Playdate: Build <
 
+Command failed: pdc "c:\Playdate Dev\Cotton-master\source" "c:\Playdate Dev\Cotton-master\Cotton"
+'pdc' is not recognized as an internal or external command,
+operable program or batch file.
+
+The terminal process failed to launch (exit code: 1).
+```
+**A:** This means the environment variables have not been set OR the SDK has not been installed correctly.
+
+**Q: Collider is covering the whole screen after I build cached levels. (also can't move or player is not shown) Whats up?`**
 **A:** Better not mix different tile sizes in tile layers! (entities is fine)
 
 ## Credit
