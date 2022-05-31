@@ -35,6 +35,17 @@
 				"command": "open Source/levels/world.ldtk"
 			},
 			"problemMatcher": [],
-		}
+		},
+		{
+			"label": "Playdate: CottonScript",
+			"type": "shell",
+			"windows": {
+				"command": "- start chrome https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md"
+			},
+			"osx": {
+				"command": "open https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md"
+			},
+			"problemMatcher": [],
+		},
 	]
 }
