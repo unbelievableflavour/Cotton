@@ -1,5 +1,5 @@
 -- import this file to import all Cotton scripts
-import "./entities/index"
-import "./rooms/index"
-import "./game/Game"
-import "./player/Player"
+import "scripts/entities/index"
+import "scripts/rooms/index"
+import "scripts/game/Game"
+import "scripts/player/Player"

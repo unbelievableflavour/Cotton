@@ -1,8 +1,8 @@
 local gfx <const> = playdate.graphics
 
-import "./PagesIcon"
-import "./MenuCursor"
-import "./MenuOptions"
+import "core/cotton/Menu/PagesIcon"
+import "core/cotton/Menu/MenuCursor"
+import "core/cotton/Menu/MenuOptions"
 
 class("MenuHandler", {
     options = {},

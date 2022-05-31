@@ -1,7 +1,7 @@
 local gfx <const> = playdate.graphics
 
-import "./PromptIcon"
-import "./TextImage"
+import "core/cotton/PromptIcon"
+import "core/cotton/TextImage"
 
 class("MessageHandler", {
     options = {},

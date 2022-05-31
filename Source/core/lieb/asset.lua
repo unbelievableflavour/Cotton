@@ -11,32 +11,32 @@
 
 local gfx <const> = playdate.graphics
 
-import './readFolder'
+import 'core/lieb/readFolder'
 
 local _assetList = {}
 
 asset = setmetatable({}, {
-	__call = function( self, assetName) return _assetList[assetName] end
+	__call = function(self, assetName) return _assetList[assetName] end
 })
 
-function asset.loadImage( imagePath, assetName )
+function asset.loadImage(imagePath, assetName)
 	assetName = assetName or imagePath
 
-	_assetList[assetName] = gfx.image.new( imagePath )
+	_assetList[assetName] = gfx.image.new(imagePath)
 end
 
-function asset.loadImageFolder( folderPath )
-	readFolder( folderPath, function(filepath, folder, filename)
-		asset.loadImage( filepath, filename:sub(1,-5))
+function asset.loadImageFolder(folderPath)
+	readFolder(folderPath, function(filepath, folder, filename)
+		asset.loadImage(filepath, filename:sub(1, -5))
 	end, ".pdi")
 end
 
-function asset.set( assetName, asset )
-	_assetList[ assetName ] = asset
+function asset.set(assetName, asset)
+	_assetList[assetName] = asset
 end
 
-function asset.free( assetName )
-	_assetList[ assetName ] = nil
+function asset.free(assetName)
+	_assetList[assetName] = nil
 end
 
 function asset.freeAll()
@@ -44,6 +44,6 @@ function asset.freeAll()
 end
 
 function asset.printList()
-	print( "Asset List")
+	print("Asset List")
 	printT(_assetList)
 end
