@@ -456,8 +456,14 @@ end
 function LDtk.get_tileIDs(level_name, tileset_enum_value, layer_name)
 	local layer = _.get_tile_layer(level_name, layer_name)
 	if not layer then return end
+	local tileset = nil
 
-	local tileset = _tilesets[layer.tileset_uid]
+	if config.useFastLoader then
+		tileset = _tilesets[tostring(layer.tileset_uid)]
+	else
+		tileset = _tilesets[layer.tileset_uid]
+	end
+
 	if not tileset then return end
 
 	if layer.has_flipped_tiles then
@@ -473,7 +479,14 @@ function LDtk.get_empty_tileIDs(level_name, tileset_enum_value, layer_name)
 	local layer = _.get_tile_layer(level_name, layer_name)
 	if not layer then return end
 
-	local tileset = _tilesets[layer.tileset_uid]
+	local tileset = nil
+
+	if config.useFastLoader then
+		tileset = _tilesets[tostring(layer.tileset_uid)]
+	else
+		tileset = _tilesets[layer.tileset_uid]
+	end
+
 	if not tileset then return end
 
 	if layer.has_flipped_tiles then
@@ -643,4 +656,11 @@ function LDtk.get_level_dimensions(level_name, layer)
 	if not level.layers[layer] then return end
 
 	return level.layers[layer].rect
+end
+
+function LDtk.get_layers(level_name)
+	local level = _levels[level_name]
+
+	if not level then return end
+	return level.layers
 end

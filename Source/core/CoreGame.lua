@@ -15,7 +15,7 @@ adapterDictionary = {
     topdown = PlayerTopdown
 }
 
-local _background_sprite = nil
+local layerSprites = {}
 local backgroundImg = nil
 
 function game.init(level_name)
@@ -99,16 +99,27 @@ function goto_level(level_name, direction)
 
     gfx.sprite.removeAll()
 
-    game.tilemap = LDtk.create_tilemap(level_name)
+    layerSprites = {}
+    for index, layer in pairs(LDtk.get_layers(level_name)) do
+        if not layer.tiles then
+            goto continue
+        end
 
-    _background_sprite = gfx.sprite.new()
-    _background_sprite:setTilemap(game.tilemap)
-    _background_sprite:moveTo(0, 0)
-    _background_sprite:setCenter(0, 0)
-    _background_sprite:setZIndex(-1)
-    _background_sprite:add()
+        local tilemap = LDtk.create_tilemap(level_name, index)
 
-    gfx.sprite.addWallSprites(game.tilemap, LDtk.get_empty_tileIDs(level_name, "Solid"))
+        local layerSprite = gfx.sprite.new()
+        layerSprite:setTilemap(tilemap)
+        layerSprite:moveTo(0, 0)
+        layerSprite:setCenter(0, 0)
+        layerSprite:setZIndex(layer.zIndex)
+        layerSprite:add()
+
+        gfx.sprite.addWallSprites(tilemap, LDtk.get_empty_tileIDs(level_name, "Solid", index))
+        layerSprites[index] = layerSprite
+
+        ::continue::
+    end
+
     gfx.sprite.setBackgroundDrawingCallback(game.drawBackground)
 
     local opposites = {}
@@ -178,7 +189,12 @@ function game.unfreeze()
 end
 
 function game.shutdown()
-    _background_sprite:remove()
+
+    for index in pairs(LDtk.get_layers(game.level_name)) do
+        layerSprites[index]:remove()
+        layerSprites[index] = nil
+    end
+
     LDtk.release_level(game.level_name)
 end
 
@@ -198,6 +214,5 @@ function game.drawBackground(x, y, w, h)
         return
     end
 
-    -- game.tilemap:draw(0,0, playdate.geometry.rect.new(x,y,w,h))
     backgroundImg:draw(0, 0)
 end
