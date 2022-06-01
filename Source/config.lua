@@ -8,5 +8,6 @@ config = {
     useFastLoader = false,
     playerType = "grid",
     font = "Pulp",
-    showFPS = true
+    showFPS = true,
+    startingLevel = "Level_0",
 }
