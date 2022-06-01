@@ -40,7 +40,7 @@
 			"label": "Documentation: CottonScript",
 			"type": "shell",
 			"windows": {
-				"command": "- start chrome https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md"
+				"command": "explorer https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md"
 			},
 			"osx": {
 				"command": "open https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md"
@@ -51,7 +51,7 @@
 			"label": "Documentation: SDK",
 			"type": "shell",
 			"windows": {
-				"command": "- start chrome https://sdk.play.date/"
+				"command": "explorer https://sdk.play.date/"
 			},
 			"osx": {
 				"command": "open https://sdk.play.date/"
