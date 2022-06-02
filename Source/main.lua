@@ -24,7 +24,7 @@ if playdate.isSimulator then
     LDtk.export_to_lua_files()
 end
 
-scene.set(game, config.startingLevel)
+scene.set(game, LDtk.playerStartLocation)
 
 function playdate.update()
     hot_import_update()

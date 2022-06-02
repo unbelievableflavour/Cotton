@@ -83,6 +83,7 @@ function LDtk.load(ldtk_file, use_lua_levels)
 		_level_rects = data.level_rects
 		_levels = data.levels
 		_use_external_files = data.use_external_files
+		LDtk.playerStartLocation = data.playerStartLocation
 
 		if not _use_external_files then
 			for level_name in pairs(_levels) do
@@ -210,16 +211,6 @@ function LDtk.export_to_lua_files()
 		lua_level_files[level_name] = _ldtk_lua_folder .. filename .. ".pdz"
 	end
 
-	print("Export LDtk world")
-	_.export_lua_table(folder .. _.get_filename(_ldtk_filepath) .. ".lua", {
-		tilesets = _tilesets,
-		level_files = lua_level_files,
-		level_names = _level_names,
-		level_rects = _level_rects,
-		levels = _levels,
-		use_external_files = _use_external_files
-	})
-
 	for level_name, level_file in pairs(_level_files) do
 		print("Export LDtk level", level_name)
 
@@ -227,6 +218,17 @@ function LDtk.export_to_lua_files()
 		_.export_lua_table(folder .. _.get_filename(level_file) .. ".lua", _levels[level_name])
 		LDtk.release_level(level_name)
 	end
+
+	print("Export LDtk world")
+	_.export_lua_table(folder .. _.get_filename(_ldtk_filepath) .. ".lua", {
+		tilesets = _tilesets,
+		level_files = lua_level_files,
+		level_names = _level_names,
+		level_rects = _level_rects,
+		levels = _levels,
+		use_external_files = _use_external_files,
+		playerStartLocation = LDtk.playerStartLocation
+	})
 end
 
 -- load the level in memory
@@ -352,6 +354,10 @@ function LDtk.load_level(level_name)
 				local properties = {}
 				for field_index, field_data in ipairs(entity_data.fieldInstances) do
 					properties[field_data.__identifier] = field_data.__value
+				end
+
+				if entity_data.__identifier == "Player" then
+					LDtk.playerStartLocation = level_name
 				end
 
 				table.insert(layer.entities, {

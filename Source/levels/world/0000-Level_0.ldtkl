@@ -537,7 +537,7 @@
 				},
 				{
 					"__identifier": "Player",
-					"__grid": [3,12],
+					"__grid": [4,12],
 					"__pivot": [0,0],
 					"__tags": [],
 					"__tile": null,
@@ -546,7 +546,7 @@
 					"width": 16,
 					"height": 16,
 					"defUid": 2,
-					"px": [48,192],
+					"px": [64,192],
 					"fieldInstances": []
 				}
 			]
