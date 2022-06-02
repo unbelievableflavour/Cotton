@@ -10,7 +10,8 @@ class("MessageHandler", {
     chunkList = {},
     currentLength = 0,
     chunkOffset = 0,
-    currentChunk = 0
+    currentChunk = 0,
+    margin = 16 / config.renderScale
 }).extends()
 
 function MessageHandler:new(message, options)
@@ -20,12 +21,11 @@ function MessageHandler:new(message, options)
 
     game.freeze()
 
-    self.dialogWidth = options.w or 300
-    self.dialogHeight = options.h or 98
+    self.dialogWidth = options.w or (300 / config.renderScale)
+    self.dialogHeight = options.h or (96 / config.renderScale) -- 96 = 6 tilerows (4 text + 2 margin rows)
 
-    self.positionX = options.x or 50
-    self.positionY = options.y or 50
-    self.margin = 16
+    self.positionX = options.x or (50 / config.renderScale)
+    self.positionY = options.y or (50 / config.renderScale)
 
     self.dialog = Dialog(
         self.positionX,
@@ -165,16 +165,18 @@ end
 
 function MessageHandler:tryClose()
     if #self.options > 0 then
-        local fontSize = 16
+        local fontSize = 16 / config.renderScale
         local maxNumberOfItems = #self.options
         if maxNumberOfItems > 5 then
             maxNumberOfItems = 5
         end
         local minWidthForOption = self:getMaxWidthForOptions(self.options, fontSize)
+        local menuDialogWidth = minWidthForOption + self.margin * 2
+
         cotton.menuHandler = MenuHandler({
-            x = self.positionX + self.dialogWidth - (minWidthForOption + self.margin * 2),
+            x = self.positionX + self.dialogWidth - (menuDialogWidth + self.margin),
             y = (self.positionY + self.dialogHeight) - (self.margin * 2),
-            w = minWidthForOption + self.margin,
+            w = menuDialogWidth,
             h = (maxNumberOfItems * fontSize) + (self.margin * 2),
             options = self.options,
             zIndex = 1
@@ -214,8 +216,8 @@ function MessageHandler:skipTransition()
 end
 
 function MessageHandler:disableDialog()
-    self.arrowDown:remove()
     self.isActive = false
+    self.arrowDown:remove()
     self.dialog:remove()
     self.text:remove()
     game.unfreeze()

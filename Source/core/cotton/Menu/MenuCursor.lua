@@ -4,7 +4,7 @@ class("MenuCursor", {
     positionX = 0,
     positionY = 0,
     selected = 1,
-    tileSize = 16
+    tileSize = 16 / config.renderScale
 }).extends(gfx.sprite)
 
 function MenuCursor:init(positionX, positionY, zIndex)

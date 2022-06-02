@@ -18,6 +18,7 @@ playdate.display.setRefreshRate(30)
 
 asset.loadImageFolder("images/")
 
+playdate.display.setScale(config.renderScale)
 LDtk.load("levels/world.ldtk", config.useFastLoader)
 
 if playdate.isSimulator then

@@ -9,6 +9,7 @@ config = {
     playerType = "grid",
     font = "Pulp",
     showFPS = true,
+    renderScale = 1,
     interface = {
         images = {
             pages = "images/interface/16-16/pages-16-16.png",

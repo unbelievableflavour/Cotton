@@ -5,7 +5,7 @@ import "CoreLibs/animation"
 class("PromptIcon", {
     positionX = 0,
     positionY = 0,
-    tileSize = 16
+    tileSize = 16 / config.renderScale
 }).extends(gfx.sprite)
 
 function PromptIcon:init(positionX, positionY, zIndex)

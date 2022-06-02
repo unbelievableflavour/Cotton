@@ -7,7 +7,7 @@ class(
     {
         positionX = 0,
         positionY = 0,
-        tileSize = 16
+        tileSize = 16 / config.renderScale
     }
 ).extends(gfx.sprite)
 

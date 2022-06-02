@@ -4,7 +4,8 @@ class("Dialog", {
     positionX = 0,
     positionY = 0,
     dialogWidth = 0,
-    dialogHeight = 0
+    dialogHeight = 0,
+    tileSize = 20 / config.renderScale
 }).extends(gfx.sprite)
 
 function Dialog:init(positionX, positionY, dialogWidth, dialogHeight, zIndex)
@@ -20,8 +21,8 @@ function Dialog:init(positionX, positionY, dialogWidth, dialogHeight, zIndex)
 
     local nineslice = gfx.nineSlice.new(
         config.interface.images.dialog,
-        10 / config.gridRenderScale,
-        10 / config.gridRenderScale,
+        self.tileSize / 2,
+        self.tileSize / 2,
         1, 1
     )
     self.dialogImage = gfx.image.new(self.dialogWidth, self.dialogHeight)

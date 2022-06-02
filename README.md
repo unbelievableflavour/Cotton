@@ -158,7 +158,7 @@ The terminal process failed to launch (exit code: 1).
 ```
 **A:** This means the environment variables have not been set OR the SDK has not been installed correctly.
 
-**Q: Why is my map rendered very big or small when I didn't set the `gridRenderScale`? ?**
+**Q: Why is my map rendered very big or small when I didn't set the `renderScale`? ?**
 **A:** Make sure you didn't name the tilesets the same but with different size. They are cached in the `.pdx` file.
 Example:
 If you have a tileset `bw_table-16-16.png`, then DONT add a `bw_table-8-8.png`.

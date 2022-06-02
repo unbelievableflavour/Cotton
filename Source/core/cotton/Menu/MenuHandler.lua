@@ -6,7 +6,8 @@ import "core/cotton/Menu/MenuOptions"
 
 class("MenuHandler", {
     options = {},
-    currentChunk = 1
+    currentChunk = 1,
+    margin = 16 / config.renderScale
 }).extends()
 
 dialogDepth = 0
@@ -20,12 +21,12 @@ function MenuHandler:init(options, callback)
 
     self.callback = callback or nil
 
-    self.dialogWidth = options.w or 300
-    self.dialogHeight = options.h or 98
+    self.dialogWidth = options.w or (300 / config.renderScale)
+    self.dialogHeight = options.h or (96 / config.renderScale) -- 96 = 6 tilerows (4 text + 2 margin rows)
 
-    self.positionX = options.x or 50
-    self.positionY = options.y or 50
-    self.margin = 16
+    self.positionX = options.x or (50 / config.renderScale)
+    self.positionY = options.y or (50 / config.renderScale)
+
     self.zIndex = options.zIndex or 0
 
     self.dialog = Dialog(

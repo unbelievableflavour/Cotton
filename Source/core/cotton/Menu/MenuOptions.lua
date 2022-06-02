@@ -7,7 +7,7 @@ class(
         positionY = 0,
         dialogWidth = 0,
         dialogHeight = 0,
-        tileSize = 16
+        tileSize = 16 / config.renderScale
     }
 ).extends(gfx.sprite)
 
