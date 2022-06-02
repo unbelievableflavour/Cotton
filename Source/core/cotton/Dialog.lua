@@ -18,7 +18,12 @@ function Dialog:init(positionX, positionY, dialogWidth, dialogHeight, zIndex)
     self:moveTo(topLeftCorner.x + self.positionX + (self.dialogWidth / 2),
         topLeftCorner.y + self.positionY + (self.dialogHeight / 2))
 
-    local nineslice = gfx.nineSlice.new("images/interface/dialog-20-20", 9, 9, 1, 1)
+    local nineslice = gfx.nineSlice.new(
+        config.interface.images.dialog,
+        10 / config.gridRenderScale,
+        10 / config.gridRenderScale,
+        1, 1
+    )
     self.dialogImage = gfx.image.new(self.dialogWidth, self.dialogHeight)
 
     gfx.pushContext(self.dialogImage)

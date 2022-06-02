@@ -4,19 +4,24 @@ import "CoreLibs/animation"
 
 class("PromptIcon", {
     positionX = 0,
-    positionY = 0
+    positionY = 0,
+    tileSize = 16
 }).extends(gfx.sprite)
 
 function PromptIcon:init(positionX, positionY, zIndex)
     self.zIndex = zIndex or 0
-    local imagetable = gfx.imagetable.new("images/interface/prompt-table-16-16.png")
+
+    local imagetable = gfx.imagetable.new(config.interface.images.prompt)
     self.animation = gfx.animation.loop.new(200, imagetable)
 
     local topLeftCorner = getTopLeftCorner()
-    self:moveTo(topLeftCorner.x + positionX + (16 / 2), topLeftCorner.y + positionY + (16 / 2))
+    self:moveTo(
+        topLeftCorner.x + positionX + (self.tileSize / 2),
+        topLeftCorner.y + positionY + (self.tileSize / 2)
+    )
     self:setZIndex(30001 + self.zIndex)
 
-    self.promptImage = gfx.image.new(16, 16)
+    self.promptImage = gfx.image.new(self.tileSize, self.tileSize)
     self:setImage(self.promptImage)
 end
 

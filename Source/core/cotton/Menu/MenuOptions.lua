@@ -7,7 +7,7 @@ class(
         positionY = 0,
         dialogWidth = 0,
         dialogHeight = 0,
-        margin = 16
+        tileSize = 16
     }
 ).extends(gfx.sprite)
 
@@ -19,7 +19,10 @@ function MenuOptions:init(positionX, positionY, dialogWidth, dialogHeight, zInde
     self.dialogHeight = dialogHeight
 
     local topLeftCorner = getTopLeftCorner()
-    self:moveTo(topLeftCorner.x + positionX + (self.dialogWidth / 2), topLeftCorner.y + positionY + (self.dialogHeight / 2))
+    self:moveTo(
+        topLeftCorner.x + positionX + (self.dialogWidth / 2),
+        topLeftCorner.y + positionY + (self.dialogHeight / 2)
+    )
 
     self.optionsImage = gfx.image.new(self.dialogWidth, self.dialogHeight)
 
@@ -36,9 +39,9 @@ function MenuOptions:drawOptions(chunkOfOptions, textFontHeight)
     for key, option in pairs(chunkOfOptions) do
         gfx.drawTextInRect(
             option.name,
-            0 + self.margin,
-            0 + self.margin + (textFontHeight * lineLoopIndex),
-            self.dialogWidth - self.margin,
+            0 + self.tileSize,
+            0 + self.tileSize + (textFontHeight * lineLoopIndex),
+            self.dialogWidth - self.tileSize,
             textFontHeight
         )
         lineLoopIndex = lineLoopIndex + 1
