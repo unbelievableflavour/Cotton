@@ -158,8 +158,16 @@ The terminal process failed to launch (exit code: 1).
 ```
 **A:** This means the environment variables have not been set OR the SDK has not been installed correctly.
 
-**Q: Collider is covering the whole screen after I build cached levels. (also can't move or player is not shown) Whats up?`**
-**A:** Better not mix different tile sizes in tile layers! (entities is fine)
+**Q: Why is my map rendered very big or small when I didn't set the `gridRenderScale`? ?**
+**A:** Make sure you didn't name the tilesets the same but with different size. They are cached in the `.pdx` file.
+Example:
+If you have a tileset `bw_table-16-16.png`, then DONT add a `bw_table-8-8.png`.
+
+To fix:
+1. Rename the image 
+2. Correct the image paths in `LDtk`,
+3. Throw away the `.pdx` file.
+4. Build again.
 
 ## Credit
 
