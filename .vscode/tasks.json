@@ -40,10 +40,10 @@
 			"label": "Documentation: CottonScript",
 			"type": "shell",
 			"windows": {
-				"command": "explorer https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md"
+				"command": "explorer https://github.com/unbelievableflavour/Cotton/wiki/CottonScript"
 			},
 			"osx": {
-				"command": "open https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md"
+				"command": "open https://github.com/unbelievableflavour/Cotton/wiki/CottonScript"
 			},
 			"problemMatcher": [],
 		},

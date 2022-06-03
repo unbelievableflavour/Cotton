@@ -11,7 +11,7 @@ Cotton is a framework for Pulp-like experiences in Lua. It will allow you to use
 
 Some of the key features you find in Cotton.
 
-* A library containing most features that Pulp has to offer ([CottonScript](https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md))
+* A library containing most features that Pulp has to offer ([CottonScript](https://github.com/unbelievableflavour/Cotton/wiki/CottonScript))
 * Preconfigured level editor ([LDtk](https://ldtk.io/))
 * Runs at 30 frames per second.
 * Toggleable FPS counter.
@@ -26,14 +26,14 @@ Some of the key features you find in Cotton.
 * Multi-tile player support.
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_grid.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_platformer.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/player_topdown.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/movement_smooth.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/camera_follow.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/dialogs.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/bigger_maps.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/big_player.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_grid.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_platformer.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_topdown.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/movement_smooth.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/camera_follow.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/dialogs.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/bigger_maps.gif" />
+    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/big_player.gif" />
 </p>
 
 ## WIP
@@ -51,7 +51,7 @@ Make sure you have the following applications installed:
 ## CottonScript
 
 CottonScript is a scripting library that contains most Pulp features.
-Documentation for CottonScript can be found here: [CottonScript](https://github.com/unbelievableflavour/Cotton/blob/master/Docs/CottonScript.md).
+Documentation for CottonScript can be found here: [CottonScript](https://github.com/unbelievableflavour/Cotton/wiki/CottonScript).
 
 ## Setting up Cotton
 
@@ -66,7 +66,7 @@ Documentation for CottonScript can be found here: [CottonScript](https://github.
 ### IMPORTANT FOR WINDOWS
 
 If you are on Windows, some environment vars need to be set before you can compile your games.
-Follow the [Environment Variables Guide](https://github.com/unbelievableflavour/Cotton/blob/master/Docs/EnvironmentVariables.md) to set the environment variables for Windows.
+Follow the [Environment Variables Guide](https://github.com/unbelievableflavour/Cotton/wiki/Environment-Variables-On-Windows) to set the environment variables for Windows.
 
 ## Working in Cotton
 
