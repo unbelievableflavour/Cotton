@@ -134,15 +134,8 @@ The cached files are saved in in your PlayDate game's data directory. You will h
 
 ## Player type specific settings
 
-Docs are WIP, but works
-
-### Smooth movement
-
-Docs are WIP, but works
-
-## #Diagonal movement
-
-Docs are WIP, but works
+A player type has different options like "smooth movement", "diagonal movement", "player speed", etc. 
+Learn more about them here: [Player Types](https://github.com/unbelievableflavour/Cotton/wiki/Player-Types)
 
 ## FAQ
 
