@@ -361,64 +361,6 @@
 					"tilesetUid": null
 				}
 			]
-		},
-		{
-			"identifier": "Exit",
-			"uid": 61,
-			"tags": [],
-			"width": 16,
-			"height": 16,
-			"resizableX": false,
-			"resizableY": false,
-			"keepAspectRatio": false,
-			"tileOpacity": 1,
-			"fillOpacity": 1,
-			"lineOpacity": 1,
-			"hollow": false,
-			"color": "#DCDC98",
-			"renderMode": "Rectangle",
-			"showName": true,
-			"tilesetId": null,
-			"tileId": null,
-			"tileRenderMode": "FitInside",
-			"tileRect": null,
-			"nineSliceBorders": [],
-			"maxCount": 0,
-			"limitScope": "PerLevel",
-			"limitBehavior": "MoveLastOne",
-			"pivotX": 0,
-			"pivotY": 0,
-			"fieldDefs": [
-				{
-					"identifier": "EntranceDirection",
-					"__type": "LocalEnum.EntranceDirection",
-					"uid": 62,
-					"type": "F_Enum(50)",
-					"isArray": false,
-					"canBeNull": false,
-					"arrayMinLength": null,
-					"arrayMaxLength": null,
-					"editorDisplayMode": "Hidden",
-					"editorDisplayPos": "Above",
-					"editorAlwaysShow": false,
-					"editorCutLongValues": true,
-					"editorTextSuffix": null,
-					"editorTextPrefix": null,
-					"useForSmartColor": false,
-					"min": null,
-					"max": null,
-					"regex": null,
-					"acceptFileTypes": null,
-					"defaultOverride": null,
-					"textLanguageMode": null,
-					"symmetricalRef": false,
-					"autoChainRef": true,
-					"allowOutOfLevelRef": true,
-					"allowedRefs": "OnlySame",
-					"allowedRefTags": [],
-					"tilesetUid": null
-				}
-			]
 		}
 	], "tilesets": [
 		{
@@ -459,15 +401,7 @@
 			"savedSelections": [],
 			"cachedPixelData": { "opaqueTiles": "11", "averageColors": "fffff000" }
 		}
-	], "enums": [
-		{ "identifier": "TileEnum", "uid": 3, "values": [ { "id": "Solid", "tileId": null, "color": 16711680, "__tileSrcRect": null }, { "id": "Water", "tileId": null, "color": 1652422, "__tileSrcRect": null } ], "iconTilesetUid": 1, "externalRelPath": null, "externalFileChecksum": null, "tags": [] },
-		{ "identifier": "EntranceDirection", "uid": 50, "values": [
-			{ "id": "East", "tileId": null, "color": 0, "__tileSrcRect": null },
-			{ "id": "West", "tileId": null, "color": 0, "__tileSrcRect": null },
-			{ "id": "North", "tileId": null, "color": 0, "__tileSrcRect": null },
-			{ "id": "South", "tileId": null, "color": 0, "__tileSrcRect": null }
-		], "iconTilesetUid": null, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }
-	], "externalEnums": [], "levelFields": [] },
+	], "enums": [{ "identifier": "TileEnum", "uid": 3, "values": [ { "id": "Solid", "tileId": null, "color": 16711680, "__tileSrcRect": null }, { "id": "Water", "tileId": null, "color": 1652422, "__tileSrcRect": null } ], "iconTilesetUid": 1, "externalRelPath": null, "externalFileChecksum": null, "tags": [] }], "externalEnums": [], "levelFields": [] },
 	"levels": [
 		{
 			"identifier": "Level_0",
