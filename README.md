@@ -112,6 +112,11 @@ You can update Cotton in your project at any time IF you did not edit any code i
 4. Replace your `main.lua` with the on from the download. BUT keep the old file as reference.
 5. Make sure to readd any code you added to `main.lua` yourself.
 
+### Optional updates
+
+Updating tasks?
+1. Replace your `.vscode` folder with the `.vscode` folder from the download.
+
 ## Caching levels
 
 Loading the LDtk levels json files can be a bit slow. However Nic Magnier provided us with a nice little solution to cache your games!
