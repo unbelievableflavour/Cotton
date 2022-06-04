@@ -280,3 +280,36 @@ function at(x, y, w, h)
 
     return positionAndSize
 end
+
+function setScale(scale)
+
+    playdate.display.setScale(scale)
+    config.renderScale = scale
+
+    if scale == 1 then
+        for settingName, settingValue in pairs(config.default) do
+            config[settingName] = settingValue
+        end
+    end
+
+    if scale == 2 and config.scale2 ~= nil then
+        for settingName, settingValue in pairs(config.scale2) do
+            config[settingName] = settingValue
+        end
+    end
+
+    Dialog:resetRenderScale()
+end
+
+function getMaxWidthForOptions(options, fontSize)
+    local maxWidth = 0
+
+    for k, option in pairs(options) do
+        local textSize = option.name:len() * fontSize
+        if maxWidth < textSize then
+            maxWidth = textSize
+        end
+    end
+
+    return maxWidth
+end

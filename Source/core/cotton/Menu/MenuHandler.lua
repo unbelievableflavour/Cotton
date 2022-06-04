@@ -21,7 +21,11 @@ function MenuHandler:init(options, callback)
 
     self.callback = callback or nil
 
-    self.dialogWidth = options.w or (300 / config.renderScale)
+    local fontSize = cotton.textFontHeight
+    local maxWidthForOption = getMaxWidthForOptions(options.options, fontSize)
+    local menuDialogWidth = maxWidthForOption + self.margin * 2
+
+    self.dialogWidth = options.w or (menuDialogWidth)
     self.dialogHeight = options.h or (96 / config.renderScale) -- 96 = 6 tilerows (4 text + 2 margin rows)
 
     self.positionX = options.x or (50 / config.renderScale)

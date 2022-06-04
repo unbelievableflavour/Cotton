@@ -154,19 +154,6 @@ function MessageHandler:detectInput()
     end
 end
 
-function MessageHandler:getMaxWidthForOptions(options, fontSize)
-    local maxWidth = 0
-
-    for k, option in pairs(options) do
-        local textSize = option.name:len() * fontSize
-        if maxWidth < textSize then
-            maxWidth = textSize
-        end
-    end
-
-    return maxWidth
-end
-
 function MessageHandler:tryClose()
     if #self.options > 0 then
         local fontSize = 16 / config.renderScale
@@ -174,13 +161,12 @@ function MessageHandler:tryClose()
         if maxNumberOfItems > 5 then
             maxNumberOfItems = 5
         end
-        local minWidthForOption = self:getMaxWidthForOptions(self.options, fontSize)
+        local minWidthForOption = getMaxWidthForOptions(self.options, fontSize)
         local menuDialogWidth = minWidthForOption + self.margin * 2
 
         cotton.menuHandler = MenuHandler({
             x = self.positionX + self.dialogWidth - (menuDialogWidth + self.margin),
             y = (self.positionY + self.dialogHeight) - (self.margin * 2),
-            w = menuDialogWidth,
             h = (maxNumberOfItems * fontSize) + (self.margin * 2),
             options = self.options,
             zIndex = 1
