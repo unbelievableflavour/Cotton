@@ -25,14 +25,8 @@ function PromptIcon:init(positionX, positionY, zIndex)
     self:setImage(self.promptImage)
 end
 
-function PromptIcon:draw(x, y)
+function PromptIcon:draw()
     gfx.pushContext(self.promptImage)
     self.animation:draw(0, 0)
     gfx.popContext()
-end
-
-function PromptIcon:remove(x, y)
-    -- a small hack for making sure prompt doesnt render anymore
-    self:setImage(nil)
-    PromptIcon.super.remove(self)
 end
