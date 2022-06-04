@@ -82,12 +82,16 @@ function MessageHandler:update()
 end
 
 function MessageHandler:drawMessage()
+    if self.isFullyRendered then
+        return
+    end
 
-    if self.currentChunkLength[self.currentChunk] == #self.chunkList[self.currentChunk] then
-        if #self.chunkList == self.currentChunk then
-            if self.isFullyRendered then
-                return
-            end
+    if self.isPageFullyRendered then
+        return
+    end
+
+    if self:isCompletedChunk() then
+        if self:isLastChunk() then
             self.isFullyRendered = true
             -- End of all chunks!
             self.arrowDown:add()
@@ -95,6 +99,7 @@ function MessageHandler:drawMessage()
         end
 
         if self.currentChunk % self.numberOfLines == 0 then
+            self.isPageFullyRendered = true
             -- Next chunk page
             self.arrowDown:add()
             return
@@ -102,7 +107,6 @@ function MessageHandler:drawMessage()
 
         -- Next chunk
         self.currentChunk = self.currentChunk + 1
-        return
     end
 
     self:drawTextInDialog()
@@ -132,7 +136,7 @@ end
 function MessageHandler:detectInput()
     if input.justPressed(buttonA) or input.justPressed(buttonB) or input.justPressed(buttonUp) or
         input.justPressed(buttonDown) or input.justPressed(buttonLeft) or input.justPressed(buttonRight) then
-        if #self.chunkList == self.currentChunk and self.currentChunkLength[self.currentChunk] == #self.chunkList[self.currentChunk] then
+        if self:isLastChunk() and self:isCompletedChunk() then
             -- End of all chunks!
             self:tryClose()
             return
@@ -195,6 +199,7 @@ function MessageHandler:tryClose()
 end
 
 function MessageHandler:nextChunkPage()
+    self.isPageFullyRendered = false
     self.text:clean()
     self.arrowDown:remove()
     self.currentChunk = self.currentChunk + 1
@@ -246,4 +251,12 @@ function MessageHandler:splitMessageIntoWordsList(inputstring)
         table.insert(words, str)
     end
     return words
+end
+
+function MessageHandler:isLastChunk()
+    return #self.chunkList == self.currentChunk
+end
+
+function MessageHandler:isCompletedChunk()
+    return (self.currentChunkLength[self.currentChunk] or 0) > #self.chunkList[self.currentChunk]
 end
