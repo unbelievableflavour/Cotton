@@ -9,21 +9,21 @@ end
 
 function Computer:interact()
     if disks == 0 then
-        say("You could play a game on this old computer if you had all of the floppies...")
+        say("You could play a game on this old computer if you had all of the floppies...", at())
         return
     end
 
     if disks == 1 then
-        say("You've found 1 floppy disk.")
+        say("You've found 1 floppy disk.", at())
         return
     end
 
     if disks == 4 then
-        say("You've found all the floppy disks!", function()
+        say("You've found all the floppy disks!", at(), function()
             fin("You whiled away the afternoon on the computer. The End")
         end)
         return
     end
 
-    say("You've found " .. disks .. " floppy disks.")
+    say("You've found " .. disks .. " floppy disks.", at())
 end
