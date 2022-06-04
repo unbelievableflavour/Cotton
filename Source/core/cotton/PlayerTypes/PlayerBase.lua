@@ -68,7 +68,17 @@ end
 
 function PlayerBase:fixCamera()
     local spriteX, spriteY = self.sprite:getPosition()
-    gfx.setDrawOffset(screenCenterX - spriteX, screenCenterY - spriteY)
+    if config.cameraFollowLockX then
+        gfx.setDrawOffset(0 + self.cameraFollowOffsetX, screenCenterY - spriteY + config.cameraFollowOffsetY)
+        return
+    end
+
+    if config.cameraFollowLockY then
+        gfx.setDrawOffset(screenCenterX - spriteX + config.cameraFollowOffsetX, 0 + config.cameraFollowOffsetY)
+        return
+    end
+
+    gfx.setDrawOffset(screenCenterX - spriteX + config.cameraFollowOffsetX, screenCenterY - spriteY + config.cameraFollowOffsetY)
 end
 
 function PlayerBase:moveTo(x, y)

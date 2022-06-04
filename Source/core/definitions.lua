@@ -16,7 +16,26 @@ collisionTypes = {
 function getTopLeftCorner()
     if config.cameraFollow then
         local spriteX, spriteY = game.player.sprite:getPosition()
-        return playdate.geometry.point.new(spriteX - (screenWidth / 2), spriteY - (screenHeight / 2))
+
+        if config.cameraFollowLockY then
+            return playdate.geometry.point.new(
+                spriteX - (screenWidth / 2) - config.cameraFollowOffsetX,
+                0 - config.cameraFollowOffsetY
+            )
+        end
+
+        if config.cameraFollowLockX then
+            return playdate.geometry.point.new(
+                0 + config.cameraFollowOffsetX,
+                spriteY - (screenHeight / 2) - config.cameraFollowOffsetY
+            )
+        end
+
+        return playdate.geometry.point.new(
+            spriteX - (screenWidth / 2) - config.cameraFollowOffsetX,
+            spriteY - (screenHeight / 2) - config.cameraFollowOffsetY
+        )
     end
+
     return playdate.geometry.point.new(0, 0)
 end
