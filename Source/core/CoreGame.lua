@@ -133,6 +133,7 @@ function goto_level(level_name, direction)
         if entity.name == "Player" then
             if direction == nil then
                 game.player:Init(entity)
+                cotton.player:UpdatePlayerObj()
             end
         end
 

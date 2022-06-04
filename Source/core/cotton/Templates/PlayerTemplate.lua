@@ -1,4 +1,6 @@
-class("PlayerTemplate", {}).extends()
+class("PlayerTemplate", {
+    player = nil
+}).extends()
 
 function PlayerTemplate:load()
     -- log("player: load")
@@ -50,4 +52,16 @@ end
 
 function PlayerTemplate:undock()
     -- log("player: undock")
+end
+
+function PlayerTemplate:UpdatePlayerObj()
+    self.player = game.player
+end
+
+function PlayerTemplate:setImage(image)
+    self.player.sprite:setImage(image)
+end
+
+function PlayerTemplate:setProperty(propKey, propValue)
+    self.player[propKey] = propValue
 end
