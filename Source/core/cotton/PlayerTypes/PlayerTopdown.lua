@@ -1,9 +1,9 @@
 local gfx <const> = playdate.graphics
 
 class("PlayerTopdown", {
-    player_speed = 4,
-    player_acc = 1,
-    player_ground_friction = 0.8,
+    playerSpeed = 4,
+    playerAcceleration = 1,
+    playerGroundFriction = 0.8,
     currentCollisions = {}
 }).extends(PlayerBase)
 
@@ -53,8 +53,8 @@ function PlayerTopdown:update()
     self:checkIfStillColliding(self.sprite)
 
     if input.x() == 0 or input.y() == 0 then
-        self.velocity.x = math.approach(self.velocity.x, 0, self.player_ground_friction)
-        self.velocity.y = math.approach(self.velocity.y, 0, self.player_ground_friction)
+        self.velocity.x = math.approach(self.velocity.x, 0, self.playerGroundFriction)
+        self.velocity.y = math.approach(self.velocity.y, 0, self.playerGroundFriction)
     end
 
     if self.bangCeiling then
@@ -69,16 +69,16 @@ function PlayerTopdown:update()
 
     -- move left/right/up/down
     if input.is(buttonLeft) then
-        self.velocity.x = math.approach(self.velocity.x, -self.player_speed, self.player_acc)
+        self.velocity.x = math.approach(self.velocity.x, -self.playerSpeed, self.playerAcceleration)
     end
     if input.is(buttonRight) then
-        self.velocity.x = math.approach(self.velocity.x, self.player_speed, self.player_acc)
+        self.velocity.x = math.approach(self.velocity.x, self.playerSpeed, self.playerAcceleration)
     end
     if input.is(buttonUp) then
-        self.velocity.y = math.approach(self.velocity.y, -self.player_speed, self.player_acc)
+        self.velocity.y = math.approach(self.velocity.y, -self.playerSpeed, self.playerAcceleration)
     end
     if input.is(buttonDown) then
-        self.velocity.y = math.approach(self.velocity.y, self.player_speed, self.player_acc)
+        self.velocity.y = math.approach(self.velocity.y, self.playerSpeed, self.playerAcceleration)
     end
 
     local goalX = self.sprite.x + self.velocity.x
