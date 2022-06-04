@@ -3,8 +3,7 @@ local gfx <const> = playdate.graphics
 class("PlayerTopdown", {
     playerSpeed = 4,
     playerAcceleration = 1,
-    playerGroundFriction = 0.8,
-    currentCollisions = {}
+    playerGroundFriction = 0.8
 }).extends(PlayerBase)
 
 function PlayerTopdown:Init(ldtk_entity)
