@@ -273,7 +273,7 @@ function LDtk.load_level(level_name)
 		local layer_type = layer_data.__type
 
 		layer.grid_size = layer_data.__gridSize
-		layer.zIndex = layer_index
+		layer.zIndex = flipZIndex(layer_index)
 		layer.rect = {
 			x = level_data.worldX + layer_data.__pxTotalOffsetX,
 			y = level_data.worldY + layer_data.__pxTotalOffsetY,
@@ -366,7 +366,7 @@ function LDtk.load_level(level_name)
 					position = { x = entity_data.px[1], y = entity_data.px[2] },
 					center = { x = entity_data.__pivot[1], y = entity_data.__pivot[2] },
 					size = { width = entity_data.width, height = entity_data.height },
-					zIndex = layer_index,
+					zIndex = flipZIndex(layer_index),
 					fields = properties,
 				})
 			end
