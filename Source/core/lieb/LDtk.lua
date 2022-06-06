@@ -100,7 +100,7 @@ function LDtk.load(ldtk_file, use_lua_levels)
 	-- handle the tilesets
 	for tileset_index, tileset_data in ipairs(data.defs.tilesets) do
 		-- check if the image table is in the folder of the ldtk file
-		if string.byte(".", 1) == string.byte(tileset_data.relPath, 1) then
+		if tileset_data.identifier ~= "Internal_Icons" and (string.byte(".", 1) == string.byte(tileset_data.relPath, 1)) then
 			error("Cannot load tileset used by LDtk levels. imageTable tilesets must be in the same folder as ldtk file.", 2)
 			return
 		end
