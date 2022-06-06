@@ -113,9 +113,13 @@ function goto_level(level_name, direction)
         layerSprite:setCenter(0, 0)
         layerSprite:setZIndex(layer.zIndex)
         layerSprite:add()
-
-        gfx.sprite.addWallSprites(tilemap, LDtk.get_empty_tileIDs(level_name, "Solid", index))
         layerSprites[index] = layerSprite
+
+        local solidTiles = LDtk.get_empty_tileIDs(level_name, "Solid", index)
+
+        if solidTiles then
+            gfx.sprite.addWallSprites(tilemap, solidTiles)
+        end
 
         ::continue::
     end
