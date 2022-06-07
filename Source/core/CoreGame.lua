@@ -221,7 +221,3 @@ function game.drawBackground(x, y, w, h)
 
     backgroundImg:draw(0, 0)
 end
-
-function flipZIndex(layerZIndex)
-    return 1000 - layerZIndex
-end
