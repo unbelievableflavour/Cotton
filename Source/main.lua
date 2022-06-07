@@ -28,8 +28,6 @@ end
 scene.set(game, LDtk.playerStartLocation)
 
 function playdate.update()
-    hot_import_update()
-
     input.update()
 
     scene.update()
