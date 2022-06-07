@@ -95,8 +95,12 @@ function toss()
 end
 
 function log(node)
-    if type(node) == "string" or type(node) == "nil" or type(node) == "number" or type(node) == "userdata" or type(node) ==
-        "boolean" or type(node) == "function" then
+    if type(node) == "string"
+        or type(node) == "nil"
+        or type(node) == "number"
+        or type(node) == "userdata"
+        or type(node) == "boolean"
+        or type(node) == "function" then
         print(node)
         return
     end
@@ -114,62 +118,66 @@ function log(node)
 
         local cur_index = 1
         for k, v in pairs(node) do
-            if (cache[node] == nil) or (cur_index >= cache[node]) then
-                if (string.find(output_str, "}", output_str:len())) then
-                    output_str = output_str .. ",\n"
-                elseif not (string.find(output_str, "\n", output_str:len())) then
-                    output_str = output_str .. "\n"
-                end
-
-                -- This is necessary for working with HUGE tables otherwise we run out of memory using concat on huge strings
-                table.insert(output, output_str)
-                output_str = ""
-
-                local key
-                if (type(k) == "number" or type(k) == "boolean") then
-                    key = "[" .. tostring(k) .. "]"
-                else
-                    key = "['" .. tostring(k) .. "']"
-                end
-
-                if (type(v) == "number" or type(v) == "boolean") then
-                    output_str = output_str .. string.rep("\t", depth) .. key .. " = " .. tostring(v)
-                elseif (type(v) == "table") then
-                    output_str = output_str .. string.rep("\t", depth) .. key .. " = {\n"
-                    table.insert(stack, node)
-                    table.insert(stack, v)
-                    cache[node] = cur_index + 1
-                    break
-                else
-                    output_str = output_str .. string.rep("\t", depth) .. key .. " = '" .. tostring(v) .. "'"
-                end
-
-                if (cur_index == size) then
-                    output_str = output_str .. "\n" .. string.rep("\t", depth - 1) .. "}"
-                else
-                    output_str = output_str .. ","
-                end
-            else
+            if (cache[node] ~= nil) and (cur_index < cache[node]) then
                 -- close the table
                 if (cur_index == size) then
                     output_str = output_str .. "\n" .. string.rep("\t", depth - 1) .. "}"
                 end
+                cur_index = cur_index + 1
+                goto continue
+            end
+
+            if (string.find(output_str, "}", output_str:len())) then
+                output_str = output_str .. ",\n"
+            elseif not (string.find(output_str, "\n", output_str:len())) then
+                output_str = output_str .. "\n"
+            end
+
+            -- This is necessary for working with HUGE tables otherwise we run out of memory using concat on huge strings
+            table.insert(output, output_str)
+            output_str = ""
+
+            local key
+            if (type(k) == "number" or type(k) == "boolean") then
+                key = "[" .. tostring(k) .. "]"
+            else
+                key = "['" .. tostring(k) .. "']"
+            end
+
+            if (type(v) == "number" or type(v) == "boolean") then
+                output_str = output_str .. string.rep("\t", depth) .. key .. " = " .. tostring(v)
+            elseif (type(v) == "table") then
+                output_str = output_str .. string.rep("\t", depth) .. key .. " = {\n"
+                table.insert(stack, node)
+                table.insert(stack, v)
+                cache[node] = cur_index + 1
+                break
+            else
+                output_str = output_str .. string.rep("\t", depth) .. key .. " = '" .. tostring(v) .. "'"
+            end
+
+            if (cur_index == size) then
+                output_str = output_str .. "\n" .. string.rep("\t", depth - 1) .. "}"
+            else
+                output_str = output_str .. ","
             end
 
             cur_index = cur_index + 1
+
+            ::continue::
         end
 
         if (size == 0) then
             output_str = output_str .. "\n" .. string.rep("\t", depth - 1) .. "}"
         end
 
-        if (#stack > 0) then
-            node = stack[#stack]
-            stack[#stack] = nil
-            depth = cache[node] == nil and depth + 1 or depth - 1
-        else
+        if (#stack <= 0) then
             break
         end
+
+        node = stack[#stack]
+        stack[#stack] = nil
+        depth = cache[node] == nil and depth + 1 or depth - 1
     end
 
     -- This is necessary for working with HUGE tables otherwise we run out of memory using concat on huge strings
