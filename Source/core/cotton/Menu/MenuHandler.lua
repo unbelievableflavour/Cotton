@@ -73,7 +73,7 @@ function MenuHandler:init(options, callback)
 
     gfx.setFont(cotton.textFont)
     self:refreshMenu()
-    cotton.player:change()
+    cotton.game:change()
 end
 
 function MenuHandler:refreshMenu()
@@ -82,27 +82,27 @@ end
 
 function MenuHandler:detectInput()
     if input.justPressed(buttonLeft) then
-        cotton.player:change()
+        cotton.game:change()
         self:previousChunkPage()
         self.cursor:setNumberOfLines(#self.chunks[self.currentChunk])
         return
     end
 
     if input.justPressed(buttonRight) then
-        cotton.player:change()
+        cotton.game:change()
         self:nextChunkPage()
         self.cursor:setNumberOfLines(#self.chunks[self.currentChunk])
         return
     end
 
     if input.justPressed(buttonUp) then
-        cotton.player:change()
+        cotton.game:change()
         self.cursor:moveUp()
         return
     end
 
     if input.justPressed(buttonDown) then
-        cotton.player:change()
+        cotton.game:change()
         self.cursor:moveDown()
         return
     end
@@ -114,7 +114,7 @@ function MenuHandler:detectInput()
             self:tryCloseAll()
             self.chunks[self.currentChunk][self.cursor.selected].callback()
         end
-        cotton.player:select()
+        cotton.game:select()
         return
     end
 
@@ -150,7 +150,7 @@ function MenuHandler:tryClose(button)
 
     dialogDepth = dialogDepth - 1
     self:disableDialog()
-    cotton.player:dismiss()
+    cotton.game:dismiss()
 end
 
 function MenuHandler:tryCloseAll()

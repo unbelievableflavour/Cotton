@@ -23,3 +23,15 @@ end
 function GameTemplate:finish()
     -- log("game: finish")
 end
+
+function GameTemplate:change()
+    -- log("game: change")
+end
+
+function GameTemplate:select()
+    -- log("game: select")
+end
+
+function GameTemplate:dismiss()
+    -- log("game: dismiss")
+end

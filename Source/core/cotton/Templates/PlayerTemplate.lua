@@ -65,15 +65,3 @@ end
 function PlayerTemplate:setProperty(propKey, propValue)
     self.player[propKey] = propValue
 end
-
-function PlayerTemplate:change()
-    -- log("player: change")
-end
-
-function PlayerTemplate:select()
-    -- log("player: select")
-end
-
-function PlayerTemplate:dismiss()
-    -- log("player: dismiss")
-end
