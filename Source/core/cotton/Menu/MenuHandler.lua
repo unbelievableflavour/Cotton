@@ -137,6 +137,7 @@ end
 
 function MenuHandler:tryClose(button)
     if self:isRootMenu() and config.allowDismissRootMenu == false and button == buttonB then
+        cotton.game:invalid()
         return
     end
 

@@ -35,3 +35,7 @@ end
 function GameTemplate:dismiss()
     -- log("game: dismiss")
 end
+
+function GameTemplate:invalid()
+    -- log("game: invalid")
+end
