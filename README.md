@@ -3,6 +3,10 @@
     src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/banner.png" 
     alt="Cotton" 
     />
+    <img
+    src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/environment.png" 
+    alt="Cotton" 
+    />
 </p>
 
 Cotton is a framework for Pulp-like experiences in Lua. It will allow you to use most of the features Pulp has to offer, but instead of being limited by Pulp, this framework is extendible, has LDtk build-in for easy level editing, and more!
