@@ -2,12 +2,14 @@ local gfx <const> = playdate.graphics
 
 class("EntityTemplate", {
     onTile = false,
-    collisionType = collisionTypes.default
+    collisionType = collisionTypes.default,
+    isAnimated = false
 }).extends(gfx.sprite)
 
 function EntityTemplate:init(ldtk_entity)
     self.id = ldtk_entity.id
     self.type = "entity"
+    self.size = ldtk_entity.size
 
     self:setZIndex(ldtk_entity.zIndex)
     self:moveTo(ldtk_entity.position.x, ldtk_entity.position.y)
@@ -45,4 +47,33 @@ function EntityTemplate:interact()
 end
 
 function EntityTemplate:exit()
+end
+
+function EntityTemplate:remove()
+    self.isRemoved = true
+    EntityTemplate.super.remove(self)
+end
+
+function EntityTemplate:setImage(src, options)
+    local options = options or {}
+    if options.animated then
+        self.animation = gfx.animation.loop.new(options.delay, gfx.imagetable.new(src), options.loop)
+        self.isAnimated = true
+        self.image = playdate.graphics.image.new(self.size.width, self.size.height)
+        EntityTemplate.super.setImage(self, self.image)
+        return
+    end
+
+    EntityTemplate.super.setImage(self, gfx.imagetable.new(src):getImage(1))
+end
+
+function EntityTemplate:animate()
+    playdate.graphics.pushContext(self.image)
+    playdate.graphics.clear()
+    self.animation:draw(0, 0)
+    playdate.graphics.popContext()
+end
+
+function EntityTemplate:shouldDraw()
+    return self.isAnimated or self.isRemoved == false
 end

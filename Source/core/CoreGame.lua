@@ -216,6 +216,16 @@ function game.update()
 
     cotton.keyListener:update()
     cotton.messageHandler:update()
+
+    for _, entity in pairs(cotton.activeEntities) do
+        if entity:shouldDraw() == false then
+            goto continue
+
+        end
+
+        entity:animate()
+        ::continue::
+    end
 end
 
 function game.drawBackground(x, y, w, h)

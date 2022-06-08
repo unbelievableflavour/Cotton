@@ -4,7 +4,7 @@ class("Computer", {}).extends(EntityTemplate)
 function Computer:init(ldtk_entity)
     Computer.super.init(self, ldtk_entity)
 
-    self:setImage(asset("computer"))
+    self:setImage("images/computer")
 end
 
 function Computer:interact()
