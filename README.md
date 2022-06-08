@@ -1,6 +1,6 @@
 <p align="center">
     <img
-    src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/logo.png" 
+    src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/banner.png" 
     alt="Cotton" 
     />
 </p>
