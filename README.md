@@ -118,6 +118,11 @@ You can update Cotton in your project at any time IF you did not edit any code i
 Updating tasks?
 1. Replace your `.vscode` folder with the `.vscode` folder from the download.
 
+## Wiki
+
+Since Cotton has a pretty extensive feature list. We created a official wiki for all documentation.
+You can find it here: [Wiki](https://github.com/unbelievableflavour/Cotton/wiki)
+
 ## FAQ
 
 **Q: Im getting the following error during compiling. What do I do?**
