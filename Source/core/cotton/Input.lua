@@ -10,8 +10,16 @@ buttonDown = playdate.kButtonDown
 buttonA = playdate.kButtonA
 buttonB = playdate.kButtonB
 
+function getRepeatDuration()
+    if not config.inputRepeat then
+        return 60
+    end
+
+    return config.inputRepeatBetween
+end
+
 input = {
-    repeatDuration = config.inputRepeatBetween,
+    repeatDuration = getRepeatDuration(),
     repeats = {
         [buttonLeft] = {
             state = false,
@@ -60,7 +68,7 @@ end
 function input.update(dt)
     dt = dt or (1 / playdate.display.getRefreshRate())
 
-    -- Save the button for this frame because playdate.buttonIsPressed always return latest result 
+    -- Save the button for this frame because playdate.buttonIsPressed always return latest result
     local isPressed = playdate.buttonIsPressed
     _buttonFrameState = 0
     if isPressed(playdate.kButtonA) then

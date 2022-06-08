@@ -1,5 +1,6 @@
 config = {
     autoAct = true,
+    inputRepeat = true,
     inputRepeatBetween = 0.2,
     cameraFollow = false,
     cameraFollowLockX = false,
