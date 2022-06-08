@@ -6,7 +6,11 @@ save = {}
 cotton = {
     activeEntities = {},
     game = nil,
-    player = nil
+    player = nil,
+    room = nil,
+    songPlayer = nil,
+    keyListener = nil,
+    messageHandler = nil,
 }
 
 adapterDictionary = {
