@@ -14,7 +14,9 @@ function PlayerGrid:Init(ldtk_entity)
     self.destinationCursor = playdate.geometry.point.new(ldtk_entity.position.x / self.tileSize,
         ldtk_entity.position.y / self.tileSize)
 
-    self.sprite = gfx.sprite.new(asset("playerGrid"))
+    local imagetable = gfx.imagetable.new("images/playerGrid")
+
+    self.sprite = gfx.sprite.new(imagetable:getImage(1))
     local sprite = self.sprite
 
     sprite:setZIndex(ldtk_entity.zIndex)
@@ -23,7 +25,7 @@ function PlayerGrid:Init(ldtk_entity)
     -- sprite:setCollideRect( 0,0, sprite:getSize() )
     sprite:add()
 
-    self.tempSprite = gfx.sprite.new(asset("playerGrid"))
+    self.tempSprite = gfx.sprite.new(imagetable:getImage(1))
     self.tempSprite:setZIndex(-100)
     self.tempSprite:moveTo(ldtk_entity.position.x, ldtk_entity.position.y)
     self.tempSprite:setCenter(ldtk_entity.center.x, ldtk_entity.center.y)

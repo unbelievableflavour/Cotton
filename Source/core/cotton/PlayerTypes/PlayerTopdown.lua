@@ -7,7 +7,9 @@ class("PlayerTopdown", {
 }).extends(PlayerBase)
 
 function PlayerTopdown:Init(ldtk_entity)
-    self.sprite = gfx.sprite.new(asset("playerGrid"))
+    local imagetable = gfx.imagetable.new("images/playerGrid")
+
+    self.sprite = gfx.sprite.new(imagetable:getImage(1))
     local sprite = self.sprite
 
     sprite:setZIndex(ldtk_entity.zIndex)
