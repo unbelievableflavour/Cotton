@@ -118,31 +118,6 @@ You can update Cotton in your project at any time IF you did not edit any code i
 Updating tasks?
 1. Replace your `.vscode` folder with the `.vscode` folder from the download.
 
-## Caching levels
-
-Loading the LDtk levels json files can be a bit slow. However Nic Magnier provided us with a nice little solution to cache your games!
-Due to development being easier without cache this setting is disabled by default.
-
-### how to cache
-
-Levels will automatically be cached when the cache is not being used. 
-
-1. Set `useFastLoader` to `false` in `config.lua`.
-2. Run the game in the simulator.
-3. Cached cached levels are created in your PlayDate game's data directory(`<playdate_sdk_location>/Disk/Data/<yourgame>/LDtk_lua_levels`)
-
-### how to run cached levels
-
-The cached files are saved in in your PlayDate game's data directory. You will have to manually copy it over.
-
-1. Move `<playdate_sdk_location>/Disk/Data/<yourgame>/LDtk_lua_levels` to `<this_project>/Source/levels/LDtk_lua_levels`
-2. finally enable the cache by changing `useFastLoader = true` in `config.lua`
-
-## Player type specific settings
-
-A player type has different options like "smooth movement", "diagonal movement", "player speed", etc. 
-Learn more about them here: [Player Types](https://github.com/unbelievableflavour/Cotton/wiki/Player-Types)
-
 ## FAQ
 
 **Q: Im getting the following error during compiling. What do I do?**
