@@ -4,7 +4,7 @@ Cotton is a framework for Pulp-like experiences in Lua. It will allow you to use
 
 <p align="center">
     <img
-    src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/environment.png" />
+    src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/logo.png" />
 </p>
 
 ## Features
@@ -24,6 +24,8 @@ Some of the key features you find in Cotton.
 * Easy level caching for fast level loading.
 * Automatic code formatting on save to keep your code clean and organised.
 * Multi-tile player support.
+
+## Showcase
 
 <p align="center">
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_grid.gif" />
