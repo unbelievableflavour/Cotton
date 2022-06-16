@@ -21,6 +21,7 @@ Some of the key features you find in Cotton.
 * A library containing most features that Pulp has to offer ([CottonScript](https://github.com/unbelievableflavour/Cotton/wiki/CottonScript))
 * Preconfigured level editor ([LDtk](https://ldtk.io/))
 * Runs at 30 frames per second.
+* Integrated scene management for easy switching out of the game into a cutscene and back.
 * Toggleable FPS counter.
 * A versionable project structure for easy git use.
 * Custom folder structuring allows for better organizing your project.
