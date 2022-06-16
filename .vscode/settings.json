@@ -9,7 +9,12 @@
         "playdate",
         "import"
     ],
-    "Lua.runtime.nonstandardSymbol": [],
+    "Lua.runtime.nonstandardSymbol": [
+        "+=",
+        "-=",
+        "*=",
+        "/="
+    ],
     "Lua.workspace.library": [
         "$PLAYDATE_SDK_PATH/CoreLibs"
     ],
