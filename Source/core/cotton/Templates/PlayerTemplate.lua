@@ -58,8 +58,9 @@ function PlayerTemplate:UpdatePlayerObj()
     self.player = game.player
 end
 
-function PlayerTemplate:setImage(image)
-    self.player.sprite:setImage(image)
+function PlayerTemplate:setImage(image, options)
+    local options = options or {}
+    self.player:setImage(image, options)
 end
 
 function PlayerTemplate:setProperty(propKey, propValue)

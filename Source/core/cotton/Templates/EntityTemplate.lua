@@ -59,7 +59,7 @@ function EntityTemplate:setImage(src, options)
     if options.animated then
         self.animation = gfx.animation.loop.new(options.delay, gfx.imagetable.new(src), options.loop)
         self.isAnimated = true
-        self.image = playdate.graphics.image.new(self.size.width, self.size.height)
+        self.image = gfx.image.new(self.size.width, self.size.height)
         EntityTemplate.super.setImage(self, self.image)
         return
     end

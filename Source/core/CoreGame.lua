@@ -213,6 +213,9 @@ function game.update()
     cotton.player:draw()
     cotton.game:loop()
     game.player:update()
+    if game.player:shouldDraw() then
+        game.player:animate()
+    end
 
     cotton.keyListener:update()
     cotton.messageHandler:update()

@@ -4,6 +4,7 @@ class("PlayerBase", {
     isFrozen = false,
     sprite = nil,
     currentCollisions = {},
+    isAnimated = false
 }).extends()
 
 function PlayerBase:Init()
@@ -69,16 +70,25 @@ end
 function PlayerBase:fixCamera()
     local spriteX, spriteY = self.sprite:getPosition()
     if config.cameraFollowLockX then
-        gfx.setDrawOffset(0 + self.cameraFollowOffsetX, screenCenterY - spriteY + config.cameraFollowOffsetY)
+        gfx.setDrawOffset(
+            0 + self.cameraFollowOffsetX,
+            screenCenterY - spriteY + config.cameraFollowOffsetY
+        )
         return
     end
 
     if config.cameraFollowLockY then
-        gfx.setDrawOffset(screenCenterX - spriteX + config.cameraFollowOffsetX, 0 + config.cameraFollowOffsetY)
+        gfx.setDrawOffset(
+            screenCenterX - spriteX + config.cameraFollowOffsetX,
+            0 + config.cameraFollowOffsetY
+        )
         return
     end
 
-    gfx.setDrawOffset(screenCenterX - spriteX + config.cameraFollowOffsetX, screenCenterY - spriteY + config.cameraFollowOffsetY)
+    gfx.setDrawOffset(
+        screenCenterX - spriteX + config.cameraFollowOffsetX,
+        screenCenterY - spriteY + config.cameraFollowOffsetY
+    )
 end
 
 function PlayerBase:moveTo(x, y)
@@ -113,4 +123,28 @@ function PlayerBase:checkIfStillColliding(sprite)
         game.player.currentCollisions[v]:onTileExit()
         game.player.currentCollisions[v] = nil
     end
+end
+
+function PlayerBase:setImage(src, options)
+    local options = options or {}
+    if options.animated then
+        self.animation = gfx.animation.loop.new(options.delay, gfx.imagetable.new(src), options.loop)
+        self.isAnimated = true
+        self.image = gfx.image.new(self.sprite.width, self.sprite.height)
+        self.sprite:setImage(self.image)
+        return
+    end
+
+    self.sprite:setImage(gfx.imagetable.new(src):getImage(1))
+end
+
+function PlayerBase:animate()
+    playdate.graphics.pushContext(self.image)
+    playdate.graphics.clear()
+    self.animation:draw(0, 0)
+    playdate.graphics.popContext()
+end
+
+function PlayerBase:shouldDraw()
+    return self.isAnimated or self.isRemoved == false
 end
