@@ -76,7 +76,7 @@ function PlayerGrid:doCollisionCheck()
             return canMoveToLocation
         end
         if collisions[1].type == "entity" and config.autoAct then
-            collisions[1].interact()
+            collisions[1]:interact()
         else
             cotton.player:bump()
         end
@@ -90,7 +90,7 @@ function PlayerGrid:interact()
     local collisions = self.tempSprite:overlappingSprites()
     if #collisions > 0 then
         if collisions[1].type == "entity" then
-            collisions[1].interact()
+            collisions[1]:interact()
         end
     end
 end
