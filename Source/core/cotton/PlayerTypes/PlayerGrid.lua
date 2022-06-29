@@ -103,23 +103,35 @@ function PlayerGrid:drawCursor()
     self.tempSprite:moveTo(self.destinationCursor.x * self.tileSize, self.destinationCursor.y * self.tileSize)
 
     if self:isAtEastRoomEdge() then
-        goto_level(LDtk.get_neighbours(game.level_name, "east")[1], "East")
-        return
+        local neighbours = LDtk.get_neighbours(game.level_name, "east")[1]
+        if neighbours ~= nil then
+            goto_level(neighbours, "East")
+            return
+        end
     end
 
     if self:isAtSouthRoomEdge() then
-        goto_level(LDtk.get_neighbours(game.level_name, "south")[1], "South")
-        return
+        local neighbours = LDtk.get_neighbours(game.level_name, "south")[1]
+        if neighbours ~= nil then
+            goto_level(neighbours, "South")
+            return
+        end
     end
 
     if self:isAtNorthRoomEdge() then
-        goto_level(LDtk.get_neighbours(game.level_name, "north")[1], "North")
-        return
+        local neighbours = LDtk.get_neighbours(game.level_name, "north")[1]
+        if neighbours ~= nil then
+            goto_level(neighbours, "North")
+            return
+        end
     end
 
     if self:isAtWestRoomEdge() then
-        goto_level(LDtk.get_neighbours(game.level_name, "west")[1], "West")
-        return
+        local neighbours = LDtk.get_neighbours(game.level_name, "west")[1]
+        if neighbours ~= nil then
+            goto_level(neighbours, "West")
+            return
+        end
     end
 
     local canMoveToLocation = self:doCollisionCheck()
