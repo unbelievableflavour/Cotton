@@ -140,7 +140,7 @@ end
 
 function PlayerBase:animate()
     playdate.graphics.pushContext(self.image)
-    playdate.graphics.clear()
+    playdate.graphics.clear(gfx.kColorClear)
     self.animation:draw(0, 0)
     playdate.graphics.popContext()
 end
