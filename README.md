@@ -47,10 +47,6 @@ Some of the key features you find in Cotton.
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/big_player.gif" />
 </p>
 
-## WIP
-
-Hi! This project is not yet finished, it's still missing some features from Pulp, BUT it's pretty stable and useable!
-
 ## Requirements
 
 Make sure you have the following applications installed:
@@ -93,12 +89,16 @@ Make sure `VS Code` with a `Cotton` workspace is open. (`simple` or `advanced` a
 
 1. Click `Task Runner` from the sidebar.
 2. Click `Playdate: Level Editor`
+3. Click the `Load` button
+4. Open the `<your-project-folder>/Source/levels/world.ldtk`
 
 OR (if you didn't install the recommended Task Runner extension)
 
 1. Click `Terminal` from the toolbar.
 2. Click `Run task` from the dropdown.
 3. Click `Playdate: Level Editor`
+4. Click the `Load` button
+5. Open the `<your-project-folder>/Source/levels/world.ldtk`
 
 ### Compile & play
 
