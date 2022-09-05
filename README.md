@@ -1,13 +1,13 @@
 <p align="center">
+    <img
+    src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/banner.png" 
+    alt="Cotton" 
+    />
     <img width="190" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_grid.gif" />
     <img width="190" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_platformer.gif" />
     <img width="190" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_topdown.gif" />
     <img width="190" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/movement_smooth.gif" />
     <img width="190" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/camera_follow.gif" />
-    <img
-    src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/banner.png" 
-    alt="Cotton" 
-    />
     <img width="190" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/camera_follow_locked.gif" />
     <img width="190" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/dialogs.gif" />
     <img width="190" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/bigger_maps.gif" />
