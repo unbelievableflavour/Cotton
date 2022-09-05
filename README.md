@@ -113,8 +113,6 @@ OR (if you didn't install the recommended Task Runner extension)
 2. Click `Run task` from the dropdown.
 3. Click `Playdate: Build and Run`
 
-**PS: Playing on an actual device requires useFastLoader to be enabled in config.lua.**
-
 ## Wiki
 
 Since Cotton has a pretty extensive feature list. We created a official wiki for all documentation.
