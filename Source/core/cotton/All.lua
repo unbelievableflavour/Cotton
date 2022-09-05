@@ -1,3 +1,5 @@
+import "core/cotton/FastLoader"
+
 import "core/cotton/PlayerTypes/PlayerBase"
 import "core/cotton/PlayerTypes/PlayerPlatformer"
 import "core/cotton/PlayerTypes/PlayerTopdown"

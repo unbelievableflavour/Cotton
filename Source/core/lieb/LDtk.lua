@@ -465,7 +465,7 @@ function LDtk.get_tileIDs(level_name, tileset_enum_value, layer_name)
 	if not layer then return end
 	local tileset = nil
 
-	if config.useFastLoader then
+	if shouldUseFastLoader() then
 		tileset = _tilesets[tostring(layer.tileset_uid)]
 	else
 		tileset = _tilesets[layer.tileset_uid]
@@ -488,7 +488,7 @@ function LDtk.get_empty_tileIDs(level_name, tileset_enum_value, layer_name)
 
 	local tileset = nil
 
-	if config.useFastLoader then
+	if shouldUseFastLoader() then
 		tileset = _tilesets[tostring(layer.tileset_uid)]
 	else
 		tileset = _tilesets[layer.tileset_uid]

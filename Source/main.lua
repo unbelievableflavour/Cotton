@@ -17,7 +17,7 @@ import "core/CoreGame"
 playdate.display.setRefreshRate(30)
 
 playdate.display.setScale(config.renderScale)
-LDtk.load("levels/world.ldtk", config.useFastLoader)
+LDtk.load("levels/world.ldtk", shouldUseFastLoader())
 
 if playdate.isSimulator then
     LDtk.export_to_lua_files()
