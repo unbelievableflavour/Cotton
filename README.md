@@ -92,7 +92,7 @@ Make sure `VS Code` with a `Cotton` workspace is open. (`simple` or `advanced` a
 
 ### Working in Cotton without the recommended Task Runner Extension?
 
-Want to use the native tasks function of VS code? Also possible just check the tutorial here:
+Want to use the native tasks function of VS code? We have a tutorial for that too! Just check here:
 [without task runner extension](https://github.com/unbelievableflavour/Cotton/wiki/Working-in-Cotton-without-the-Task-Runner-Extension)
 
 ## Wiki
