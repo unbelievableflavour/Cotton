@@ -56,11 +56,6 @@ Make sure you have the following applications installed:
 * [Visual studio code](https://code.visualstudio.com/)
 * [LDtk](https://ldtk.io/)
 
-## CottonScript
-
-CottonScript is a scripting library that contains most Pulp features.
-Documentation for CottonScript can be found here: [CottonScript](https://github.com/unbelievableflavour/Cotton/wiki/CottonScript).
-
 ## Setting up Cotton
 
 1. Download and install the requirements above.
@@ -93,14 +88,6 @@ Make sure `VS Code` with a `Cotton` workspace is open. (`simple` or `advanced` a
 3. Click the `Load` button
 4. Open the `<your-project-folder>/Source/levels/world.ldtk`
 
-OR (if you didn't install the recommended Task Runner extension)
-
-1. Click `Terminal` from the toolbar.
-2. Click `Run task` from the dropdown.
-3. Click `Playdate: Level Editor`
-4. Click the `Load` button
-5. Open the `<your-project-folder>/Source/levels/world.ldtk`
-
 ### Compile & play
 
 Make sure `VS Code` with a `Cotton` workspace is open. (`simple` or `advanced` are both fine)
@@ -108,11 +95,10 @@ Make sure `VS Code` with a `Cotton` workspace is open. (`simple` or `advanced` a
 1. Click `Task Runner` from the sidebar.
 2. Click `Playdate: Build and Run`
 
-OR (if you didn't install the recommended Task Runner extension)
+### Working in Cotton without the recommended Task Runner Extension?
 
-1. Click `Terminal` from the toolbar.
-2. Click `Run task` from the dropdown.
-3. Click `Playdate: Build and Run`
+Want to use the native tasks function of VS code? Also possible just check the tutorial here:
+[without task runner extension](https://github.com/unbelievableflavour/Cotton/wiki/Working-in-Cotton-without-the-Task-Runner-Extension)
 
 ## Wiki
 
@@ -122,6 +108,11 @@ You can find it here: [Wiki](https://github.com/unbelievableflavour/Cotton/wiki)
 ## FAQ
 
 The FAQ can be found here: [FAQ](https://github.com/unbelievableflavour/Cotton/wiki/FAQ).
+
+## CottonScript
+
+CottonScript is a scripting library that contains most Pulp features.
+Documentation for CottonScript can be found here: [CottonScript](https://github.com/unbelievableflavour/Cotton/wiki/CottonScript).
 
 ## Credit
 
