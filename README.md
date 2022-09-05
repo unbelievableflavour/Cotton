@@ -113,62 +113,16 @@ OR (if you didn't install the recommended Task Runner extension)
 2. Click `Run task` from the dropdown.
 3. Click `Playdate: Build and Run`
 
-## Updating Cotton
-
-You can update Cotton in your project at any time IF you did not edit any code in the `core` folder.
-
-1. Download [the latest version of Cotton](https://github.com/unbelievableflavour/Cotton/releases) `zip` file.
-2. Extract it somewhere.
-3. Replace your `core` folder with the `core` folder from the download.
-4. Replace your `main.lua` with the on from the download. BUT keep the old file as reference.
-5. Make sure to readd any code you added to `main.lua` yourself.
-
-### Optional updates
-
-Updating tasks?
-1. Replace your `.vscode` folder with the `.vscode` folder from the download.
+**PS: Playing on an actual device requires useFastLoader to be enabled in config.lua.**
 
 ## Wiki
 
 Since Cotton has a pretty extensive feature list. We created a official wiki for all documentation.
-You can find it here: [Wiki](https://github.com/unbelievableflavour/Cotton/wiki)
+You can find it here: [Wiki](https://github.com/unbelievableflavour/Cotton/wiki).
 
 ## FAQ
 
-**Q: Im getting the following error during compiling. What do I do?**
-```bash
-> Executing task: Playdate: Build <
-
-Command failed: pdc "c:\Playdate Dev\Cotton-master\source" "c:\Playdate Dev\Cotton-master\Cotton"
-'pdc' is not recognized as an internal or external command,
-operable program or batch file.
-
-The terminal process failed to launch (exit code: 1).
-```
-**A:** This means the environment variables have not been set OR the SDK has not been installed correctly.
-
-**Q: Why is my map rendered very big or small when I didn't set the `renderScale`? ?**
-**A:** Make sure you didn't name the tilesets the same but with different size. They are cached in the `.pdx` file.
-Example:
-If you have a tileset `bw_table-16-16.png`, then DONT add a `bw_table-8-8.png`.
-
-To fix:
-1. Rename the image 
-2. Correct the image paths in `LDtk`,
-3. Throw away the `.pdx` file.
-4. Build again.
-
-
-**Q: Game crashes on start on actual device. Following error occurs:**
-```core/CoreGame.lua:215 attempt to index a nil value (field 'player')
-
-stack traceback:
-core/CoreGame.lua:215: in local 'fn'
-core/lieb/call.lua:10 in function 'call'
-core/lieb/scene.lua:119: in field 'update'
-main.lua:31: in function main.lua:28
-```
-**A:** Using the fast loader is required on actual devices. Go to Source/config.lua and make sure `useFastLoader = true`.
+The FAQ can be found here: [FAQ](https://github.com/unbelievableflavour/Cotton/wiki/FAQ).
 
 ## Credit
 
