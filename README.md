@@ -32,6 +32,7 @@ Some of the key features you find in Cotton.
 * Easy level caching for fast level loading.
 * Automatic code formatting on save to keep your code clean and organised.
 * Multi-tile player support.
+* Panels library support.
 
 ## Showcase
 
