@@ -3,9 +3,7 @@
     src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/banner.png" 
     alt="Cotton" 
     />
-</p>
-
-<p align="center">
+    
     <img width="190" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_grid.gif" />
     <img width="190" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_platformer.gif" />
     <img width="190" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_topdown.gif" />
