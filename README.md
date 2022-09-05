@@ -37,9 +37,9 @@ Some of the key features you find in Cotton.
 ## Showcase
 
 <p align="center">
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_grid.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_platformer.gif" />
-    <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_topdown.gif" />
+    <img width="100" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_grid.gif" />
+    <img width="100" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_platformer.gif" />
+    <img width="100" src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/player_topdown.gif" />
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/movement_smooth.gif" />
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/camera_follow.gif" />
     <img src="https://raw.githubusercontent.com/unbelievableflavour/cotton/master/Docs/images/showcase/camera_follow_locked.gif" />
