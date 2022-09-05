@@ -158,6 +158,18 @@ To fix:
 3. Throw away the `.pdx` file.
 4. Build again.
 
+
+**Q: Game crashes on start on actual device. Following error occurs:
+```core/CoreGame.lua:215 attempt to index a nil value (field 'player')
+
+stack traceback:
+core/CoreGame.lua:215: in local 'fn'
+core/lieb/call.lua:10 in function 'call'
+core/lieb/scene.lua:119: in field 'update'
+main.lua:31: in function main.lua:28
+```
+**A: Using the fast loader is required on actual devices. Go to Source/config.lua and make sure `useFastLoader = true`.
+
 ## Credit
 
 * [Nic Magnier](https://github.com/NicMagnier) for offering the LDtk library
