@@ -15,7 +15,9 @@ local gfx <const> = playdate.graphics
 
 import "core/lieb/call"
 
-scene = {}
+scene = {
+	isCutScene = false
+}
 
 -- private members
 local _index = 0
@@ -30,7 +32,7 @@ function scene.push(newScene, ...)
 		return
 	end
 
-	if _stack[_index] then
+	if _stack[_index] and scene.isCutScene == false then
 		call(_stack[_index].shutdown)
 	end
 
@@ -40,7 +42,7 @@ function scene.push(newScene, ...)
 
 	-- we enter a new mode so we will initialize it at the beginning of the next update
 	_call_init = true
-	_call_init_args = {...}
+	_call_init_args = { ... }
 end
 
 -- push a new scene in the stack as an overlay
@@ -127,4 +129,15 @@ function scene.isInStack(checkScene)
 	end
 
 	return false
+end
+
+function scene.startCutScene(comicData, afterCutScene)
+	local function callbackAfterPanels()
+		scene.isCutScene = false
+		afterCutScene()
+	end
+
+	scene.isCutScene = true
+	Panels.startCutscene(comicData, callbackAfterPanels)
+	scene.pushOverlay(Panels)
 end
