@@ -16,7 +16,7 @@ local gfx <const> = playdate.graphics
 import "core/lieb/call"
 
 scene = {
-	isCutScene = false
+	isInCutScene = false
 }
 
 -- private members
@@ -32,7 +32,7 @@ function scene.push(newScene, ...)
 		return
 	end
 
-	if _stack[_index] and scene.isCutScene == false then
+	if _stack[_index] and scene.isInCutScene == false then
 		call(_stack[_index].shutdown)
 	end
 
@@ -132,12 +132,20 @@ function scene.isInStack(checkScene)
 end
 
 function scene.startCutScene(comicData, afterCutScene)
+	local tempcameraFollow = config.cameraFollow
+
 	local function callbackAfterPanels()
-		scene.isCutScene = false
+		scene.isInCutScene = false
+		config.cameraFollow = tempcameraFollow
 		afterCutScene()
 	end
 
-	scene.isCutScene = true
+	scene.isInCutScene = true
+	resetDrawOffset()
 	Panels.startCutscene(comicData, callbackAfterPanels)
 	scene.pushOverlay(Panels)
+end
+
+function resetDrawOffset()
+	config.cameraFollow = false;
 end
