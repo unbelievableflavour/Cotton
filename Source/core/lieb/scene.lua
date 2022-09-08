@@ -148,4 +148,7 @@ end
 
 function resetDrawOffset()
 	config.cameraFollow = false;
+	gfx.setDrawOffset(
+		0, 0
+	)
 end
